@@ -496,6 +496,68 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'AWS CloudTrail automatically logs API calls with minimal configuration. Custom metrics pushed to CloudWatch combined with CloudWatch Alarms and SNS provide overfitting notifications. This approach requires the least code and steps compared to custom Lambda implementations.',
   },
+  {
+    id: '41',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is building a prediction model for a large number of features using linear models, such as linear regression and logistic regression. During exploratory data analysis, the Specialist observes that many features are highly correlated with each other. This may make the model unstable. What should be done to reduce the impact of having such a large number of features?',
+    options: [
+      { id: '41a', text: 'Perform one-hot encoding on highly correlated features.', isCorrect: false },
+      { id: '41b', text: 'Use matrix multiplication on highly correlated features.', isCorrect: false },
+      { id: '41c', text: 'Create a new feature space using principal component analysis (PCA)', isCorrect: true },
+      { id: '41d', text: 'Apply the Pearson correlation coefficient.', isCorrect: false },
+    ],
+    explanation: 'PCA transforms correlated features into a smaller set of uncorrelated principal components. This reduces multicollinearity in linear models, stabilizing the model and reducing variance in coefficient estimates.',
+  },
+  {
+    id: '42',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is implementing a full Bayesian network on a dataset that describes public transit in New York City. One of the random variables is discrete, and represents the number of minutes New Yorkers wait for a bus given that the buses cycle every 10 minutes, with a mean of 3 minutes. Which prior probability distribution should the ML Specialist use for this variable?',
+    options: [
+      { id: '42a', text: 'Poisson distribution', isCorrect: true },
+      { id: '42b', text: 'Uniform distribution', isCorrect: false },
+      { id: '42c', text: 'Normal distribution', isCorrect: false },
+      { id: '42d', text: 'Binomial distribution', isCorrect: false },
+    ],
+    explanation: 'The Poisson distribution models the count of events occurring in a fixed interval (waiting time in minutes) when events happen independently at a constant average rate (mean of 3 minutes). It is appropriate for discrete, non-negative integer counts.',
+  },
+  {
+    id: '43',
+    type: QuestionType.MCQ,
+    question: 'A Data Science team within a large company uses Amazon SageMaker notebooks to access data stored in Amazon S3 buckets. The IT Security team is concerned that internet-enabled notebook instances create a security vulnerability. The company mandates that all instances stay within a secured VPC with no internet access, and data communication traffic must stay within the AWS network. How should the Data Science team configure the notebook instance placement to meet these requirements?',
+    options: [
+      { id: '43a', text: 'Associate the Amazon SageMaker notebook with a private subnet in a VPC. Place the Amazon SageMaker endpoint and S3 buckets within the same VPC.', isCorrect: false },
+      { id: '43b', text: 'Associate the Amazon SageMaker notebook with a private subnet in a VPC. Use IAM policies to grant access to Amazon S3 and Amazon SageMaker.', isCorrect: false },
+      { id: '43c', text: 'Associate the Amazon SageMaker notebook with a private subnet in a VPC. Ensure the VPC has S3 VPC endpoints and Amazon SageMaker VPC endpoints attached to it.', isCorrect: true },
+      { id: '43d', text: 'Associate the Amazon SageMaker notebook with a private subnet in a VPC. Ensure the VPC has a NAT gateway and an associated security group allowing only outbound connections to Amazon S3 and Amazon SageMaker.', isCorrect: false },
+    ],
+    explanation: 'VPC endpoints for S3 and SageMaker enable private connectivity within the AWS network without internet access. Gateway endpoints for S3 provide direct, secure access while VPC endpoints for SageMaker enable API calls within the VPC.',
+  },
+  {
+    id: '44',
+    type: QuestionType.MSQ,
+    question: 'A Machine Learning Specialist has created a deep learning neural network model that performs well on the training data but performs poorly on the test data. Which of the following methods should the Specialist consider using to correct this? (Choose three.)',
+    options: [
+      { id: '44a', text: 'Decrease regularization.', isCorrect: false },
+      { id: '44b', text: 'Increase regularization.', isCorrect: true },
+      { id: '44c', text: 'Increase dropout.', isCorrect: true },
+      { id: '44d', text: 'Decrease dropout.', isCorrect: false },
+      { id: '44e', text: 'Increase feature combinations.', isCorrect: false },
+      { id: '44f', text: 'Decrease feature combinations.', isCorrect: true },
+    ],
+    explanation: 'The model is overfitting (high training accuracy, low test accuracy). To reduce overfitting: increase regularization penalties, increase dropout rates to prevent co-adaptation of neurons, and decrease feature combinations to reduce model complexity.',
+  },
+  {
+    id: '45',
+    type: QuestionType.MCQ,
+    question: 'A Data Scientist needs to create a serverless ingestion and analytics solution for high-velocity, real-time streaming data. The ingestion process must buffer and convert incoming records from JSON to a query-optimized, columnar format without data loss. The output datastore must be highly available, and Analysts must be able to run SQL queries against the data and connect to existing business intelligence dashboards. Which solution should the Data Scientist build to satisfy the requirements?',
+    options: [
+      { id: '45a', text: 'Create a schema in the AWS Glue Data Catalog of the incoming data format. Use an Amazon Kinesis Data Firehose delivery stream to stream the data and transform the data to Apache Parquet or ORC format using the AWS Glue Data Catalog before delivering to Amazon S3. Have the Analysts query the data directly from Amazon S3 using Amazon Athena, and connect to BI tools using the Athena Java Database Connectivity (JDBC) connector.', isCorrect: true },
+      { id: '45b', text: 'Write each JSON record to a staging location in Amazon S3. Use the S3 Put event to trigger an AWS Lambda function that transforms the data into Apache Parquet or ORC format and writes the data to a processed data location in Amazon S3. Have the Analysts query the data directly from Amazon S3 using Amazon Athena, and connect to BI tools using the Athena Java Database Connectivity (JDBC) connector.', isCorrect: false },
+      { id: '45c', text: 'Write each JSON record to a staging location in Amazon S3. Use the S3 Put event to trigger an AWS Lambda function that transforms the data into Apache Parquet or ORC format and inserts it into an Amazon RDS PostgreSQL database. Have the Analysts query and run dashboards from the RDS database.', isCorrect: false },
+      { id: '45d', text: 'Use Amazon Kinesis Data Analytics to ingest the streaming data and perform real-time SQL queries to convert the records to Apache Parquet before delivering to Amazon S3. Have the Analysts query the data directly from Amazon S3 using Amazon Athena and connect to BI tools using the Athena Java Database Connectivity (JDBC) connector.', isCorrect: false },
+    ],
+    explanation: 'Kinesis Data Firehose with AWS Glue Data Catalog provides serverless ETL that automatically converts JSON to Parquet/ORC format. Amazon S3 ensures high availability, and Athena enables SQL queries with BI dashboard connectivity via JDBC.',
+  },
 ];
 
 function App() {
