@@ -558,6 +558,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Kinesis Data Firehose with AWS Glue Data Catalog provides serverless ETL that automatically converts JSON to Parquet/ORC format. Amazon S3 ensures high availability, and Athena enables SQL queries with BI dashboard connectivity via JDBC.',
   },
+  {
+    id: '46',
+    type: QuestionType.MCQ,
+    question: 'An online reseller has a large, multi-column dataset with one column missing 30% of its data. A Machine Learning Specialist believes that certain columns in the dataset could be used to reconstruct the missing data. Which reconstruction approach should the Specialist use to preserve the integrity of the dataset?',
+    options: [
+      { id: '46a', text: 'Listwise deletion', isCorrect: false },
+      { id: '46b', text: 'Last observation carried forward', isCorrect: false },
+      { id: '46c', text: 'Multiple imputation', isCorrect: true },
+      { id: '46d', text: 'Mean substitution', isCorrect: false },
+    ],
+    explanation: 'Multiple imputation creates multiple plausible estimates for missing values based on relationships in the data, preserving statistical properties and uncertainty. This is more sophisticated than simple methods like mean substitution or listwise deletion which can bias results.',
+  },
+  {
+    id: '47',
+    type: QuestionType.MCQ,
+    question: 'A company is setting up an Amazon SageMaker environment. The corporate data security policy does not allow communication over the internet. How can the company enable the Amazon SageMaker service without enabling direct internet access to Amazon SageMaker notebook instances?',
+    options: [
+      { id: '47a', text: 'Create a NAT gateway within the corporate VPC.', isCorrect: false },
+      { id: '47b', text: 'Route Amazon SageMaker traffic through an on-premises network.', isCorrect: false },
+      { id: '47c', text: 'Create Amazon SageMaker VPC interface endpoints within the corporate VPC.', isCorrect: true },
+      { id: '47d', text: 'Create VPC peering with Amazon VPC hosting Amazon SageMaker.', isCorrect: false },
+    ],
+    explanation: 'VPC interface endpoints (powered by AWS PrivateLink) enable private connectivity between the VPC and SageMaker without traversing the internet. This satisfies security requirements while allowing notebook instances to access SageMaker APIs.',
+  },
+  {
+    id: '48',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is training a model to identify the make and model of vehicles in images. The Specialist wants to use transfer learning and an existing model trained on images of general objects. The Specialist collated a large custom dataset of pictures containing different vehicle makes and models. What should the Specialist do to initialize the model to re-train it with the custom data?',
+    options: [
+      { id: '48a', text: 'Initialize the model with random weights in all layers including the last fully connected layer.', isCorrect: false },
+      { id: '48b', text: 'Initialize the model with pre-trained weights in all layers and replace the last fully connected layer.', isCorrect: true },
+      { id: '48c', text: 'Initialize the model with random weights in all layers and replace the last fully connected layer.', isCorrect: false },
+      { id: '48d', text: 'Initialize the model with pre-trained weights in all layers including the last fully connected layer.', isCorrect: false },
+    ],
+    explanation: 'Transfer learning works best when initializing with pre-trained ImageNet weights for feature extraction layers while replacing the final classification layer with a new randomly initialized layer for vehicle make/model classification.',
+  },
+  {
+    id: '49',
+    type: QuestionType.MCQ,
+    question: 'An office security agency conducted a successful pilot using 100 cameras. Images were uploaded to Amazon S3 and tagged using Amazon Rekognition. The agency wants to expand to thousands of cameras globally to identify activities performed by non-employees in real time. Which solution should the agency consider?',
+    options: [
+      { id: '49a', text: 'Use a proxy server at each local office and for each camera, and stream the RTSP feed to a unique Amazon Kinesis Video Streams video stream. On each stream, use Amazon Rekognition Video and create a stream processor to detect faces from a collection of known employees, and alert when non-employees are detected.', isCorrect: true },
+      { id: '49b', text: 'Use a proxy server at each local office and for each camera, and stream the RTSP feed to a unique Amazon Kinesis Video Streams video stream. On each stream, use Amazon Rekognition Image to detect faces from a collection of known employees and alert when non-employees are detected.', isCorrect: false },
+      { id: '49c', text: 'Install AWS DeepLens cameras and use the DeepLens_Kinesis_Video module to stream video to Amazon Kinesis Video Streams for each camera. On each stream, use Amazon Rekognition Video and create a stream processor to detect faces from a collection on each stream, and alert when non-employees are detected.', isCorrect: false },
+      { id: '49d', text: 'Install AWS DeepLens cameras and use the DeepLens_Kinesis_Video module to stream video to Amazon Kinesis Video Streams for each camera. On each stream, run an AWS Lambda function to capture image fragments and then call Amazon Rekognition Image to detect faces from a collection of known employees, and alert when non-employees are detected.', isCorrect: false },
+    ],
+    explanation: 'Kinesis Video Streams with Rekognition Video stream processors enable real-time face detection and comparison against employee collections. This scales to thousands of cameras while providing real-time alerts for non-employee detection.',
+  },
+  {
+    id: '50',
+    type: QuestionType.MCQ,
+    question: 'A Marketing Manager at a pet insurance company plans to launch a targeted marketing campaign on social media to acquire new customers. The company has customer profiles, pet profiles, policy information, premiums, and claims data in Amazon Aurora. What steps should be taken to implement a machine learning model to identify potential new customers on social media?',
+    options: [
+      { id: '50a', text: 'Use regression on customer profile data to understand key characteristics of consumer segments. Find similar profiles on social media.', isCorrect: false },
+      { id: '50b', text: 'Use clustering on customer profile data to understand key characteristics of consumer segments. Find similar profiles on social media.', isCorrect: true },
+      { id: '50c', text: 'Use a recommendation engine on customer profile data to understand key characteristics of consumer segments. Find similar profiles on social media.', isCorrect: false },
+      { id: '50d', text: 'Use a decision tree classifier engine on customer profile data to understand key characteristics of consumer segments. Find similar profiles on social media.', isCorrect: false },
+    ],
+    explanation: 'Clustering algorithms like K-Means identify natural groupings in customer data based on similar characteristics. Once customer segments are identified, similar profiles can be found on social media for targeted marketing.',
+  },
 ];
 
 function App() {
