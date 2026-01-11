@@ -188,6 +188,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Creating a VPC endpoint (Gateway Endpoint for S3) and applying a bucket policy that restricts access to only that VPC endpoint ensures the data stays within the VPC and doesn\'t traverse the public internet. This provides the required security for PII data.',
   },
+  {
+    id: '16',
+    type: QuestionType.MCQ,
+    question: 'During mini-batch training of a neural network for a classification problem, a Data Scientist notices that training accuracy oscillates. What is the MOST likely cause of this issue?',
+    options: [
+      { id: '16a', text: 'The class distribution in the dataset is imbalanced.', isCorrect: false },
+      { id: '16b', text: 'Dataset shuffling is disabled.', isCorrect: false },
+      { id: '16c', text: 'The batch size is too big.', isCorrect: false },
+      { id: '16d', text: 'The learning rate is very high.', isCorrect: true },
+    ],
+    explanation: 'A very high learning rate causes the optimizer to take large steps during gradient descent, leading to oscillations in the loss and training accuracy. This prevents the model from converging smoothly. Reducing the learning rate or using learning rate scheduling can help stabilize training.',
+  },
+  {
+    id: '17',
+    type: QuestionType.MCQ,
+    question: 'An employee found a video clip with audio on a company\'s social media feed. The language used in the video is Spanish. English is the employee\'s first language, and they do not understand Spanish. The employee wants to do a sentiment analysis. What combination of services is the MOST efficient to accomplish the task?',
+    options: [
+      { id: '17a', text: 'Amazon Transcribe, Amazon Translate, and Amazon Comprehend', isCorrect: true },
+      { id: '17b', text: 'Amazon Transcribe, Amazon Comprehend, and Amazon SageMaker seq2seq', isCorrect: false },
+      { id: '17c', text: 'Amazon Transcribe, Amazon Translate, and Amazon SageMaker Neural Topic Model (NTM)', isCorrect: false },
+      { id: '17d', text: 'Amazon Transcribe, Amazon Translate and Amazon SageMaker BlazingText', isCorrect: false },
+    ],
+    explanation: 'Amazon Transcribe converts Spanish audio to text, Amazon Translate converts Spanish text to English, and Amazon Comprehend performs sentiment analysis on the English text. This is the most efficient serverless combination without needing custom ML models.',
+  },
+  {
+    id: '18',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is packaging a custom ResNet model into a Docker container so the company can leverage Amazon SageMaker for training. The Specialist is using Amazon EC2 P3 instances to train the model and needs to properly configure the Docker container to leverage the NVIDIA GPUs. What does the Specialist need to do?',
+    options: [
+      { id: '18a', text: 'Bundle the NVIDIA drivers with the Docker image.', isCorrect: false },
+      { id: '18b', text: 'Build the Docker container to be NVIDIA-Docker compatible.', isCorrect: true },
+      { id: '18c', text: 'Organize the Docker container\'s file structure to execute on GPU instances.', isCorrect: false },
+      { id: '18d', text: 'Set the GPU flag in the Amazon SageMaker CreateTrainingJob request body.', isCorrect: false },
+    ],
+    explanation: 'NVIDIA-Docker (nvidia-docker) allows Docker containers to access NVIDIA GPUs by providing the necessary runtime configuration. SageMaker training images are already NVIDIA-Docker compatible, and using this framework ensures proper GPU access for deep learning frameworks like TensorFlow or PyTorch.',
+  },
+  {
+    id: '19',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is building a logistic regression model that will predict whether or not a person will order a pizza. The Specialist is trying to build the optimal model with an ideal classification threshold. What model evaluation technique should the Specialist use to understand how different classification thresholds will impact the model\'s performance?',
+    options: [
+      { id: '19a', text: 'Receiver operating characteristic (ROC) curve', isCorrect: true },
+      { id: '19b', text: 'Misclassification rate', isCorrect: false },
+      { id: '19c', text: 'Root Mean Square Error (RMSE)', isCorrect: false },
+      { id: '19d', text: 'L1 norm', isCorrect: false },
+    ],
+    explanation: 'The ROC curve plots True Positive Rate against False Positive Rate at various classification thresholds. It helps visualize how changing the threshold affects the trade-off between sensitivity and specificity, allowing the Specialist to select an optimal threshold based on business requirements.',
+  },
+  {
+    id: '20',
+    type: QuestionType.MCQ,
+    question: 'An interactive online dictionary wants to add a widget that displays words used in similar contexts. A Machine Learning Specialist is asked to provide word features for the downstream nearest neighbor model powering the widget. What should the Specialist do to meet these requirements?',
+    options: [
+      { id: '20a', text: 'Create one-hot word encoding vectors.', isCorrect: false },
+      { id: '20b', text: 'Produce a set of synonyms for every word using Amazon Mechanical Turk.', isCorrect: false },
+      { id: '20c', text: 'Create word embedding vectors that store edit distance with every other word.', isCorrect: false },
+      { id: '20d', text: 'Download word embeddings pre-trained on a large corpus.', isCorrect: true },
+    ],
+    explanation: 'Pre-trained word embeddings (like Word2Vec, GloVe, or FastText) capture semantic meaning and contextual similarity between words based on their usage in large text corpora. Words used in similar contexts will have similar embedding vectors, making them ideal for nearest neighbor queries in a dictionary widget.',
+  },
 ];
 
 function App() {
