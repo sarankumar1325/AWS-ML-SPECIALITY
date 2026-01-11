@@ -309,6 +309,71 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Decision trees can capture non-linear decision boundaries and are effective at identifying positive cases (fraudulent transactions). They tend to have higher recall because they can create rules that flag suspicious patterns without being overly constrained by linear separations.',
   },
+  {
+    id: '26',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist kicks off a hyperparameter tuning job for a tree-based ensemble model using Amazon SageMaker with Area Under the ROC Curve (AUC) as the objective metric. This workflow will eventually be deployed in a pipeline that retrains and tunes hyperparameters each night to model click-through on data that goes stale every 24 hours. With the goal of decreasing the amount of time it takes to train these models, and ultimately to decrease costs, the Specialist wants to reconfigure the input hyperparameter range(s). Which visualization will accomplish this?',
+    options: [
+      { id: '26a', text: 'A histogram showing whether the most important input feature is Gaussian.', isCorrect: false },
+      { id: '26b', text: 'A scatter plot with points colored by target variable that uses t-Distributed Stochastic Neighbor Embedding (t-SNE) to visualize the large number of input variables in an easier-to-read dimension.', isCorrect: false },
+      { id: '26c', text: 'A scatter plot showing the performance of the objective metric over each training iteration.', isCorrect: false },
+      { id: '26d', text: 'A scatter plot showing the correlation between maximum tree depth and the objective metric.', isCorrect: true },
+    ],
+    explanation: 'A scatter plot showing the correlation between maximum tree depth and AUC helps identify the optimal hyperparameter range. If deeper trees consistently improve AUC, the range can be adjusted to focus on deeper values, reducing the search space and training time.',
+  },
+  {
+    id: '27',
+    type: QuestionType.MSQ,
+    question: 'A Machine Learning Specialist is creating a new natural language processing application that processes a dataset comprised of 1 million sentences. The aim is to then run Word2Vec to generate embeddings of the sentences and enable different types of predictions. Here is an example from the dataset: "The quck BROWN FOX jumps over the lazy dog." Which of the following are the operations the Specialist needs to perform to correctly sanitize and prepare the data in a repeatable manner? (Choose three.)',
+    options: [
+      { id: '27a', text: 'Perform part-of-speech tagging and keep the action verb and the nouns only.', isCorrect: false },
+      { id: '27b', text: 'Normalize all words by making the sentence lowercase.', isCorrect: true },
+      { id: '27c', text: 'Remove stop words using an English stopword dictionary.', isCorrect: true },
+      { id: '27d', text: 'Correct the typography on "quck" to "quick".', isCorrect: false },
+      { id: '27e', text: 'One-hot encode all words in the sentence.', isCorrect: false },
+      { id: '27f', text: 'Tokenize the sentence into words.', isCorrect: true },
+    ],
+    explanation: 'Word2Vec requires normalized text (lowercase), removal of common stop words, and tokenization into words. These preprocessing steps ensure consistent input for training embeddings. Typo correction and one-hot encoding are not required for Word2Vec.',
+  },
+  {
+    id: '28',
+    type: QuestionType.MCQ,
+    question: 'A company is using Amazon Polly to translate plaintext documents to speech for automated company announcements. However, company acronyms are being mispronounced in the current documents. How should a Machine Learning Specialist address this issue for future documents?',
+    options: [
+      { id: '28a', text: 'Convert current documents to SSML with pronunciation tags.', isCorrect: false },
+      { id: '28b', text: 'Create an appropriate pronunciation lexicon.', isCorrect: true },
+      { id: '28c', text: 'Output speech marks to guide in pronunciation.', isCorrect: false },
+      { id: '28d', text: 'Use Amazon Lex to preprocess the text files for pronunciation', isCorrect: false },
+    ],
+    explanation: 'Amazon Polly pronunciation lexicons allow you to define custom pronunciations for specific words or phrases, including company acronyms. This ensures correct pronunciation without modifying the source documents or using SSML tags.',
+  },
+  {
+    id: '29',
+    type: QuestionType.MSQ,
+    question: 'An insurance company is developing a new device for vehicles that uses a camera to observe drivers\' behavior and alert them when they appear distracted. The company created approximately 10,000 training images in a controlled environment that a Machine Learning Specialist will use to train and evaluate machine learning models. During the model evaluation, the Specialist notices that the training error rate diminishes faster as the number of epochs increases and the model is not accurately inferring on the unseen test images. Which of the following should be used to resolve this issue? (Choose two.)',
+    options: [
+      { id: '29a', text: 'Add vanishing gradient to the model.', isCorrect: false },
+      { id: '29b', text: 'Perform data augmentation on the training data.', isCorrect: true },
+      { id: '29c', text: 'Make the neural network architecture complex.', isCorrect: false },
+      { id: '29d', text: 'Use gradient checking in the model.', isCorrect: false },
+      { id: '29e', text: 'Add L2 regularization to the model.', isCorrect: true },
+    ],
+    explanation: 'The symptoms indicate overfitting (low training error but poor test performance). Data augmentation increases training diversity to improve generalization, while L2 regularization penalizes large weights to reduce overfitting.',
+  },
+  {
+    id: '30',
+    type: QuestionType.MSQ,
+    question: 'When submitting Amazon SageMaker training jobs using one of the built-in algorithms, which common parameters MUST be specified? (Choose three.)',
+    options: [
+      { id: '30a', text: 'The training channel identifying the location of training data on an Amazon S3 bucket.', isCorrect: true },
+      { id: '30b', text: 'The validation channel identifying the location of validation data on an Amazon S3 bucket.', isCorrect: false },
+      { id: '30c', text: 'The IAM role that Amazon SageMaker can assume to perform tasks on behalf of the users.', isCorrect: true },
+      { id: '30d', text: 'Hyperparameters in a JSON array as documented for the algorithm used.', isCorrect: false },
+      { id: '30e', text: 'The Amazon EC2 instance class specifying whether training will be run using CPU or GPU.', isCorrect: false },
+      { id: '30f', text: 'The output path specifying where on an Amazon S3 bucket the trained model will persist.', isCorrect: true },
+    ],
+    explanation: 'SageMaker training jobs require: (1) training channel with S3 data location, (2) IAM role for AWS permissions, and (3) output path for model artifacts. Validation channel, hyperparameters, and instance type have defaults or are optional.',
+  },
 ];
 
 function App() {
