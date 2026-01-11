@@ -374,6 +374,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'SageMaker training jobs require: (1) training channel with S3 data location, (2) IAM role for AWS permissions, and (3) output path for model artifacts. Validation channel, hyperparameters, and instance type have defaults or are optional.',
   },
+  {
+    id: '31',
+    type: QuestionType.MCQ,
+    question: 'A monitoring service generates 1 TB of scale metrics record data every minute. A Research team performs queries on this data using Amazon Athena. The queries run slowly due to the large volume of data, and the team requires better performance. How should the records be stored in Amazon S3 to improve query performance?',
+    options: [
+      { id: '31a', text: 'CSV files', isCorrect: false },
+      { id: '31b', text: 'Parquet files', isCorrect: true },
+      { id: '31c', text: 'Compressed JSON', isCorrect: false },
+      { id: '31d', text: 'RecordIO', isCorrect: false },
+    ],
+    explanation: 'Parquet is a columnar storage format that allows Athena to read only the columns needed for a query, significantly improving performance for large datasets. It also provides better compression and schema evolution compared to CSV, JSON, or RecordIO.',
+  },
+  {
+    id: '32',
+    type: QuestionType.MCQ,
+    question: 'Machine Learning Specialist is working with a media company to perform classification on popular articles from the company\'s website. The company is using random forests to classify how popular an article will be before it is published. The Specialist wants to convert the Day_Of_Week column to binary values. What technique should be used to convert this column to binary values?',
+    options: [
+      { id: '32a', text: 'Binarization', isCorrect: false },
+      { id: '32b', text: 'One-hot encoding', isCorrect: true },
+      { id: '32c', text: 'Tokenization', isCorrect: false },
+      { id: '32d', text: 'Normalization transformation', isCorrect: false },
+    ],
+    explanation: 'One-hot encoding converts categorical variables (like Day_Of_Week with values Monday, Tuesday, etc.) into binary columns. Each category becomes its own column with 1 or 0 values, allowing tree-based models like random forests to effectively use categorical features.',
+  },
+  {
+    id: '33',
+    type: QuestionType.MSQ,
+    question: 'A gaming company has launched an online game where people can start playing for free, but they need to pay if they choose to use certain features. The company needs to build an automated system to predict whether or not a new user will become a paid user within 1 year. The training dataset consists of 1,000 positive samples (paid users) and 999,000 negative samples. Using this dataset for training, the Data Science team trained a random forest model that converged with over 99% accuracy on the training set. However, the prediction results on a test dataset were not satisfactory. Which of the following approaches should the Data Science team take to mitigate this issue? (Choose two.)',
+    options: [
+      { id: '33a', text: 'Add more deep trees to the random forest to enable the model to learn more features.', isCorrect: false },
+      { id: '33b', text: 'Include a copy of the samples in the test dataset in the training dataset.', isCorrect: false },
+      { id: '33c', text: 'Generate more positive samples by duplicating the positive samples and adding a small amount of noise to the duplicated data.', isCorrect: true },
+      { id: '33d', text: 'Change the cost function so that false negatives have a higher impact on the cost value than false positives.', isCorrect: true },
+      { id: '33e', text: 'Change the cost function so that false positives have a higher impact on the cost value than false negatives.', isCorrect: false },
+    ],
+    explanation: 'The dataset is highly imbalanced (1:999 ratio). SMOTE-like oversampling of positive samples addresses class imbalance. Adjusting the cost function to penalize false negatives more heavily helps the model prioritize detecting paying users, which is the rare positive class.',
+  },
+  {
+    id: '34',
+    type: QuestionType.MCQ,
+    question: 'A Data Scientist is developing a machine learning model to predict future patient outcomes. The model should output a continuous value as its prediction. The data available includes labeled outcomes for a set of 4,000 patients. Out of 4,000 patient observations, there are 450 where the patient age has been input as 0. The other features for these observations appear normal compared to the rest of the sample population. How should the Data Scientist correct this issue?',
+    options: [
+      { id: '34a', text: 'Drop all records from the dataset where age has been set to 0.', isCorrect: false },
+      { id: '34b', text: 'Replace the age field value for records with a value of 0 with the mean or median value from the dataset', isCorrect: true },
+      { id: '34c', text: 'Drop the age feature from the dataset and train the model using the rest of the features.', isCorrect: false },
+      { id: '34d', text: 'Use k-means clustering to handle missing features', isCorrect: false },
+    ],
+    explanation: 'Replacing invalid values (0) with the mean or median preserves the data and statistical distribution while keeping the valuable features from the other 4,500 valid observations. Dropping 450 records (11% of data) or removing the age feature would lose important information.',
+  },
+  {
+    id: '35',
+    type: QuestionType.MCQ,
+    question: 'A Data Science team is designing a dataset repository where it will store a large amount of training data commonly used in its machine learning models. As Data Scientists may create an arbitrary number of new datasets every day, the solution has to scale automatically and be cost-effective. Also, it must be possible to explore the data using SQL. Which storage scheme is MOST adapted to this scenario?',
+    options: [
+      { id: '35a', text: 'Store datasets as files in Amazon S3.', isCorrect: true },
+      { id: '35b', text: 'Store datasets as files in an Amazon EBS volume attached to an Amazon EC2 instance.', isCorrect: false },
+      { id: '35c', text: 'Store datasets as tables in a multi-node Amazon Redshift cluster.', isCorrect: false },
+      { id: '35d', text: 'Store datasets as global tables in Amazon DynamoDB.', isCorrect: false },
+    ],
+    explanation: 'Amazon S3 scales automatically, is cost-effective (pay only for usage), and supports SQL queries through Amazon Athena. It eliminates the need to manage infrastructure while providing durability and accessibility for ML training data.',
+  },
 ];
 
 function App() {
