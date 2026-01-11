@@ -435,6 +435,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Amazon S3 scales automatically, is cost-effective (pay only for usage), and supports SQL queries through Amazon Athena. It eliminates the need to manage infrastructure while providing durability and accessibility for ML training data.',
   },
+  {
+    id: '36',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist deployed a model that provides product recommendations on a company\'s website. Initially, the model was performing very well. However, within the past few months, the effect of product recommendations has diminished as customers are returning to their original habits. The model has not changed from its initial deployment over a year ago. Which method should the Specialist try to improve model performance?',
+    options: [
+      { id: '36a', text: 'The model needs to be completely re-engineered because it is unable to handle product inventory changes.', isCorrect: false },
+      { id: '36b', text: 'The model\'s hyperparameters should be periodically updated to prevent drift.', isCorrect: false },
+      { id: '36c', text: 'The model should be periodically retrained from scratch using the original data while adding a regularization term to handle product inventory changes.', isCorrect: false },
+      { id: '36d', text: 'The model should be periodically retrained using the original training data plus new data as product inventory changes.', isCorrect: true },
+    ],
+    explanation: 'Concept drift occurs when the underlying data distribution changes over time (e.g., product inventory, customer preferences). Periodically retraining the model with new data combined with historical data helps the model adapt to these changes and maintain recommendation quality.',
+  },
+  {
+    id: '37',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist working for an online fashion company wants to build a data ingestion solution for the company\'s Amazon S3-based data lake. The Specialist wants to create mechanisms for: Real-time analytics, Interactive analytics of historical data, Clickstream analytics, Product recommendations. Which services should the Specialist use?',
+    options: [
+      { id: '37a', text: 'AWS Glue as the data catalog; Amazon Kinesis Data Streams and Amazon Kinesis Data Analytics for real-time data insights; Amazon Kinesis Data Firehose for delivery to Amazon ES for clickstream analytics; Amazon EMR to generate personalized product recommendations', isCorrect: true },
+      { id: '37b', text: 'Amazon Athena as the data catalog: Amazon Kinesis Data Streams and Amazon Kinesis Data Analytics for near-real-time data insights; Amazon Kinesis Data Firehose for clickstream analytics; AWS Glue to generate personalized product recommendations', isCorrect: false },
+      { id: '37c', text: 'AWS Glue as the data catalog; Amazon Kinesis Data Streams and Amazon Kinesis Data Analytics for historical data insights; Amazon Kinesis Data Firehose for delivery to Amazon ES for clickstream analytics; Amazon EMR to generate personalized product recommendations', isCorrect: false },
+      { id: '37d', text: 'Amazon Athena as the data catalog; Amazon Kinesis Data Streams and Amazon Kinesis Data Analytics for historical data insights; Amazon DynamoDB streams for clickstream analytics; AWS Glue to generate personalized product recommendations', isCorrect: false },
+    ],
+    explanation: 'AWS Glue provides data cataloging, Kinesis Data Streams/Analytics enable real-time processing, Kinesis Data Firehose delivers to Amazon ES for clickstream analytics, and Amazon EMR generates product recommendations. This combination provides all required capabilities.',
+  },
+  {
+    id: '38',
+    type: QuestionType.MSQ,
+    question: 'A company is observing low accuracy while training on the default built-in image classification algorithm in Amazon SageMaker. The Data Science team wants to use an Inception neural network architecture instead of a ResNet architecture. Which of the following will accomplish this? (Choose two.)',
+    options: [
+      { id: '38a', text: 'Customize the built-in image classification algorithm to use Inception and use this for model training.', isCorrect: false },
+      { id: '38b', text: 'Create a support case with the SageMaker team to change the default image classification algorithm to Inception.', isCorrect: false },
+      { id: '38c', text: 'Bundle a Docker container with TensorFlow Estimator loaded with an Inception network and use this for model training.', isCorrect: true },
+      { id: '38d', text: 'Use custom code in Amazon SageMaker with TensorFlow Estimator to load the model with an Inception network, and use this for model training.', isCorrect: true },
+      { id: '38e', text: 'Download and apt-get install the inception network code into an Amazon EC2 instance and use this instance as a Jupyter notebook in Amazon SageMaker.', isCorrect: false },
+    ],
+    explanation: 'To use Inception instead of the built-in ResNet algorithm, the team needs custom code with TensorFlow Estimator. This can be done by either bundling a custom Docker container or using custom code in SageMaker with TensorFlow Estimator loaded with the Inception architecture.',
+  },
+  {
+    id: '39',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist built an image classification deep learning model. However, the Specialist ran into an overfitting problem in which the training and testing accuracies were 99% and 75%, respectively. How should the Specialist address this issue and what is the reason behind it?',
+    options: [
+      { id: '39a', text: 'The learning rate should be increased because the optimization process was trapped at a local minimum.', isCorrect: false },
+      { id: '39b', text: 'The dropout rate at the flatten layer should be increased because the model is not generalized enough.', isCorrect: true },
+      { id: '39c', text: 'The dimensionality of dense layer next to the flatten layer should be increased because the model is not complex enough.', isCorrect: false },
+      { id: '39d', text: 'The epoch number should be increased because the optimization process was terminated before it reached the global minimum.', isCorrect: false },
+    ],
+    explanation: 'The large gap between training (99%) and testing (75%) accuracy indicates overfitting. Increasing dropout rate randomly deactivates neurons during training, forcing the network to learn more robust features and generalize better to unseen data.',
+  },
+  {
+    id: '40',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning team uses Amazon SageMaker to train an Apache MXNet handwritten digit classifier model. The team wants to receive a notification when the model is overfitting. Auditors want to view the Amazon SageMaker log activity report to ensure there are no unauthorized API calls. What should the Machine Learning team do with the least amount of code and fewest steps?',
+    options: [
+      { id: '40a', text: 'Implement an AWS Lambda function to log Amazon SageMaker API calls to Amazon S3. Add code to push a custom metric to Amazon CloudWatch. Create an alarm in CloudWatch with Amazon SNS to receive a notification when the model is overfitting.', isCorrect: false },
+      { id: '40b', text: 'Use AWS CloudTrail to log Amazon SageMaker API calls to Amazon S3. Add code to push a custom metric to Amazon CloudWatch. Create an alarm in CloudWatch with Amazon SNS to receive a notification when the model is overfitting.', isCorrect: true },
+      { id: '40c', text: 'Implement an AWS Lambda function to log Amazon SageMaker API calls to AWS CloudTrail. Add code to push a custom metric to Amazon CloudWatch. Create an alarm in CloudWatch with Amazon SNS to receive a notification when the model is overfitting.', isCorrect: false },
+      { id: '40d', text: 'Use AWS CloudTrail to log Amazon SageMaker API calls to Amazon S3. Set up Amazon SNS to receive a notification when the model is overfitting.', isCorrect: false },
+    ],
+    explanation: 'AWS CloudTrail automatically logs API calls with minimal configuration. Custom metrics pushed to CloudWatch combined with CloudWatch Alarms and SNS provide overfitting notifications. This approach requires the least code and steps compared to custom Lambda implementations.',
+  },
 ];
 
 function App() {
