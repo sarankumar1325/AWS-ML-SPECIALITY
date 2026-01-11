@@ -248,6 +248,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Pre-trained word embeddings (like Word2Vec, GloVe, or FastText) capture semantic meaning and contextual similarity between words based on their usage in large text corpora. Words used in similar contexts will have similar embedding vectors, making them ideal for nearest neighbor queries in a dictionary widget.',
   },
+  {
+    id: '21',
+    type: QuestionType.MSQ,
+    question: 'A Machine Learning Specialist is configuring Amazon SageMaker so multiple Data Scientists can access notebooks, train models, and deploy endpoints. To ensure the best operational performance, the Specialist needs to be able to track how often the Scientists are deploying models, GPU and CPU utilization on the deployed SageMaker endpoints, and all errors that are generated when an endpoint is invoked. Which services are integrated with Amazon SageMaker to track this information? (Choose two.)',
+    options: [
+      { id: '21a', text: 'AWS CloudTrail', isCorrect: true },
+      { id: '21b', text: 'AWS Health', isCorrect: false },
+      { id: '21c', text: 'AWS Trusted Advisor', isCorrect: false },
+      { id: '21d', text: 'Amazon CloudWatch', isCorrect: true },
+      { id: '21e', text: 'AWS Config', isCorrect: false },
+    ],
+    explanation: 'AWS CloudTrail logs API calls including model deployments, and Amazon CloudWatch monitors metrics like GPU/CPU utilization and endpoint errors. These two services integrate with SageMaker to provide comprehensive operational visibility.',
+  },
+  {
+    id: '22',
+    type: QuestionType.MCQ,
+    question: 'A retail chain has been ingesting purchasing records from its network of 20,000 stores to Amazon S3 using Amazon Kinesis Data Firehose. To support training an improved machine learning model, training records will require new but simple transformations, and some attributes will be combined. The model needs to be retrained daily. Given the large number of stores and the legacy data ingestion, which change will require the LEAST amount of development effort?',
+    options: [
+      { id: '22a', text: 'Require that the stores to switch to capturing their data locally on AWS Storage Gateway for loading into Amazon S3, then use AWS Glue to do the transformation.', isCorrect: false },
+      { id: '22b', text: 'Deploy an Amazon EMR cluster running Apache Spark with the transformation logic, and have the cluster run each day on the accumulating records in Amazon S3, outputting new/transformed records to Amazon S3.', isCorrect: false },
+      { id: '22c', text: 'Spin up a fleet of Amazon EC2 instances with the transformation logic, have them transform the data records accumulating on Amazon S3, and output the transformed records to Amazon S3.', isCorrect: false },
+      { id: '22d', text: 'Insert an Amazon Kinesis Data Analytics stream downstream of the Kinesis Data Firehose stream that transforms raw record attributes into simple transformed values using SQL.', isCorrect: true },
+    ],
+    explanation: 'Kinesis Data Analytics allows SQL-based transformations on streaming data with minimal code. Adding it downstream of Kinesis Data Firehose requires the least effort compared to setting up EMR, EC2 fleets, or changing store-side data capture.',
+  },
+  {
+    id: '23',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is building a convolutional neural network (CNN) that will classify 10 types of animals. The Specialist has built a series of layers in a neural network that will take an input image of an animal, pass it through a series of convolutional and pooling layers, and then finally pass it through a dense and fully connected layer with 10 nodes. The Specialist would like to get an output from the neural network that is a probability distribution of how likely it is that the input image belongs to each of the 10 classes. Which function will produce the desired output?',
+    options: [
+      { id: '23a', text: 'Dropout', isCorrect: false },
+      { id: '23b', text: 'Smooth L1 loss', isCorrect: false },
+      { id: '23c', text: 'Softmax', isCorrect: true },
+      { id: '23d', text: 'Rectified linear units (ReLU)', isCorrect: false },
+    ],
+    explanation: 'Softmax activation function converts the 10 output values into a probability distribution that sums to 1, where each value represents the probability of the input belonging to that class. This is the standard approach for multi-class classification output layers.',
+  },
+  {
+    id: '24',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist trained a regression model, but the first iteration needs optimizing. The Specialist needs to understand whether the model is more frequently overestimating or underestimating the target. What option can the Specialist use to determine whether it is overestimating or underestimating the target value?',
+    options: [
+      { id: '24a', text: 'Root Mean Square Error (RMSE)', isCorrect: false },
+      { id: '24b', text: 'Residual plots', isCorrect: true },
+      { id: '24c', text: 'Area under the curve', isCorrect: false },
+      { id: '24d', text: 'Confusion matrix', isCorrect: false },
+    ],
+    explanation: 'Residual plots (scatter plot of residuals vs predicted values) show whether predictions systematically overestimate (positive residuals) or underestimate (negative residuals) the target. A pattern in the residuals indicates bias in the model predictions.',
+  },
+  {
+    id: '25',
+    type: QuestionType.MCQ,
+    question: 'A company wants to classify user behavior as either fraudulent or normal. Based on internal research, a Machine Learning Specialist would like to build a binary classifier based on two features: age of account and transaction month. The class distribution for these features is illustrated in the figure provided. Based on this information, which model would have the HIGHEST recall with respect to the fraudulent class?',
+    options: [
+      { id: '25a', text: 'Decision tree', isCorrect: true },
+      { id: '25b', text: 'Linear support vector machine (SVM)', isCorrect: false },
+      { id: '25c', text: 'Naive Bayesian classifier', isCorrect: false },
+      { id: '25d', text: 'Single Perceptron with sigmoidal activation function', isCorrect: false },
+    ],
+    explanation: 'Decision trees can capture non-linear decision boundaries and are effective at identifying positive cases (fraudulent transactions). They tend to have higher recall because they can create rules that flag suspicious patterns without being overly constrained by linear separations.',
+  },
 ];
 
 function App() {
