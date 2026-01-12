@@ -1287,6 +1287,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'High correlation (0.1-0.95) between features indicates statistical dependence. Naive Bayes assumes feature independence, which is violated here. A full Bayesian network can model conditional dependencies between features, making it more appropriate for this data.',
   },
+  {
+    id: '106',
+    type: QuestionType.MCQ,
+    question: 'A Data Scientist is building a linear regression model and will use resulting p-values to evaluate the statistical significance of each coefficient. Upon inspection of the dataset, the Data Scientist discovers that most of the features are normally distributed. The plot of one feature in the dataset is shown in the graphic. What transformation should the Data Scientist apply to satisfy the statistical assumptions of the linear regression model?',
+    options: [
+      { id: '106a', text: 'Exponential transformation', isCorrect: false },
+      { id: '106b', text: 'Logarithmic transformation', isCorrect: true },
+      { id: '106c', text: 'Polynomial transformation', isCorrect: false },
+      { id: '106d', text: 'Sinusoidal transformation', isCorrect: false },
+    ],
+    explanation: 'Logarithmic transformation normalizes right-skewed distributions by compressing large values. This addresses the positive skewness shown in the graphic and helps satisfy linear regression assumptions of normally distributed residuals and constant variance.',
+  },
+  {
+    id: '107',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is assigned to a Fraud Detection team and must tune an XGBoost model, which is working appropriately for test data. However, with unknown data, it is not working as expected. The existing parameters are provided as follows. Which parameter tuning guidelines should the Specialist follow to avoid overfitting?',
+    options: [
+      { id: '107a', text: 'Increase the max_depth parameter value.', isCorrect: false },
+      { id: '107b', text: 'Lower the max_depth parameter value.', isCorrect: true },
+      { id: '107c', text: 'Update the objective to binary:logistic.', isCorrect: false },
+      { id: '107d', text: 'Lower the min_child_weight parameter value.', isCorrect: false },
+    ],
+    explanation: 'Lowering max_depth restricts tree depth, reducing model complexity and overfitting. Smaller trees generalize better to unseen data. XGBoost overfitting is commonly addressed by constraining tree depth, increasing min_child_weight, and adding regularization.',
+  },
+  {
+    id: '108',
+    type: QuestionType.MSQ,
+    question: 'A data scientist is developing a pipeline to ingest streaming web traffic data. The data scientist needs to implement a process to identify unusual web traffic patterns as part of the pipeline. The patterns will be used downstream for alerting and incident response. The data scientist has access to unlabeled historic data to use, if needed. The solution needs to: Calculate an anomaly score for each web traffic entry. Adapt unusual event identification to changing web patterns over time. Which approach should the data scientist implement to meet these requirements?',
+    options: [
+      { id: '108a', text: 'Use historic web traffic data to train an anomaly detection model using the Amazon SageMaker Random Cut Forest (RCF) built-in model. Use an Amazon Kinesis Data Stream to process the incoming web traffic data. Attach a preprocessing AWS Lambda function to perform data enrichment by calling the RCF model to calculate the anomaly score for each record.', isCorrect: false },
+      { id: '108b', text: 'Use historic web traffic data to train an anomaly detection model using the Amazon SageMaker built-in XGBoost model. Use an Amazon Kinesis Data Stream to process the incoming web traffic data. Attach a preprocessing AWS Lambda function to perform data enrichment by calling the XGBoost model to calculate the anomaly score for each record.', isCorrect: false },
+      { id: '108c', text: 'Collect the streaming data using Amazon Kinesis Data Firehose. Map the delivery stream as an input source for Amazon Kinesis Data Analytics. Write a SQL query to run in real time against the streaming data with the k-Nearest Neighbors (kNN) SQL extension to calculate anomaly scores for each record using a tumbling window.', isCorrect: false },
+      { id: '108d', text: 'Collect the streaming data using Amazon Kinesis Data Firehose. Map the delivery stream as an input source for Amazon Kinesis Data Analytics. Write a SQL query to run in real time against the streaming data with the Amazon Random Cut Forest (RCF) SQL extension to calculate anomaly scores for each record using a sliding window.', isCorrect: true },
+    ],
+    explanation: 'Kinesis Data Analytics with RCF SQL extension provides real-time anomaly scoring with automatic adaptation to changing patterns. The sliding window continuously updates the model, and RCF is specifically designed for unsupervised anomaly detection on streaming data.',
+  },
+  {
+    id: '109',
+    type: QuestionType.MCQ,
+    question: 'A Data Scientist received a set of insurance records, each consisting of a record ID, the final outcome among 200 categories, and the date of the final outcome. Some partial information on claim contents is also provided, but only for a few of the 200 categories. For each outcome category, there are hundreds of records distributed over the past 3 years. The Data Scientist wants to predict how many claims to expect in each category from month to month, a few months in advance. What type of machine learning model should be used?',
+    options: [
+      { id: '109a', text: 'Classification month-to-month using supervised learning of the 200 categories based on claim contents.', isCorrect: false },
+      { id: '109b', text: 'Reinforcement learning using claim IDs and timestamps where the agent will identify how many claims in each category to expect from month to month.', isCorrect: false },
+      { id: '109c', text: 'Forecasting using claim IDs and timestamps to identify how many claims in each category to expect from month to month.', isCorrect: true },
+      { id: '109d', text: 'Classification with supervised learning of the categories for which partial information on claim contents is provided, and forecasting using claim IDs and timestamps for all other categories.', isCorrect: false },
+    ],
+    explanation: 'This is a time series forecasting problem - predicting future claim counts based on historical data. The data has temporal patterns (3 years of records) and the goal is to forecast quantities (how many claims) for each category in future months.',
+  },
+  {
+    id: '110',
+    type: QuestionType.MCQ,
+    question: 'A company that promotes healthy sleep patterns by providing cloud-connected devices currently hosts a sleep tracking application on AWS. The application collects device usage information from device users. The company\'s Data Science team is building a machine learning model to predict if and when a user will stop utilizing the company\'s devices. Predictions from this model are used by a downstream application that determines the best approach for contacting users. The Data Science team is building multiple versions of the machine learning model to evaluate each version against the company\'s business goals. To measure long-term effectiveness, the team wants to run multiple versions of the model in parallel for long periods of time, with the ability to control the portion of inferences served by the models. Which solution satisfies these requirements with MINIMAL effort?',
+    options: [
+      { id: '110a', text: 'Build and host multiple models in Amazon SageMaker. Create multiple Amazon SageMaker endpoints, one for each model. Programmatically control invoking different models for inference at the application layer.', isCorrect: false },
+      { id: '110b', text: 'Build and host multiple models in Amazon SageMaker. Create an Amazon SageMaker endpoint configuration with multiple production variants. Programmatically control the portion of the inferences served by the multiple models by updating the endpoint configuration.', isCorrect: true },
+      { id: '110c', text: 'Build and host multiple models in Amazon SageMaker Neo to take into account different types of medical devices. Programmatically control which model is invoked for inference based on the medical device type.', isCorrect: false },
+      { id: '110d', text: 'Build and host multiple models in Amazon SageMaker. Create a single endpoint that accesses multiple models. Use Amazon SageMaker batch transform to control invoking the different models through the single endpoint.', isCorrect: false },
+    ],
+    explanation: 'SageMaker endpoint configurations with multiple production variants allow running models in parallel and controlling traffic distribution with minimal effort. Traffic shifting can be done via API calls to update the endpoint configuration, enabling A/B testing of multiple model versions.',
+  },
 ];
 
 function App() {
