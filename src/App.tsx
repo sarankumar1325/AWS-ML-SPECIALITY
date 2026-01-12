@@ -982,6 +982,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Autoencoder or PCA dimensionality reduction addresses all three issues: (1) handles correlated features by creating uncorrelated principal components, (2) reduces feature count for faster training, (3) prevents overfitting by eliminating noise. This preserves maximum information while improving training efficiency.',
   },
+  {
+    id: '81',
+    type: QuestionType.MCQ,
+    question: 'A Data Scientist is training a multilayer perception (MLP) on a dataset with multiple classes. The target class of interest is unique compared to the other classes within the dataset, but it does not achieve and acceptable recall metric. The Data Scientist has already tried varying the number and size of the MLP\'s hidden layers, which has not significantly improved the results. A solution to improve recall must be implemented as quickly as possible. Which techniques should be used to meet these requirements?',
+    options: [
+      { id: '81a', text: 'Gather more data using Amazon Mechanical Turk and then retrain', isCorrect: false },
+      { id: '81b', text: 'Train an anomaly detection model instead of an MLP', isCorrect: false },
+      { id: '81c', text: 'Train an XGBoost model instead of an MLP', isCorrect: false },
+      { id: '81d', text: 'Add class weights to the MLP\'s loss function and then retrain', isCorrect: true },
+    ],
+    explanation: 'Adding class weights to the loss function penalizes misclassification of the rare class more heavily, directly improving recall. This is the fastest solution compared to gathering more data or switching to different algorithms.',
+  },
+  {
+    id: '82',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist works for a credit card processing company and needs to predict which transactions may be fraudulent in near-real time. Specifically, the Specialist must train a model that returns the probability that a given transaction may fraudulent. How should the Specialist frame this business problem?',
+    options: [
+      { id: '82a', text: 'Streaming classification', isCorrect: false },
+      { id: '82b', text: 'Binary classification', isCorrect: true },
+      { id: '82c', text: 'Multi-category classification', isCorrect: false },
+      { id: '82d', text: 'Regression classification', isCorrect: false },
+    ],
+    explanation: 'Fraud detection is a binary classification problem (fraudulent vs. legitimate transaction) that requires real-time probability scores. This framing allows the model to output a probability that can be thresholded for fraud alerts.',
+  },
+  {
+    id: '83',
+    type: QuestionType.MCQ,
+    question: 'A real estate company wants to create a machine learning model for predicting housing prices based on a historical dataset. The dataset contains 32 features. Which model will meet the business requirement?',
+    options: [
+      { id: '83a', text: 'Logistic regression', isCorrect: false },
+      { id: '83b', text: 'Linear regression', isCorrect: true },
+      { id: '83c', text: 'K-means', isCorrect: false },
+      { id: '83d', text: 'Principal component analysis (PCA)', isCorrect: false },
+    ],
+    explanation: 'Predicting housing prices is a regression problem (continuous output), making linear regression the appropriate model. The 32 features can be used as independent variables to predict the price target.',
+  },
+  {
+    id: '84',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is applying a linear least squares regression model to a dataset with 1,000 records and 50 features. Prior to training, the ML Specialist notices that two features are perfectly linearly dependent. Why could this be an issue for the linear least squares regression model?',
+    options: [
+      { id: '84a', text: 'It could cause the backpropagation algorithm to fail during training', isCorrect: false },
+      { id: '84b', text: 'It could create a singular matrix during optimization, which fails to define a unique solution', isCorrect: true },
+      { id: '84c', text: 'It could modify the loss function during optimization, causing it to fail during training', isCorrect: false },
+      { id: '84d', text: 'It could introduce non-linear dependencies within the data, which could invalidate the linear assumptions of the model', isCorrect: false },
+    ],
+    explanation: 'Perfect linear dependence creates multicollinearity, resulting in a singular (non-invertible) matrix during the normal equation solution. This prevents finding a unique solution for the regression coefficients.',
+  },
+  {
+    id: '85',
+    type: QuestionType.MCQ,
+    question: 'Given the following confusion matrix for a movie classification model, what is the true class frequency for Romance and the predicted class frequency for Adventure?',
+    options: [
+      { id: '85a', text: 'The true class frequency for Romance is 77.56% and the predicted class frequency for Adventure is 20.85%', isCorrect: false },
+      { id: '85b', text: 'The true class frequency for Romance is 57.92% and the predicted class frequency for Adventure is 13.12%', isCorrect: true },
+      { id: '85c', text: 'The true class frequency for Romance is 0.78 and the predicted class frequency for Adventure is (0.47-0.32)', isCorrect: false },
+      { id: '85d', text: 'The true class frequency for Romance is 77.56% × 0.78 and the predicted class frequency for Adventure is 20.85% × 0.32', isCorrect: false },
+    ],
+    explanation: 'True class frequency for Romance = Romance predictions / Total predictions = 0.5792 (57.92%). Predicted class frequency for Adventure = Adventure predictions / Total predictions = 0.1312 (13.12%). These are calculated from the confusion matrix row and column totals.',
+  },
 ];
 
 function App() {
