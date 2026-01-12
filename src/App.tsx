@@ -798,6 +798,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Normalization (standardization) transforms features to have mean 0 and variance 1, ensuring all features contribute equally to the model regardless of their original magnitude. This prevents features with larger scales from dominating the model predictions.',
   },
+  {
+    id: '66',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist must build out a process to query a dataset on Amazon S3 using Amazon Athena. The dataset contains more than 800,000 records stored as plaintext CSV files. Each record contains 200 columns and is approximately 1.5 MB in size. Most queries will span 5 to 10 columns only. How should the Machine Learning Specialist transform the dataset to minimize query runtime?',
+    options: [
+      { id: '66a', text: 'Convert the records to Apache Parquet format.', isCorrect: true },
+      { id: '66b', text: 'Convert the records to JSON format.', isCorrect: false },
+      { id: '66c', text: 'Convert the records to GZIP CSV format.', isCorrect: false },
+      { id: '66d', text: 'Convert the records to XML format.', isCorrect: false },
+    ],
+    explanation: 'Apache Parquet is a columnar storage format that allows Athena to read only the required columns for each query. This significantly reduces query runtime compared to row-based formats like CSV, JSON, or XML, especially when queries only span 5-10 columns out of 200.',
+  },
+  {
+    id: '67',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is developing a daily ETL workflow containing multiple ETL jobs. The workflow consists of the following processes: Start the workflow as soon as data is uploaded to Amazon S3. When all the datasets are available in Amazon S3, start an ETL job to join the uploaded datasets with multiple terabyte-sized datasets already stored in Amazon S3. Store the results of joining datasets in Amazon S3. If one of the jobs fails, send a notification to the Administrator. Which configuration will meet these requirements?',
+    options: [
+      { id: '67a', text: 'Use AWS Lambda to trigger an AWS Step Functions workflow to wait for dataset uploads to complete in Amazon S3. Use AWS Glue to join the datasets. Use an Amazon CloudWatch alarm to send an SNS notification to the Administrator in the case of a failure.', isCorrect: true },
+      { id: '67b', text: 'Develop the ETL workflow using AWS Lambda to start an Amazon SageMaker notebook instance. Use a lifecycle configuration script to join the datasets and persist the results in Amazon S3. Use an Amazon CloudWatch alarm to send an SNS notification to the Administrator in the case of a failure.', isCorrect: false },
+      { id: '67c', text: 'Develop the ETL workflow using AWS Batch to trigger the start of ETL jobs when data is uploaded to Amazon S3. Use AWS Glue to join the datasets in Amazon S3. Use an Amazon CloudWatch alarm to send an SNS notification to the Administrator in the case of a failure.', isCorrect: false },
+      { id: '67d', text: 'Use AWS Lambda to chain other Lambda functions to read and join the datasets in Amazon S3 as soon as the data is uploaded to Amazon S3. Use an Amazon CloudWatch alarm to send an SNS notification to the Administrator in the case of a failure.', isCorrect: false },
+    ],
+    explanation: 'Step Functions with Lambda provides orchestration for waiting on multiple dataset uploads, Glue handles the terabyte-scale data joining efficiently, and CloudWatch alarms with SNS provide failure notifications. This combination meets all workflow requirements.',
+  },
+  {
+    id: '68',
+    type: QuestionType.MSQ,
+    question: 'An agency collects census information within a country to determine healthcare and social program needs by province and city. The census form collects responses for approximately 500 questions from each citizen. Which combination of algorithms would provide the appropriate insights? (Choose two.)',
+    options: [
+      { id: '68a', text: 'The factorization machines (FM) algorithm', isCorrect: false },
+      { id: '68b', text: 'The Latent Dirichlet Allocation (LDA) algorithm', isCorrect: false },
+      { id: '68c', text: 'The principal component analysis (PCA) algorithm', isCorrect: true },
+      { id: '68d', text: 'The k-means algorithm', isCorrect: true },
+      { id: '68e', text: 'The Random Cut Forest (RCF) algorithm', isCorrect: false },
+    ],
+    explanation: 'PCA reduces the 500-question dimensionality to identify key patterns and correlations in census data. K-means clustering segments citizens by geographic regions (province/city) for targeted healthcare and social program insights. Together they provide appropriate census analysis.',
+  },
+  {
+    id: '69',
+    type: QuestionType.MCQ,
+    question: 'A large consumer goods manufacturer has the following products on sale: 34 different toothpaste variants, 48 different toothbrush variants, 43 different mouthwash variants. The entire sales history of all these products is available in Amazon S3. Currently, the company is using custom-built autoregressive integrated moving average (ARIMA) models to forecast demand for these products. The company wants to predict the demand for a new product that will soon be launched. Which solution should a Machine Learning Specialist apply?',
+    options: [
+      { id: '69a', text: 'Train a custom ARIMA model to forecast demand for the new product.', isCorrect: false },
+      { id: '69b', text: 'Train an Amazon SageMaker DeepAR algorithm to forecast demand for the new product.', isCorrect: true },
+      { id: '69c', text: 'Train an Amazon SageMaker k-means clustering algorithm to forecast demand for the new product.', isCorrect: false },
+      { id: '69d', text: 'Train a custom XGBoost model to forecast demand for the new product.', isCorrect: false },
+    ],
+    explanation: 'DeepAR is designed for time series forecasting with multiple related series (product demand across 125 variants). It learns patterns across similar products and can forecast for new products by leveraging the learned dynamics, unlike ARIMA which requires separate models per product.',
+  },
+  {
+    id: '70',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist uploads a dataset to an Amazon S3 bucket protected with server-side encryption using AWS KMS. How should the ML Specialist define the Amazon SageMaker notebook instance so it can read the same dataset from Amazon S3?',
+    options: [
+      { id: '70a', text: 'Define security group(s) to allow all HTTP inbound/outbound traffic and assign those security group(s) to the Amazon SageMaker notebook instance.', isCorrect: false },
+      { id: '70b', text: 'Configure the Amazon SageMaker notebook instance to have access to the VPC. Grant permission in the KMS key policy to the notebook\'s KMS role.', isCorrect: false },
+      { id: '70c', text: 'Assign an IAM role to the Amazon SageMaker notebook with S3 read access to the dataset. Grant permission in the KMS key policy to that role.', isCorrect: true },
+      { id: '70d', text: 'Assign the same KMS key used to encrypt data in Amazon S3 to the Amazon SageMaker notebook instance.', isCorrect: false },
+    ],
+    explanation: 'The SageMaker notebook needs an IAM role with S3 read permissions to access the data. Additionally, the KMS key policy must grant the notebook role permission to decrypt the data. This combination enables secure access to KMS-encrypted S3 data from SageMaker.',
+  },
 ];
 
 function App() {
