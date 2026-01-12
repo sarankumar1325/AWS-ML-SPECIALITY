@@ -1469,6 +1469,68 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Amazon Elastic Inference allows attaching GPU acceleration to cost-effective CPU instances like M5. This reduces costs by providing the right amount of GPU power needed for the workload rather than paying for an underutilized full P3 instance.',
   },
+  {
+    id: '121',
+    type: QuestionType.MCQ,
+    question: 'A data scientist uses an Amazon SageMaker notebook instance to conduct data exploration and analysis. This requires certain Python packages that are not natively available on Amazon SageMaker to be installed on the notebook instance. How can a machine learning specialist ensure that required packages are automatically available on the notebook instance for the data scientist to use?',
+    options: [
+      { id: '121a', text: 'Install AWS Systems Manager Agent on the underlying Amazon EC2 instance and use Systems Manager Automation to execute the package installation commands.', isCorrect: false },
+      { id: '121b', text: 'Create a Jupyter notebook file (.ipynb) with cells containing the package installation commands to execute and place the file under the /etc/init directory of each Amazon SageMaker notebook instance.', isCorrect: false },
+      { id: '121c', text: 'Use the conda package manager from within the Jupyter notebook console to apply the necessary conda packages to the default kernel of the notebook.', isCorrect: false },
+      { id: '121d', text: 'Create an Amazon SageMaker lifecycle configuration with package installation commands and assign the lifecycle configuration to the notebook instance.', isCorrect: true },
+    ],
+    explanation: 'SageMaker lifecycle configurations automatically execute scripts when creating or starting notebook instances. This ensures required packages are installed automatically for all users without manual intervention.',
+  },
+  {
+    id: '122',
+    type: QuestionType.MCQ,
+    question: 'A data scientist needs to identify fraudulent user accounts for a company\'s ecommerce platform. The company wants the ability to determine if a newly created account is associated with a previously known fraudulent user. The data scientist is using AWS Glue to cleanse the company\'s application logs during ingestion. Which strategy will allow the data scientist to identify fraudulent accounts?',
+    options: [
+      { id: '122a', text: 'Execute the built-in FindDuplicates Amazon Athena query.', isCorrect: false },
+      { id: '122b', text: 'Create a FindMatches machine learning transform in AWS Glue.', isCorrect: true },
+      { id: '122c', text: 'Create an AWS Glue crawler to infer duplicate accounts in the source data.', isCorrect: false },
+      { id: '122d', text: 'Search for duplicate accounts in the AWS Glue Data Catalog.', isCorrect: false },
+    ],
+    explanation: 'AWS Glue FindMatches ML transform is designed for entity resolution and duplicate detection. It learns to identify matching records even when data quality issues exist, making it ideal for detecting fraudulent accounts linked to known fraudsters.',
+  },
+  {
+    id: '123',
+    type: QuestionType.MSQ,
+    question: 'A Data Scientist is developing a machine learning model to classify whether a financial transaction is fraudulent. The labeled data available for training consists of 100,000 non-fraudulent observations and 1,000 fraudulent observations. The Data Scientist applies the XGBoost algorithm to the data, resulting in the following confusion matrix when the trained model is applied to a previously unseen validation dataset. The accuracy of the model is 99.1%, but the Data Scientist needs to reduce the number of false negatives. Which combination of steps should the Data Scientist take to reduce the number of false negative predictions by the model? (Choose two.)',
+    options: [
+      { id: '123a', text: 'Change the XGBoost eval_metric parameter to optimize based on Root Mean Square Error (RMSE).', isCorrect: false },
+      { id: '123b', text: 'Increase the XGBoost scale_pos_weight parameter to adjust the balance of positive and negative weights.', isCorrect: true },
+      { id: '123c', text: 'Increase the XGBoost max_depth parameter because the model is currently underfitting the data.', isCorrect: false },
+      { id: '123d', text: 'Change the XGBoost eval_metric parameter to optimize based on Area Under the ROC Curve (AUC).', isCorrect: true },
+      { id: '123e', text: 'Decrease the XGBoost max_depth parameter because the model is currently overfitting the data.', isCorrect: false },
+    ],
+    explanation: 'scale_pos_weight adjusts class imbalance (1:100 ratio) by penalizing false negatives more heavily. AUC optimizes for ranking and separation between classes, reducing false negatives without adjusting the threshold manually.',
+  },
+  {
+    id: '124',
+    type: QuestionType.MCQ,
+    question: 'A data scientist has developed a machine learning translation model for English to Japanese by using Amazon SageMaker\'s built-in seq2seq algorithm with 500,000 aligned sentence pairs. While testing with sample sentences, the data scientist finds that the translation quality is reasonable for an example as short as five words. However, the quality becomes unacceptable if the sentence is 100 words long. Which action will resolve the problem?',
+    options: [
+      { id: '124a', text: 'Change preprocessing to use n-grams.', isCorrect: false },
+      { id: '124b', text: 'Add more nodes to the recurrent neural network (RNN) than the largest sentence\'s word count.', isCorrect: false },
+      { id: '124c', text: 'Adjust hyperparameters related to the attention mechanism.', isCorrect: true },
+      { id: '124d', text: 'Choose a different weight initialization type.', isCorrect: false },
+    ],
+    explanation: 'The attention mechanism allows the model to focus on relevant parts of the input sequence when generating translations. For long sentences (100 words), the attention mechanism may need tuning (attention horizon, number of layers, or attention type) to maintain translation quality.',
+  },
+  {
+    id: '125',
+    type: QuestionType.MSQ,
+    question: 'A financial company is trying to detect credit card fraud. The company observed that, on average, 2% of credit card transactions were fraudulent. A data scientist trained a classifier on a year\'s worth of credit card transactions data. The model needs to identify the fraudulent transactions (positives) from the regular ones (negatives). The company\'s goal is to accurately capture as many positives as possible. Which metrics should the data scientist use to optimize the model? (Choose two.)',
+    options: [
+      { id: '125a', text: 'Specificity', isCorrect: false },
+      { id: '125b', text: 'False positive rate', isCorrect: false },
+      { id: '125c', text: 'Accuracy', isCorrect: false },
+      { id: '125d', text: 'Area under the precision-recall curve', isCorrect: true },
+      { id: '125e', text: 'True positive rate', isCorrect: true },
+    ],
+    explanation: 'For imbalanced fraud detection (2% fraud), True Positive Rate (Recall) measures how many fraudulent transactions are captured. Area under the PR curve is better than ROC for imbalanced data as it focuses on the positive class performance.',
+  },
 ];
 
 function App() {
