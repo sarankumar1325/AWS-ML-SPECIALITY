@@ -1227,6 +1227,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Stratified k-fold maintains the class distribution (3% disease, 97% no disease) in each fold. This is critical for imbalanced datasets to ensure each fold representative of the overall population and prevent biased model evaluation.',
   },
+  {
+    id: '101',
+    type: QuestionType.MCQ,
+    question: 'A technology startup is using complex deep neural networks and GPU compute to recommend the company\'s products to its existing customers based upon each customer\'s habits and interactions. The solution currently pulls each dataset from an Amazon S3 bucket before loading the data into a TensorFlow model pulled from the company\'s Git repository that runs locally. This job then runs for several hours while continually outputting its progress to the same S3 bucket. The job can be paused, restarted, and continued at any time in the event of a failure, and is run from a central queue. Senior managers are concerned about the complexity of the solution\'s resource management and the costs involved in repeating the process regularly. They ask for the workload to be automated so it runs once a week, starting Monday and completing by the close of business Friday. Which architecture should be used to scale the solution at the lowest cost?',
+    options: [
+      { id: '101a', text: 'Implement the solution using AWS Deep Learning Containers and run the container as a job using AWS Batch on a GPU-compatible Spot Instance', isCorrect: true },
+      { id: '101b', text: 'Implement the solution using a low-cost GPU-compatible Amazon EC2 instance and use the AWS Instance Scheduler to schedule the task', isCorrect: false },
+      { id: '101c', text: 'Implement the solution using AWS Deep Learning Containers, run the workload using AWS Fargate running on Spot Instances, and then schedule the task using the built-in task scheduler', isCorrect: false },
+      { id: '101d', text: 'Implement the solution using Amazon ECS running on Spot Instances and schedule the task using the ECS service scheduler', isCorrect: false },
+    ],
+    explanation: 'AWS Batch on GPU Spot Instances provides the lowest cost for batch ML workloads. Deep Learning Containers come pre-configured with frameworks, Spot Instances offer up to 90% savings, and AWS Batch handles job scheduling, scaling, and failure recovery automatically.',
+  },
+  {
+    id: '102',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist prepared the following graph displaying the results of k-means for k = [1..10]: Considering the graph, what is a reasonable selection for the optimal choice of k?',
+    options: [
+      { id: '102a', text: '1', isCorrect: false },
+      { id: '102b', text: '4', isCorrect: true },
+      { id: '102c', text: '7', isCorrect: false },
+      { id: '102d', text: '10', isCorrect: false },
+    ],
+    explanation: 'The elbow method selects k at the "elbow" point where diminishing returns begin. Based on the typical elbow curve, k=4 represents the optimal number of clusters where adding more clusters doesn\'t significantly reduce the within-cluster sum of squares (inertia).',
+  },
+  {
+    id: '103',
+    type: QuestionType.MCQ,
+    question: 'A media company with a very large archive of unlabeled images, text, audio, and video footage wishes to index its assets to allow rapid identification of relevant content by the Research team. The company wants to use machine learning to accelerate the efforts of its in-house researchers who have limited machine learning expertise. Which is the FASTEST route to index the assets?',
+    options: [
+      { id: '103a', text: 'Use Amazon Rekognition, Amazon Comprehend, and Amazon Transcribe to tag data into distinct categories/classes.', isCorrect: true },
+      { id: '103b', text: 'Create a set of Amazon Mechanical Turk Human Intelligence Tasks to label all footage.', isCorrect: false },
+      { id: '103c', text: 'Use Amazon Transcribe to convert speech to text. Use the Amazon SageMaker Neural Topic Model (NTM) and Object Detection algorithms to tag data into distinct categories/classes.', isCorrect: false },
+      { id: '103d', text: 'Use the AWS Deep Learning AMI and Amazon EC2 GPU instances to create custom models for audio transcription and topic modeling, and use object detection to tag data into distinct categories/classes.', isCorrect: false },
+    ],
+    explanation: 'Amazon Rekognition, Comprehend, and Transcribe are managed AI services that require no ML expertise and provide immediate results. This is the fastest approach compared to building custom models or using human labeling which takes significantly longer.',
+  },
+  {
+    id: '104',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is working for an online retailer that wants to run analytics on every customer visit, processed through a machine learning pipeline. The data needs to be ingested by Amazon Kinesis Data Streams at up to 100 transactions per second, and the JSON data blob is 100 KB in size. What is the MINIMUM number of shards in Kinesis Data Streams the Specialist should use to successfully ingest this data?',
+    options: [
+      { id: '104a', text: '1 shard', isCorrect: false },
+      { id: '104b', text: '10 shards', isCorrect: true },
+      { id: '104c', text: '100 shards', isCorrect: false },
+      { id: '104d', text: '1,000 shards', isCorrect: false },
+    ],
+    explanation: 'Each Kinesis shard supports: (1) 1MB/second write OR 1000 records/second write. At 100 transactions/second × 100KB = 10MB/second incoming data rate. We need at least 10 shards (10MB/second ÷ 1MB/shard) to handle this throughput.',
+  },
+  {
+    id: '105',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is deciding between building a naive Bayesian model or a full Bayesian network for a classification problem. The Specialist computes the Pearson correlation coefficients between each feature and finds that their absolute values range between 0.1 to 0.95. Which model describes the underlying data in this situation?',
+    options: [
+      { id: '105a', text: 'A naive Bayesian model, since the features are all conditionally independent.', isCorrect: false },
+      { id: '105b', text: 'A full Bayesian network, since the features are all conditionally independent.', isCorrect: false },
+      { id: '105c', text: 'A naive Bayesian model, since some of the features are statistically dependent.', isCorrect: false },
+      { id: '105d', text: 'A full Bayesian network, since some of the features are statistically dependent.', isCorrect: true },
+    ],
+    explanation: 'High correlation (0.1-0.95) between features indicates statistical dependence. Naive Bayes assumes feature independence, which is violated here. A full Bayesian network can model conditional dependencies between features, making it more appropriate for this data.',
+  },
 ];
 
 function App() {
