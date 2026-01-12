@@ -1347,6 +1347,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'SageMaker endpoint configurations with multiple production variants allow running models in parallel and controlling traffic distribution with minimal effort. Traffic shifting can be done via API calls to update the endpoint configuration, enabling A/B testing of multiple model versions.',
   },
+  {
+    id: '111',
+    type: QuestionType.MCQ,
+    question: 'An agricultural company is interested in using machine learning to detect specific types of weeds in a 100-acre grassland field. Currently, the company uses tractor-mounted cameras to capture multiple images of the field as 10×10 grids. The company also has a large training dataset that consists of annotated images of popular weed classes like broadleaf and non-broadleaf docks. The company wants to build a weed detection model that will detect specific types of weeds and the location of each type within the field. Once the model is ready, it will be hosted on Amazon SageMaker endpoints. The model will perform real-time inferencing using the images captured by the cameras. Which approach should a Machine Learning Specialist take to obtain accurate predictions?',
+    options: [
+      { id: '111a', text: 'Prepare the images in RecordIO format and upload them to Amazon S3. Use Amazon SageMaker to train, test, and validate the model using an image classification algorithm to categorize images into various weed classes.', isCorrect: false },
+      { id: '111b', text: 'Prepare the images in Apache Parquet format and upload them to Amazon S3. Use Amazon SageMaker to train, test, and validate the model using an object-detection single-shot multibox detector (SSD) algorithm.', isCorrect: false },
+      { id: '111c', text: 'Prepare the images in RecordIO format and upload them to Amazon S3. Use Amazon SageMaker to train, test, and validate the model using an object-detection single-shot multibox detector (SSD) algorithm.', isCorrect: true },
+      { id: '111d', text: 'Prepare the images in Apache Parquet format and upload them to Amazon S3. Use Amazon SageMaker to train, test, and validate the model using an image classification algorithm to categorize images into various weed classes.', isCorrect: false },
+    ],
+    explanation: 'Object detection with SSD (Single Shot Multibox Detector) is required because the company needs to detect both the type of weed AND its location within the field. Image classification only categorizes entire images. RecordIO is the correct format for SageMaker object detection algorithms.',
+  },
+  {
+    id: '112',
+    type: QuestionType.MCQ,
+    question: 'A manufacturer is operating a large number of factories with a complex supply chain relationship where unexpected downtime of a machine can cause production to stop at several factories. A data scientist wants to analyze sensor data from the factories to identify equipment in need of preemptive maintenance and then dispatch a service team to prevent unplanned downtime. The sensor readings from a single machine can include up to 200 data points including temperatures, voltages, vibrations, RPMs, and pressure readings. To collect this sensor data, the manufacturer deployed Wi-Fi and LANs across the factories. Even though many factory locations do not have reliable or high-speed internet connectivity, the manufacturer would like to maintain near-real-time inference capabilities. Which deployment architecture for the model will address these business requirements?',
+    options: [
+      { id: '112a', text: 'Deploy the model in Amazon SageMaker. Run sensor data through this model to predict which machines need maintenance.', isCorrect: false },
+      { id: '112b', text: 'Deploy the model on AWS IoT Greengrass in each factory. Run sensor data through this model to infer which machines need maintenance.', isCorrect: true },
+      { id: '112c', text: 'Deploy the model to an Amazon SageMaker batch transformation job. Generate inferences in a daily batch report to identify machines that need maintenance.', isCorrect: false },
+      { id: '112d', text: 'Deploy the model in Amazon SageMaker and use an IoT rule to write data to an Amazon DynamoDB table. Consume a DynamoDB stream from the table with an AWS Lambda function to invoke the endpoint.', isCorrect: false },
+    ],
+    explanation: 'AWS IoT Greengrass enables edge inference by deploying ML models directly to local factory devices. This provides near-real-time inference without relying on internet connectivity, addressing the unreliable connectivity requirement while maintaining low-latency predictions.',
+  },
+  {
+    id: '113',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is designing a scalable data storage solution for Amazon SageMaker. There is an existing TensorFlow-based model implemented as a train.py script that relies on static training data that is currently stored as TFRecords. Which method of providing training data to Amazon SageMaker would meet the business requirements with the LEAST development overhead?',
+    options: [
+      { id: '113a', text: 'Use Amazon SageMaker script mode and use train.py unchanged. Point the Amazon SageMaker training invocation to the local path of the data without reformatting the training data.', isCorrect: false },
+      { id: '113b', text: 'Use Amazon SageMaker script mode and use train.py unchanged. Put the TFRecord data into an Amazon S3 bucket. Point the Amazon SageMaker training invocation to the S3 bucket without reformatting the training data.', isCorrect: true },
+      { id: '113c', text: 'Rewrite the train.py script to add a section that converts TFRecords to protobuf and ingests the protobuf data instead of TFRecords.', isCorrect: false },
+      { id: '113d', text: 'Prepare the data in the format accepted by Amazon SageMaker. Use AWS Glue or AWS Lambda to reformat and store the data in an Amazon S3 bucket.', isCorrect: false },
+    ],
+    explanation: 'SageMaker script mode allows using existing train.py scripts without modification. TFRecords are natively supported by TensorFlow, so simply uploading to S3 and pointing SageMaker to the bucket provides the least development overhead while maintaining scalability.',
+  },
+  {
+    id: '114',
+    type: QuestionType.MCQ,
+    question: 'The chief editor for a product catalog wants the research and development team to build a machine learning system that can be used to detect whether or not individuals in a collection of images are wearing the company\'s retail brand. The team has a set of training data. Which machine learning algorithm should the researchers use that BEST meets their requirements?',
+    options: [
+      { id: '114a', text: 'Latent Dirichlet Allocation (LDA)', isCorrect: false },
+      { id: '114b', text: 'Recurrent neural network (RNN)', isCorrect: false },
+      { id: '114c', text: 'K-means', isCorrect: false },
+      { id: '114d', text: 'Convolutional neural network (CNN)', isCorrect: true },
+    ],
+    explanation: 'CNNs are the state-of-the-art for image classification and object detection tasks. They automatically learn spatial hierarchies of features from images, making them ideal for detecting brand logos or clothing items in images.',
+  },
+  {
+    id: '115',
+    type: QuestionType.MCQ,
+    question: 'A retail company is using Amazon Personalize to provide personalized product recommendations for its customers during a marketing campaign. The company sees a significant increase in sales of recommended items to existing customers immediately after deploying a new solution version, but these sales decrease a short time after deployment. Only historical data from before the marketing campaign is available for training. How should a data scientist adjust the solution?',
+    options: [
+      { id: '115a', text: 'Use the event tracker in Amazon Personalize to include real-time user interactions.', isCorrect: true },
+      { id: '115b', text: 'Add user metadata and use the HRNN-Metadata recipe in Amazon Personalize.', isCorrect: false },
+      { id: '115c', text: 'Implement a new solution using the built-in factorization machines (FM) algorithm in Amazon SageMaker.', isCorrect: false },
+      { id: '115d', text: 'Add event type and event value fields to the interactions dataset in Amazon Personalize.', isCorrect: false },
+    ],
+    explanation: 'The event tracker in Amazon Personalize captures real-time user interactions (clicks, purchases, etc.) which are used to continuously improve recommendations. Without real-time feedback, the model relies on stale historical data causing the recommendation quality to degrade over time.',
+  },
 ];
 
 function App() {
