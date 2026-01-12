@@ -1103,6 +1103,68 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Only task nodes should use Spot Instances. Core nodes store data (HDFS) and their loss would cause job failure. Master node coordinates the cluster and must be reliable. Task nodes are stateless and can be replaced if terminated, making them ideal for Spot Instances.',
   },
+  {
+    id: '91',
+    type: QuestionType.MCQ,
+    question: 'A manufacturer of car engines collects data from cars as they are being driven. The data collected includes timestamp, engine temperature, rotations per minute (RPM), and other sensor readings. The company wants to predict when an engine is going to have a problem, so it can notify drivers in advance to get engine maintenance. The engine data is loaded into a data lake for training. Which is the MOST suitable predictive model that can be deployed into production?',
+    options: [
+      { id: '91a', text: 'Add labels over time to indicate which engine faults occur at what time in the future to turn this into a supervised learning problem. Use a recurrent neural network (RNN) to train the model to recognize when an engine might need maintenance for a certain fault.', isCorrect: true },
+      { id: '91b', text: 'This data requires an unsupervised learning algorithm. Use Amazon SageMaker k-means to cluster the data.', isCorrect: false },
+      { id: '91c', text: 'Add labels over time to indicate which engine faults occur at what time in the future to turn this into a supervised learning problem. Use a convolutional neural network (CNN) to train the model to recognize when an engine might need maintenance for a certain fault.', isCorrect: false },
+      { id: '91d', text: 'This data is already formulated as a time series. Use Amazon SageMaker seq2seq to model the time series.', isCorrect: false },
+    ],
+    explanation: 'RNNs are ideal for sequential/time-series data like sensor readings because they can learn temporal dependencies. By labeling historical data to indicate when faults occurred, this becomes a supervised learning problem where RNNs can predict future maintenance needs based on patterns in the sensor data.',
+  },
+  {
+    id: '92',
+    type: QuestionType.MCQ,
+    question: 'A company wants to predict the sale prices of houses based on available historical sales data. The target variable in the company\'s dataset is the sale price. The features include parameters such as the lot size, living area measurements, non-living area measurements, number of bedrooms, number of bathrooms, year built, and postal code. The company wants to use multi-variable linear regression to predict house sale prices. Which step should a machine learning specialist take to remove features that are irrelevant for the analysis and reduce the model\'s complexity?',
+    options: [
+      { id: '92a', text: 'Plot a histogram of the features and compute their standard deviation. Remove features with high variance.', isCorrect: false },
+      { id: '92b', text: 'Plot a histogram of the features and compute their standard deviation. Remove features with low variance.', isCorrect: false },
+      { id: '92c', text: 'Build a heatmap showing the correlation of the dataset against itself. Remove features with low mutual correlation scores.', isCorrect: false },
+      { id: '92d', text: 'Run a correlation check of all features against the target variable. Remove features with low target variable correlation scores.', isCorrect: true },
+    ],
+    explanation: 'For regression problems, the most relevant features are those most correlated with the target variable (sale price). Removing features with low correlation to the target reduces complexity while preserving predictive power. This feature selection approach directly measures each feature\'s relationship with what we want to predict.',
+  },
+  {
+    id: '93',
+    type: QuestionType.MCQ,
+    question: 'A company wants to classify user behavior as either fraudulent or normal. Based on internal research, a machine learning specialist will build a binary classifier based on two features: age of account, denoted by x, and transaction month, denoted by y. The class distributions are illustrated in the provided figure. The positive class is portrayed in red, while the negative class is portrayed in black. Which model would have the HIGHEST accuracy?',
+    options: [
+      { id: '93a', text: 'Linear support vector machine (SVM)', isCorrect: false },
+      { id: '93b', text: 'Decision tree', isCorrect: false },
+      { id: '93c', text: 'Support vector machine (SVM) with a radial basis function kernel', isCorrect: true },
+      { id: '93d', text: 'Single perceptron with a Tanh activation function', isCorrect: false },
+    ],
+    explanation: 'Based on the class distributions described (likely non-linear boundaries), an SVM with RBF kernel can create complex, non-linear decision boundaries that separate the fraud and normal classes more accurately than linear models. The RBF kernel maps data to higher dimensions where classes become separable.',
+  },
+  {
+    id: '94',
+    type: QuestionType.MSQ,
+    question: 'A health care company is planning to use neural networks to classify their X-ray images into normal and abnormal classes. The labeled data is divided into a training set of 1,000 images and a test set of 200 images. The initial training of a neural network model with 50 hidden layers yielded 99% accuracy on the training set, but only 55% accuracy on the test set. What changes should the Specialist consider to solve this issue? (Choose three.)',
+    options: [
+      { id: '94a', text: 'Choose a higher number of layers', isCorrect: false },
+      { id: '94b', text: 'Choose a lower number of layers', isCorrect: true },
+      { id: '94c', text: 'Choose a smaller learning rate', isCorrect: false },
+      { id: '94d', text: 'Enable dropout', isCorrect: true },
+      { id: '94e', text: 'Include all the images from the test set in the training set', isCorrect: false },
+      { id: '94f', text: 'Enable early stopping', isCorrect: true },
+    ],
+    explanation: 'The model is severely overfitting (99% train accuracy vs 55% test accuracy). Reducing layers decreases model capacity and overfitting. Dropout randomly deactivates neurons during training, improving generalization. Early stopping halts training when validation performance degrades, preventing the model from memorizing training data.',
+  },
+  {
+    id: '95',
+    type: QuestionType.MCQ,
+    question: 'This graph shows the training and validation loss against the epochs for a neural network. The network being trained is as follows: Two dense layers, one output neuron, 100 neurons in each layer, 100 epochs, Random initialization of weights. Which technique can be used to improve model performance in terms of accuracy in the validation set?',
+    options: [
+      { id: '95a', text: 'Early stopping', isCorrect: true },
+      { id: '95b', text: 'Random initialization of weights with appropriate seed', isCorrect: false },
+      { id: '95c', text: 'Increasing the number of epochs', isCorrect: false },
+      { id: '95d', text: 'Adding another layer with the 100 neurons', isCorrect: false },
+    ],
+    explanation: 'Early stopping monitors validation loss and stops training when it starts increasing (indicating overfitting begins). This prevents the model from overfitting to training data and improves generalization to the validation set. The graph likely shows validation loss diverging from training loss.',
+  },
 ];
 
 function App() {
