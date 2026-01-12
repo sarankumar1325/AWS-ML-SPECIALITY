@@ -1407,6 +1407,68 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'The event tracker in Amazon Personalize captures real-time user interactions (clicks, purchases, etc.) which are used to continuously improve recommendations. Without real-time feedback, the model relies on stale historical data causing the recommendation quality to degrade over time.',
   },
+  {
+    id: '116',
+    type: QuestionType.MSQ,
+    question: 'A machine learning (ML) specialist wants to secure calls to the Amazon SageMaker Service API. The specialist has configured Amazon VPC with a VPC interface endpoint for the Amazon SageMaker Service API and is attempting to secure traffic from specific sets of instances and IAM users. The VPC is configured with a single public subnet. Which combination of steps should the ML specialist take to secure the traffic? (Choose two.)',
+    options: [
+      { id: '116a', text: 'Add a VPC endpoint policy to allow access to the IAM users.', isCorrect: true },
+      { id: '116b', text: 'Modify the users\' IAM policy to allow access to Amazon SageMaker Service API calls only.', isCorrect: false },
+      { id: '116c', text: 'Modify the security group on the endpoint network interface to restrict access to the instances.', isCorrect: true },
+      { id: '116d', text: 'Modify the ACL on the endpoint network interface to restrict access to the instances.', isCorrect: false },
+      { id: '116e', text: 'Add a SageMaker Runtime VPC endpoint interface to the VPC.', isCorrect: false },
+    ],
+    explanation: 'VPC endpoint policies control which principals can access the endpoint, while security groups on the endpoint network interface can restrict traffic to specific instances. Together they provide defense-in-depth security for SageMaker API access within the VPC.',
+  },
+  {
+    id: '117',
+    type: QuestionType.MCQ,
+    question: 'An e-commerce company wants to launch a new cloud-based product recommendation feature for its web application. Due to data localization regulations, any sensitive data must not leave its on-premises data center, and the product recommendation model must be trained and tested using nonsensitive data only. Data transfer to the cloud must use IPsec. The web application is hosted on premises with a PostgreSQL database that contains all the data. The company wants the data to be uploaded securely to Amazon S3 each day for model retraining. How should a machine learning specialist meet these requirements?',
+    options: [
+      { id: '117a', text: 'Create an AWS Glue job to connect to the PostgreSQL DB instance. Ingest tables without sensitive data through an AWS Site-to-Site VPN connection directly into Amazon S3.', isCorrect: true },
+      { id: '117b', text: 'Create an AWS Glue job to connect to the PostgreSQL DB instance. Ingest all data through an AWS Site-to-Site VPN connection into Amazon S3 while removing sensitive data using a PySpark job.', isCorrect: false },
+      { id: '117c', text: 'Use AWS Database Migration Service (AWS DMS) with table mapping to select PostgreSQL tables with no sensitive data through an SSL connection. Replicate data directly into Amazon S3.', isCorrect: false },
+      { id: '117d', text: 'Use PostgreSQL logical replication to replicate all data to PostgreSQL in Amazon EC2 through AWS Direct Connect with a VPN connection. Use AWS Glue to move data from Amazon EC2 to Amazon S3.', isCorrect: false },
+    ],
+    explanation: 'AWS Site-to-Site VPN provides IPsec encryption for data in transit. AWS Glue can connect to on-premises PostgreSQL, extract only non-sensitive data, and load it to S3. This meets data localization requirements while enabling daily model retraining.',
+  },
+  {
+    id: '118',
+    type: QuestionType.MSQ,
+    question: 'A logistics company needs a forecast model to predict next month\'s inventory requirements for a single item in 10 warehouses. A machine learning specialist uses Amazon Forecast to develop a forecast model from 3 years of monthly data. There is no missing data. The specialist selects the DeepAR+ algorithm to train a predictor. The predictor\'s mean absolute percentage error (MAPE) is much larger than the MAPE produced by the current human forecasters. Which changes to the CreatePredictor API call could improve the MAPE? (Choose two.)',
+    options: [
+      { id: '118a', text: 'Set PerformAutoML to true.', isCorrect: true },
+      { id: '118b', text: 'Set ForecastHorizon to 4.', isCorrect: false },
+      { id: '118c', text: 'Set ForecastFrequency to W for weekly.', isCorrect: false },
+      { id: '118d', text: 'Set PerformHPO to true.', isCorrect: true },
+      { id: '118e', text: 'Set FeaturizationMethodName to filling.', isCorrect: false },
+    ],
+    explanation: 'PerformAutoML lets Forecast automatically select the best algorithm and featurization. PerformHPO enables hyperparameter optimization to find optimal settings for DeepAR+. Both improve model accuracy when the default settings underperform.',
+  },
+  {
+    id: '119',
+    type: QuestionType.MCQ,
+    question: 'A data scientist wants to use Amazon Forecast to build a forecasting model for inventory demand for a retail company. The company has provided a dataset of historic inventory demand for its products as a .csv file stored in an Amazon S3 bucket. The table below shows a sample of the dataset. How should the data scientist transform the data?',
+    options: [
+      { id: '119a', text: 'Use ETL jobs in AWS Glue to separate the dataset into a target time series dataset and an item metadata dataset. Upload both datasets as .csv files to Amazon S3.', isCorrect: true },
+      { id: '119b', text: 'Use a Jupyter notebook in Amazon SageMaker to separate the dataset into a related time series dataset and an item metadata dataset. Upload both datasets as tables in Amazon Aurora.', isCorrect: false },
+      { id: '119c', text: 'Use AWS Batch jobs to separate the dataset into a target time series dataset, a related time series dataset, and an item metadata dataset. Upload them directly to Forecast from a local machine.', isCorrect: false },
+      { id: '119d', text: 'Use a Jupyter notebook in Amazon SageMaker to transform the data into the optimized protobuf recordIO format. Upload the dataset in this format to Amazon S3.', isCorrect: false },
+    ],
+    explanation: 'Amazon Forecast requires data in specific formats: target time series (demand history) and optionally item metadata. AWS Glue can transform the raw CSV into these required formats, which are then uploaded to S3 for Forecast consumption.',
+  },
+  {
+    id: '120',
+    type: QuestionType.MCQ,
+    question: 'A machine learning specialist is running an Amazon SageMaker endpoint using the built-in object detection algorithm on a P3 instance for real-time predictions in a company\'s production application. When evaluating the model\'s resource utilization, the specialist notices that the model is using only a fraction of the GPU. Which architecture changes would ensure that provisioned resources are being utilized effectively?',
+    options: [
+      { id: '120a', text: 'Redeploy the model as a batch transform job on an M5 instance.', isCorrect: false },
+      { id: '120b', text: 'Redeploy the model on an M5 instance. Attach Amazon Elastic Inference to the instance.', isCorrect: true },
+      { id: '120c', text: 'Redeploy the model on a P3dn instance.', isCorrect: false },
+      { id: '120d', text: 'Deploy the model onto an Amazon Elastic Container Service (Amazon ECS) cluster using a P3 instance.', isCorrect: false },
+    ],
+    explanation: 'Amazon Elastic Inference allows attaching GPU acceleration to cost-effective CPU instances like M5. This reduces costs by providing the right amount of GPU power needed for the workload rather than paying for an underutilized full P3 instance.',
+  },
 ];
 
 function App() {
