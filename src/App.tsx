@@ -738,6 +738,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Downloading the SageMaker TensorFlow Docker container allows the Specialist to work locally with the exact same environment as SageMaker. Using the SageMaker Python SDK locally ensures code compatibility when deployed to SageMaker for training.',
   },
+  {
+    id: '61',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is working with a large cybersecurity company that manages security events in real time for companies around the world. The cybersecurity company wants to design a solution that will allow it to use machine learning to score malicious events as anomalies on the data as it is being ingested. The company also wants be able to save the results in its data lake for later processing and analysis. What is the MOST efficient way to accomplish these tasks?',
+    options: [
+      { id: '61a', text: 'Ingest the data using Amazon Kinesis Data Firehose, and use Amazon Kinesis Data Analytics Random Cut Forest (RCF) for anomaly detection. Then use Kinesis Data Firehose to stream the results to Amazon S3.', isCorrect: true },
+      { id: '61b', text: 'Ingest the data into Apache Spark Streaming using Amazon EMR, and use Spark MLlib with k-means to perform anomaly detection. Then store the results in an Apache Hadoop Distributed File System (HDFS) using Amazon EMR with a replication factor of three as the data lake.', isCorrect: false },
+      { id: '61c', text: 'Ingest the data and store it in Amazon S3. Use AWS Batch along with the AWS Deep Learning AMIs to train a k-means model using TensorFlow on the data in Amazon S3.', isCorrect: false },
+      { id: '61d', text: 'Ingest the data and store it in Amazon S3. Have an AWS Glue job that is triggered on demand transform the new data. Then use the built-in Random Cut Forest (RCF) model within Amazon SageMaker to detect anomalies in the data.', isCorrect: false },
+    ],
+    explanation: 'Kinesis Data Firehose with Kinesis Data Analytics RCF provides real-time anomaly detection for streaming data. This serverless approach efficiently scores events as they are ingested and delivers results directly to S3 for the data lake.',
+  },
+  {
+    id: '62',
+    type: QuestionType.MCQ,
+    question: 'A Data Scientist wants to gain real-time insights into a data stream of GZIP files. Which solution would allow the use of SQL to query the stream with the LEAST latency?',
+    options: [
+      { id: '62a', text: 'Amazon Kinesis Data Analytics with an AWS Lambda function to transform the data.', isCorrect: true },
+      { id: '62b', text: 'AWS Glue with a custom ETL script to transform the data.', isCorrect: false },
+      { id: '62c', text: 'An Amazon Kinesis Client Library to transform the data and save it to an Amazon ES cluster.', isCorrect: false },
+      { id: '62d', text: 'Amazon Kinesis Data Firehose to transform the data and put it into an Amazon S3 bucket.', isCorrect: false },
+    ],
+    explanation: 'Kinesis Data Analytics allows running SQL queries directly on streaming data with Lambda functions for data transformation, providing the lowest latency for real-time insights into GZIP streams.',
+  },
+  {
+    id: '63',
+    type: QuestionType.MCQ,
+    question: 'A retail company intends to use machine learning to categorize new products. A labeled dataset of current products was provided to the Data Science team. The dataset includes 1,200 products. The labeled dataset has 15 features for each product such as title dimensions, weight, and price. Each product is labeled as belonging to one of six categories such as books, games, electronics, and movies. Which model should be used for categorizing new products using the provided dataset for training?',
+    options: [
+      { id: '63a', text: 'An XGBoost model where the objective parameter is set to multi:softmax', isCorrect: true },
+      { id: '63b', text: 'A deep convolutional neural network (CNN) with a softmax activation function for the last layer', isCorrect: false },
+      { id: '63c', text: 'A regression forest where the number of trees is set equal to the number of product categories', isCorrect: false },
+      { id: '63d', text: 'A DeepAR forecasting model based on a recurrent neural network (RNN)', isCorrect: false },
+    ],
+    explanation: 'XGBoost with multi:softmax is ideal for multi-class classification with structured/tabular data. It handles the 15 features efficiently for categorizing products into 6 classes, unlike deep learning approaches which are better suited for image or sequence data.',
+  },
+  {
+    id: '64',
+    type: QuestionType.MCQ,
+    question: 'A Data Scientist is working on an application that performs sentiment analysis. The validation accuracy is poor, and the Data Scientist thinks that the cause may be a rich vocabulary and a low average frequency of words in the dataset. Which tool should be used to improve the validation accuracy?',
+    options: [
+      { id: '64a', text: 'Amazon Comprehend syntax analysis and entity detection', isCorrect: false },
+      { id: '64b', text: 'Amazon SageMaker BlazingText cbow mode', isCorrect: false },
+      { id: '64c', text: 'Natural Language Toolkit (NLTK) stemming and stop word removal', isCorrect: false },
+      { id: '64d', text: 'Scikit-learn term frequency-inverse document frequency (TF-IDF) vectorizer', isCorrect: true },
+    ],
+    explanation: 'TF-IDF vectorization addresses rich vocabulary and low word frequency issues by giving higher weights to distinctive terms and lower weights to common words. This improves feature representation for sentiment analysis with sparse, high-vocabulary text data.',
+  },
+  {
+    id: '65',
+    type: QuestionType.MCQ,
+    question: 'Machine Learning Specialist is building a model to predict future employment rates based on a wide range of economic factors. While exploring the data, the Specialist notices that the magnitude of the input features vary greatly. The Specialist does not want variables with a larger magnitude to dominate the model. What should the Specialist do to prepare the data for model training?',
+    options: [
+      { id: '65a', text: 'Apply quantile binning to group the data into categorical bins to keep any relationships in the data by replacing the magnitude with distribution.', isCorrect: false },
+      { id: '65b', text: 'Apply the Cartesian product transformation to create new combinations of fields that are independent of the magnitude.', isCorrect: false },
+      { id: '65c', text: 'Apply normalization to ensure each field will have a mean of 0 and a variance of 1 to remove any significant magnitude.', isCorrect: true },
+      { id: '65d', text: 'Apply the orthogonal sparse bigram (OSB) transformation to apply a fixed-size sliding window to generate new features of a similar magnitude.', isCorrect: false },
+    ],
+    explanation: 'Normalization (standardization) transforms features to have mean 0 and variance 1, ensuring all features contribute equally to the model regardless of their original magnitude. This prevents features with larger scales from dominating the model predictions.',
+  },
 ];
 
 function App() {
