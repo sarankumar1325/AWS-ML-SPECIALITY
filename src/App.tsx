@@ -921,6 +921,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: '20 RPS × 60 seconds = 1,200 requests per minute capacity. With 0.5 safety factor: 1,200 × 0.5 = 600 invocations per instance. This provides a buffer to maintain performance under peak load while preventing over-provisioning.',
   },
+  {
+    id: '76',
+    type: QuestionType.MCQ,
+    question: 'A company uses a long short-term memory (LSTM) model to evaluate the risk factors of a particular energy sector. The model reviews multi-page text documents to analyze each sentence of the text and categorize it as either a potential risk or no risk. The model is not performing well, even though the Data Scientist has experimented with many different network structures and tuned the corresponding hyperparameters. Which approach will provide the MAXIMUM performance boost?',
+    options: [
+      { id: '76a', text: 'Initialize the words by term frequency-inverse document frequency (TF-IDF) vectors pretrained on a large collection of news articles related to the energy sector.', isCorrect: false },
+      { id: '76b', text: 'Use gated recurrent units (GRUs) instead of LSTM and run the training process until the validation loss stops decreasing.', isCorrect: false },
+      { id: '76c', text: 'Reduce the learning rate and run the training process until the training loss stops decreasing.', isCorrect: false },
+      { id: '76d', text: 'Initialize the words by word2vec embeddings pretrained on a large collection of news articles related to the energy sector.', isCorrect: true },
+    ],
+    explanation: 'Word2Vec embeddings pretrained on energy sector news provide semantic understanding of domain-specific terminology. This initializes the LSTM with meaningful word representations, significantly improving performance compared to random initialization or architectural changes.',
+  },
+  {
+    id: '77',
+    type: QuestionType.MSQ,
+    question: 'A Machine Learning Specialist needs to move and transform data in preparation for training. Some of the data needs to be processed in near-real time, and other data can be moved hourly. There are existing Amazon EMR MapReduce jobs to clean and feature engineering to perform on the data. Which of the following services can feed data to the MapReduce jobs? (Choose two.)',
+    options: [
+      { id: '77a', text: 'AWS DMS', isCorrect: false },
+      { id: '77b', text: 'Amazon Kinesis', isCorrect: true },
+      { id: '77c', text: 'AWS Data Pipeline', isCorrect: true },
+      { id: '77d', text: 'Amazon Athena', isCorrect: false },
+      { id: '77e', text: 'Amazon ES', isCorrect: false },
+    ],
+    explanation: 'Amazon Kinesis provides real-time data streaming to EMR for near-real-time processing. AWS Data Pipeline orchestrates data movement and triggers EMR jobs on schedules. Both services can feed data into EMR MapReduce jobs for transformation.',
+  },
+  {
+    id: '78',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist previously trained a logistic regression model using scikit-learn on a local machine, and the Specialist now wants to deploy it to production for inference only. What steps should be taken to ensure Amazon SageMaker can host a model that was trained locally?',
+    options: [
+      { id: '78a', text: 'Build the Docker image with the inference code. Tag the Docker image with the registry hostname and upload it to Amazon ECR.', isCorrect: true },
+      { id: '78b', text: 'Serialize the trained model so the format is compressed for deployment. Tag the Docker image with the registry hostname and upload it to Amazon S3.', isCorrect: false },
+      { id: '78c', text: 'Serialize the trained model so the format is compressed for deployment. Build the image and upload it to Docker Hub.', isCorrect: false },
+      { id: '78d', text: 'Build the Docker image with the inference code. Configure Docker Hub and upload the image to Amazon ECR.', isCorrect: false },
+    ],
+    explanation: 'To deploy a local model to SageMaker, you need to: (1) serialize the model in a compatible format, (2) build a Docker image with inference code, (3) tag with ECR registry hostname, and (4) push to Amazon ECR for SageMaker to pull and deploy.',
+  },
+  {
+    id: '79',
+    type: QuestionType.MCQ,
+    question: 'A trucking company is collecting live image data from its fleet of trucks across the globe. The data is growing rapidly and approximately 100 GB of new data is generated every day. The company wants to explore machine learning uses cases while ensuring the data is only accessible to specific IAM users. Which storage option provides the most processing flexibility and will allow access control with IAM?',
+    options: [
+      { id: '79a', text: 'Use a database, such as Amazon DynamoDB, to store the images, and set the IAM policies to restrict access to only the desired IAM users.', isCorrect: false },
+      { id: '79b', text: 'Use an Amazon S3-backed data lake to store the raw images, and set up the permissions using bucket policies.', isCorrect: true },
+      { id: '79c', text: 'Setup up Amazon EMR with Hadoop Distributed File System (HDFS) to store the files, and restrict access to the EMR instances using IAM policies.', isCorrect: false },
+      { id: '79d', text: 'Configure Amazon EFS with IAM policies to make the data available to Amazon EC2 instances owned by the IAM users.', isCorrect: false },
+    ],
+    explanation: 'Amazon S3 provides scalable, cost-effective storage for 100 GB/day of image data. S3 bucket policies combined with IAM policies enable granular access control to specific users while supporting various ML processing frameworks (SageMaker, EMR, Glue) for flexible analysis.',
+  },
+  {
+    id: '80',
+    type: QuestionType.MCQ,
+    question: 'A credit card company wants to build a credit scoring model to help predict whether a new credit card applicant will default on a credit card payment. The company has collected data from a large number of sources with thousands of raw attributes. Early experiments to train a classification model revealed that many attributes are highly correlated, the large number of features slows down the training speed significantly, and that there are some overfitting issues. The Data Scientist on this project would like to speed up the model training time without losing a lot of information from the original dataset. Which feature engineering technique should the Data Scientist use to meet the objectives?',
+    options: [
+      { id: '80a', text: 'Run self-correlation on all features and remove highly correlated features', isCorrect: false },
+      { id: '80b', text: 'Normalize all numerical values to be between 0 and 1', isCorrect: false },
+      { id: '80c', text: 'Use an autoencoder or principal component analysis (PCA) to replace original features with new features', isCorrect: true },
+      { id: '80d', text: 'Cluster raw data using k-means and use sample data from each cluster to build a new dataset', isCorrect: false },
+    ],
+    explanation: 'Autoencoder or PCA dimensionality reduction addresses all three issues: (1) handles correlated features by creating uncorrelated principal components, (2) reduces feature count for faster training, (3) prevents overfitting by eliminating noise. This preserves maximum information while improving training efficiency.',
+  },
 ];
 
 function App() {
