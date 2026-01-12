@@ -1165,6 +1165,68 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Early stopping monitors validation loss and stops training when it starts increasing (indicating overfitting begins). This prevents the model from overfitting to training data and improves generalization to the validation set. The graph likely shows validation loss diverging from training loss.',
   },
+  {
+    id: '96',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is attempting to build a linear regression model. Given the displayed residual plot only, what is the MOST likely problem with the model?',
+    options: [
+      { id: '96a', text: 'Linear regression is inappropriate. The residuals do not have constant variance.', isCorrect: true },
+      { id: '96b', text: 'Linear regression is inappropriate. The underlying data has outliers.', isCorrect: false },
+      { id: '96c', text: 'Linear regression is appropriate. The residuals have a zero mean.', isCorrect: false },
+      { id: '96d', text: 'Linear regression is appropriate. The residuals have constant variance.', isCorrect: false },
+    ],
+    explanation: 'Heteroscedasticity (non-constant variance in residuals) violates linear regression assumptions. The residual plot likely shows a funnel or cone shape where residuals spread out or contract as predicted values increase, indicating the model is inappropriate for this data.',
+  },
+  {
+    id: '97',
+    type: QuestionType.MSQ,
+    question: 'A large company has developed a BI application that generates reports and dashboards using data collected from various operational metrics. The company wants to provide executives with an enhanced experience so they can use natural language to get data from the reports. The company wants the executives to be able ask questions using written and spoken interfaces. Which combination of services can be used to build this conversational interface? (Choose three.)',
+    options: [
+      { id: '97a', text: 'Alexa for Business', isCorrect: false },
+      { id: '97b', text: 'Amazon Connect', isCorrect: false },
+      { id: '97c', text: 'Amazon Lex', isCorrect: true },
+      { id: '97d', text: 'Amazon Polly', isCorrect: true },
+      { id: '97e', text: 'Amazon Comprehend', isCorrect: false },
+      { id: '97f', text: 'Amazon Transcribe', isCorrect: true },
+    ],
+    explanation: 'Amazon Lex provides the conversational interface for natural language understanding. Amazon Polly converts text responses to speech. Amazon Transcribe converts spoken queries to text. Together they enable both written and spoken natural language interactions with the BI reports.',
+  },
+  {
+    id: '98',
+    type: QuestionType.MCQ,
+    question: 'A machine learning specialist works for a fruit processing company and needs to build a system that categorizes apples into three types. The specialist has collected a dataset that contains 150 images for each type of apple and applied transfer learning on a neural network that was pretrained on ImageNet with this dataset. The company requires at least 85% accuracy. After an exhaustive grid search, the optimal hyperparameters produced 68% accuracy on the training set and 67% accuracy on the validation set. What can the machine learning specialist do to improve the system\'s accuracy?',
+    options: [
+      { id: '98a', text: 'Upload the model to an Amazon SageMaker notebook instance and use the Amazon SageMaker HPO feature to optimize the model\'s hyperparameters.', isCorrect: false },
+      { id: '98b', text: 'Add more data to the training set and retrain the model using transfer learning to reduce the bias.', isCorrect: true },
+      { id: '98c', text: 'Use a neural network model with more layers that are pretrained on ImageNet and apply transfer learning to increase the variance.', isCorrect: false },
+      { id: '98d', text: 'Train a new model using the current neural network architecture.', isCorrect: false },
+    ],
+    explanation: 'The model shows high bias (both train and validation accuracy are low and similar). Adding more training data with transfer learning will help the model learn better features and reduce bias. The low training accuracy indicates underfitting, not overfitting.',
+  },
+  {
+    id: '99',
+    type: QuestionType.MCQ,
+    question: 'A company uses camera images of the tops of items displayed on store shelves to determine which items were removed and which ones still remain. After several hours of data labeling, the company has a total of 1,000 hand-labeled images covering 10 distinct items. The training results were poor. Which machine learning approach fulfills the company\'s long-term needs?',
+    options: [
+      { id: '99a', text: 'Convert the images to grayscale and retrain the model', isCorrect: false },
+      { id: '99b', text: 'Reduce the number of distinct items from 10 to 2, build the model, and iterate', isCorrect: false },
+      { id: '99c', text: 'Attach different colored labels to each item, take the images again, and build the model', isCorrect: false },
+      { id: '99d', text: 'Augment training data for each item using image variants like inversions and translations, build the model, and iterate.', isCorrect: true },
+    ],
+    explanation: 'Data augmentation (inversions, translations, rotations, etc.) artificially expands the training dataset, helping the model generalize better. This is the most scalable approach for long-term needs as it maximizes the value of existing labeled data and improves model robustness without requiring additional manual labeling.',
+  },
+  {
+    id: '100',
+    type: QuestionType.MCQ,
+    question: 'A Data Scientist is developing a binary classifier to predict whether a patient has a particular disease on a series of test results. The Data Scientist has data on 400 patients randomly selected from the population. The disease is seen in 3% of the population. Which cross-validation strategy should the Data Scientist adopt?',
+    options: [
+      { id: '100a', text: 'A k-fold cross-validation strategy with k=5', isCorrect: false },
+      { id: '100b', text: 'A stratified k-fold cross-validation strategy with k=5', isCorrect: true },
+      { id: '100c', text: 'A k-fold cross-validation strategy with k=5 and 3 repeats', isCorrect: false },
+      { id: '100d', text: 'An 80/20 stratified split between training and validation', isCorrect: false },
+    ],
+    explanation: 'Stratified k-fold maintains the class distribution (3% disease, 97% no disease) in each fold. This is critical for imbalanced datasets to ensure each fold representative of the overall population and prevent biased model evaluation.',
+  },
 ];
 
 function App() {
