@@ -1042,6 +1042,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'True class frequency for Romance = Romance predictions / Total predictions = 0.5792 (57.92%). Predicted class frequency for Adventure = Adventure predictions / Total predictions = 0.1312 (13.12%). These are calculated from the confusion matrix row and column totals.',
   },
+  {
+    id: '86',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist wants to bring a custom algorithm to Amazon SageMaker. The Specialist implements the algorithm in a Docker container supported by Amazon SageMaker. How should the Specialist package the Docker container so that Amazon SageMaker can launch the training correctly?',
+    options: [
+      { id: '86a', text: 'Modify the bash_profile file in the container and add a bash command to start the training program', isCorrect: false },
+      { id: '86b', text: 'Use CMD config in the Dockerfile to add the training program as a CMD of the image', isCorrect: false },
+      { id: '86c', text: 'Configure the training program as an ENTRYPOINT named train', isCorrect: true },
+      { id: '86d', text: 'Copy the training program to directory /opt/ml/train', isCorrect: false },
+    ],
+    explanation: 'SageMaker requires custom algorithms to have a training entrypoint named "train" configured as the ENTRYPOINT in the Docker container. This allows SageMaker to correctly invoke the training program when launching training jobs.',
+  },
+  {
+    id: '87',
+    type: QuestionType.MSQ,
+    question: 'A Data Scientist needs to analyze employment data. The dataset contains approximately 10 million observations on people across 10 different features. During the preliminary analysis, the Data Scientist notices that income and age distributions are not normal. While income levels shows a right skew as expected, with fewer individuals having a higher income, the age distribution also shows a right skew, with fewer older individuals participating in the workforce. Which feature transformations can the Data Scientist apply to fix the incorrectly skewed data? (Choose two.)',
+    options: [
+      { id: '87a', text: 'Cross-validation', isCorrect: false },
+      { id: '87b', text: 'Numerical value binning', isCorrect: true },
+      { id: '87c', text: 'High-degree polynomial transformation', isCorrect: false },
+      { id: '87d', text: 'Logarithmic transformation', isCorrect: true },
+      { id: '87e', text: 'One hot encoding', isCorrect: false },
+    ],
+    explanation: 'Logarithmic transformation effectively reduces right-skewed distributions by compressing large values. Numerical value binning groups continuous values into buckets, reducing the impact of extreme values. Both transformations help normalize skewed data for better model performance.',
+  },
+  {
+    id: '88',
+    type: QuestionType.MCQ,
+    question: 'A web-based company wants to improve its conversion rate on its landing page. Using a large historical dataset of customer visits, the company has repeatedly trained a multi-class deep learning network algorithm on Amazon SageMaker. However, there is an overfitting problem: training data shows 90% accuracy in predictions, while test data shows 70% accuracy only. The company needs to boost the generalization of its model before deploying it into production to maximize conversions of visits to purchases. Which action is recommended to provide the HIGHEST accuracy model for the company\'s test and validation data?',
+    options: [
+      { id: '88a', text: 'Increase the randomization of training data in the mini-batches used in training', isCorrect: false },
+      { id: '88b', text: 'Allocate a higher proportion of the overall data to the training dataset', isCorrect: false },
+      { id: '88c', text: 'Apply L1 or L2 regularization and dropouts to the training', isCorrect: true },
+      { id: '88d', text: 'Reduce the number of layers and units (or neurons) from the deep learning network', isCorrect: false },
+    ],
+    explanation: 'L1/L2 regularization adds penalty terms to the loss function to prevent overfitting, while dropouts randomly deactivate neurons during training to improve generalization. This combination provides the highest accuracy improvement for overfitting deep learning models.',
+  },
+  {
+    id: '89',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is given a structured dataset on the shopping habits of a company\'s customer base. The dataset contains thousands of columns of data and hundreds of numerical columns for each customer. The Specialist wants to identify whether there are natural groupings for these columns across all customers and visualize the results as quickly as possible. What approach should the Specialist take to accomplish these tasks?',
+    options: [
+      { id: '89a', text: 'Embed the numerical features using the t-distributed stochastic neighbor embedding (t-SNE) algorithm and create a scatter plot.', isCorrect: true },
+      { id: '89b', text: 'Run k-means using the Euclidean distance measure for different values of k and create an elbow plot.', isCorrect: false },
+      { id: '89c', text: 'Embed the numerical features using the t-distributed stochastic neighbor embedding (t-SNE) algorithm and create a line graph.', isCorrect: false },
+      { id: '89d', text: 'Run k-means using the Euclidean distance measure for different values of k and create box plots for each numerical column within each cluster.', isCorrect: false },
+    ],
+    explanation: 't-SNE dimensionality reduction preserves local structure and is excellent for visualizing high-dimensional data as 2D/3D scatter plots. This allows quick identification of natural groupings in the customer shopping habits data.',
+  },
+  {
+    id: '90',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is planning to create a long-running Amazon EMR cluster. The EMR cluster will have 1 master node, 10 core nodes, and 20 task nodes. To save on costs, the Specialist will use Spot Instances in the EMR cluster. Which nodes should the Specialist launch on Spot Instances?',
+    options: [
+      { id: '90a', text: 'Master node', isCorrect: false },
+      { id: '90b', text: 'Any of the core nodes', isCorrect: false },
+      { id: '90c', text: 'Any of the task nodes', isCorrect: true },
+      { id: '90d', text: 'Both core and task nodes', isCorrect: false },
+    ],
+    explanation: 'Only task nodes should use Spot Instances. Core nodes store data (HDFS) and their loss would cause job failure. Master node coordinates the cluster and must be reliable. Task nodes are stateless and can be replaced if terminated, making them ideal for Spot Instances.',
+  },
 ];
 
 function App() {
