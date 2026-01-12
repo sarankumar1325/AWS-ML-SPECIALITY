@@ -678,6 +678,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'EMR provides scalable data processing for generating precision-recall data from 100 TB of predictions. QuickSight can then visualize this data without requiring custom visualization code. This combination minimizes coding effort while providing a shared, read-only dashboard for the Business team.',
   },
+  {
+    id: '56',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is preparing data for training on Amazon SageMaker. The Specialist is using one of the SageMaker built-in algorithms for the training. The dataset is stored in .CSV format and is transformed into a numpy.array, which appears to be negatively affecting the speed of the training. What should the Specialist do to optimize the data for training on SageMaker?',
+    options: [
+      { id: '56a', text: 'Use the SageMaker batch transform feature to transform the training data into a DataFrame.', isCorrect: false },
+      { id: '56b', text: 'Use AWS Glue to compress the data into the Apache Parquet format.', isCorrect: false },
+      { id: '56c', text: 'Transform the dataset into the RecordIO protobuf format.', isCorrect: true },
+      { id: '56d', text: 'Use the SageMaker hyperparameter optimization feature to automatically optimize the data.', isCorrect: false },
+    ],
+    explanation: 'RecordIO protobuf format is the optimized data format for SageMaker training. It provides better performance than CSV or numpy arrays by enabling efficient streaming and batch access to training data, significantly reducing training time.',
+  },
+  {
+    id: '57',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is required to build a supervised image-recognition model to identify a cat. The ML Specialist performs some tests and records the following results for a neural network-based image classifier: Total number of images available = 1,000, Test set images = 100 (constant test set). The ML Specialist notices that, in over 75% of the misclassified images, the cats were held upside down by their owners. Which techniques can be used by the ML Specialist to improve this specific test error?',
+    options: [
+      { id: '57a', text: 'Increase the training data by adding variation in rotation for training images.', isCorrect: true },
+      { id: '57b', text: 'Increase the number of epochs for model training', isCorrect: false },
+      { id: '57c', text: 'Increase the number of layers for the neural network.', isCorrect: false },
+      { id: '57d', text: 'Increase the dropout rate for the second-to-last layer.', isCorrect: false },
+    ],
+    explanation: 'Data augmentation with rotation variations will help the model learn to recognize cats in different orientations. Since the error is specifically related to upside-down cats, adding rotated training examples is the most effective solution to improve test accuracy for this particular failure mode.',
+  },
+  {
+    id: '58',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist needs to be able to ingest streaming data and store it in Apache Parquet files for exploration and analysis. Which of the following services would both ingest and store this data in the correct format?',
+    options: [
+      { id: '58a', text: 'AWS DMS', isCorrect: false },
+      { id: '58b', text: 'Amazon Kinesis Data Streams', isCorrect: false },
+      { id: '58c', text: 'Amazon Kinesis Data Firehose', isCorrect: true },
+      { id: '58d', text: 'Amazon Kinesis Data Analytics', isCorrect: false },
+    ],
+    explanation: 'Amazon Kinesis Data Firehose can ingest streaming data and automatically convert it to Parquet format before delivering to S3. It handles the ingestion and format conversion in a single fully-managed service, making it ideal for this use case.',
+  },
+  {
+    id: '59',
+    type: QuestionType.MCQ,
+    question: 'A data scientist has explored and sanitized a dataset in preparation for the modeling phase of a supervised learning task. The statistical dispersion can vary widely between features, sometimes by several orders of magnitude. Before moving on to the modeling phase, the data scientist wants to ensure that the prediction performance on the production data is as accurate as possible. Which sequence of steps should the data scientist take to meet these requirements?',
+    options: [
+      { id: '59a', text: 'Apply random sampling to the dataset. Then split the dataset into training, validation, and test sets.', isCorrect: false },
+      { id: '59b', text: 'Split the dataset into training, validation, and test sets. Then rescale the training set and apply the same scaling to the validation and test sets.', isCorrect: true },
+      { id: '59c', text: 'Rescale the dataset. Then split the dataset into training, validation, and test sets.', isCorrect: false },
+      { id: '59d', text: 'Split the dataset into training, validation, and test sets. Then rescale the training set, the validation set, and the test set independently.', isCorrect: false },
+    ],
+    explanation: 'Splitting the data first prevents data leakage. The scaling parameters (mean, std) should be computed only from the training set, then applied consistently to validation and test sets. This ensures the model evaluation reflects real-world performance on unseen data.',
+  },
+  {
+    id: '60',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is assigned a TensorFlow project using Amazon SageMaker for training, and needs to continue working for an extended period with no Wi-Fi access. Which approach should the Specialist use to continue working?',
+    options: [
+      { id: '60a', text: 'Install Python 3 and boto3 on their laptop and continue the code development using that environment.', isCorrect: false },
+      { id: '60b', text: 'Download the TensorFlow Docker container used in Amazon SageMaker from GitHub to their local environment, and use the Amazon SageMaker Python SDK to test the code.', isCorrect: true },
+      { id: '60c', text: 'Download TensorFlow from tensorflow.org to emulate the TensorFlow kernel in the SageMaker environment.', isCorrect: false },
+      { id: '60d', text: 'Download the SageMaker notebook to their local environment, then install Jupyter Notebooks on their laptop and continue the development in a local notebook.', isCorrect: false },
+    ],
+    explanation: 'Downloading the SageMaker TensorFlow Docker container allows the Specialist to work locally with the exact same environment as SageMaker. Using the SageMaker Python SDK locally ensures code compatibility when deployed to SageMaker for training.',
+  },
 ];
 
 function App() {
