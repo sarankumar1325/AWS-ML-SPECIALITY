@@ -1531,6 +1531,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'For imbalanced fraud detection (2% fraud), True Positive Rate (Recall) measures how many fraudulent transactions are captured. Area under the PR curve is better than ROC for imbalanced data as it focuses on the positive class performance.',
   },
+  {
+    id: '126',
+    type: QuestionType.MCQ,
+    question: 'A machine learning specialist is developing a proof of concept for government users whose primary concern is security. The specialist is using Amazon SageMaker to train a convolutional neural network (CNN) model for a photo classifier application. The specialist wants to protect the data so that it cannot be accessed and transferred to a remote host by malicious code accidentally installed on the training container. Which action will provide the MOST secure protection?',
+    options: [
+      { id: '126a', text: 'Remove Amazon S3 access permissions from the SageMaker execution role.', isCorrect: false },
+      { id: '126b', text: 'Encrypt the weights of the CNN model.', isCorrect: false },
+      { id: '126c', text: 'Encrypt the training and validation dataset.', isCorrect: false },
+      { id: '126d', text: 'Enable network isolation for training jobs.', isCorrect: true },
+    ],
+    explanation: 'Network isolation (VPC mode) runs training jobs in an isolated VPC with no internet access, preventing data exfiltration by malicious code. This provides the strongest protection against data being transferred to remote hosts.',
+  },
+  {
+    id: '127',
+    type: QuestionType.MCQ,
+    question: 'A medical imaging company wants to train a computer vision model to detect areas of concern on patients\' CT scans. The company has a large collection of unlabeled CT scans that are linked to each patient and stored in an Amazon S3 bucket. The scans must be accessible to authorized users only. A machine learning engineer needs to build a labeling pipeline. Which set of steps should the engineer take to build the labeling pipeline with the LEAST effort?',
+    options: [
+      { id: '127a', text: 'Create a workforce with AWS Identity and Access Management (IAM). Build a labeling tool on Amazon EC2 Queue images for labeling by using Amazon Simple Queue Service (Amazon SQS). Write the labeling instructions.', isCorrect: false },
+      { id: '127b', text: 'Create an Amazon Mechanical Turk workforce and manifest file. Create a labeling job by using the built-in image classification task type in Amazon SageMaker Ground Truth. Write the labeling instructions.', isCorrect: false },
+      { id: '127c', text: 'Create a private workforce and manifest file. Create a labeling job by using the built-in bounding box task type in Amazon SageMaker Ground Truth. Write the labeling instructions.', isCorrect: true },
+      { id: '127d', text: 'Create a workforce with Amazon Cognito. Build a labeling web application with AWS Amplify. Build a labeling workflow backend using AWS Lambda. Write the labeling instructions.', isCorrect: false },
+    ],
+    explanation: 'SageMaker Ground Truth provides built-in bounding box task types for CT scan annotation. Creating a private workforce with managed labeling UI requires the least effort compared to building custom solutions, while maintaining authorized access.',
+  },
+  {
+    id: '128',
+    type: QuestionType.MCQ,
+    question: 'A company is using Amazon Textract to extract textual data from thousands of scanned text-heavy legal documents daily. The company uses this information to process loan applications automatically. Some of the documents fail business validation and are returned to human reviewers, who investigate the errors. This activity increases the time to process the loan applications. What should the company do to reduce the processing time of loan applications?',
+    options: [
+      { id: '128a', text: 'Configure Amazon Textract to route low-confidence predictions to Amazon SageMaker Ground Truth. Perform a manual review on those words before performing a business validation.', isCorrect: false },
+      { id: '128b', text: 'Use an Amazon Textract synchronous operation instead of an asynchronous operation.', isCorrect: false },
+      { id: '128c', text: 'Configure Amazon Textract to route low-confidence predictions to Amazon Augmented AI (Amazon A2I). Perform a manual review on those words before performing a business validation.', isCorrect: true },
+      { id: '128d', text: 'Use Amazon Rekognition\'s feature to detect text in an image to extract the data from scanned images. Use this information to process the loan applications.', isCorrect: false },
+    ],
+    explanation: 'Amazon A2I (Augmented AI) provides built-in human review workflows for Textract. It routes low-confidence predictions directly to human reviewers without building custom infrastructure, reducing processing time while maintaining accuracy.',
+  },
+  {
+    id: '129',
+    type: QuestionType.MCQ,
+    question: 'A company ingests machine learning (ML) data from web advertising clicks into an Amazon S3 data lake. Click data is added to an Amazon Kinesis data stream by using the Kinesis Producer Library (KPL). The data is loaded into the S3 data lake from the data stream by using an Amazon Kinesis Data Firehose delivery stream. As the data volume increases, an ML specialist notices that the rate of data ingested into Amazon S3 is relatively constant. There also is an increasing backlog of data for Kinesis Data Streams and Kinesis Data Firehose to ingest. Which next step is MOST likely to improve the data ingestion rate into Amazon S3?',
+    options: [
+      { id: '129a', text: 'Increase the number of S3 prefixes for the delivery stream to write to.', isCorrect: false },
+      { id: '129b', text: 'Decrease the retention period for the data stream.', isCorrect: false },
+      { id: '129c', text: 'Increase the number of shards for the data stream.', isCorrect: true },
+      { id: '129d', text: 'Add more consumers using the Kinesis Client Library (KCL).', isCorrect: false },
+    ],
+    explanation: 'Kinesis Data Stream throughput is limited by the number of shards (1MB/s write per shard). Increasing shards enables higher ingestion throughput, resolving the backlog issue and improving the data ingestion rate into S3.',
+  },
+  {
+    id: '130',
+    type: QuestionType.MCQ,
+    question: 'A data scientist must build a custom recommendation model in Amazon SageMaker for an online retail company. Due to the nature of the company\'s products, customers buy only 4-5 products every 5-10 years. So, the company relies on a steady stream of new customers. When a new customer signs up, the company collects data on the customer\'s preferences. How should the data scientist split the dataset into a training and test set for this use case?',
+    options: [
+      { id: '130a', text: 'Shuffle all interaction data. Split off the last 10% of the interaction data for the test set.', isCorrect: false },
+      { id: '130b', text: 'Identify the most recent 10% of interactions for each user. Split off these interactions for the test set.', isCorrect: false },
+      { id: '130c', text: 'Identify the 10% of users with the least interaction data. Split off all interaction data from these users for the test set.', isCorrect: false },
+      { id: '130d', text: 'Randomly select 10% of the users. Split off all interaction data from these users for the test set.', isCorrect: true },
+    ],
+    explanation: 'For recommendation systems with sparse purchases, randomly selecting users for the test set ensures the model is evaluated on unseen users (cold start scenario). This simulates the real-world situation of making recommendations to new customers.',
+  },
 ];
 
 function App() {
