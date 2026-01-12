@@ -618,6 +618,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Clustering algorithms like K-Means identify natural groupings in customer data based on similar characteristics. Once customer segments are identified, similar profiles can be found on social media for targeted marketing.',
   },
+  {
+    id: '51',
+    type: QuestionType.MCQ,
+    question: 'A manufacturing company has a large set of labeled historical sales data. The manufacturer would like to predict how many units of a particular part should be produced each quarter. Which machine learning approach should be used to solve this problem?',
+    options: [
+      { id: '51a', text: 'Logistic regression', isCorrect: false },
+      { id: '51b', text: 'Random Cut Forest (RCF)', isCorrect: false },
+      { id: '51c', text: 'Principal component analysis (PCA)', isCorrect: false },
+      { id: '51d', text: 'Linear regression', isCorrect: true },
+    ],
+    explanation: 'The problem requires predicting a continuous numerical value (number of units to produce), which is a regression task. Linear regression is the appropriate algorithm for predicting continuous values based on historical labeled data.',
+  },
+  {
+    id: '52',
+    type: QuestionType.MCQ,
+    question: 'A financial services company is building a robust serverless data lake on Amazon S3. The data lake should be flexible and meet the following requirements: Support querying old and new data on Amazon S3 through Amazon Athena and Amazon Redshift Spectrum. Support event-driven ETL pipelines. Provide a quick and easy way to understand metadata. Which approach meets these requirements?',
+    options: [
+      { id: '52a', text: 'Use an AWS Glue crawler to crawl S3 data, an AWS Lambda function to trigger an AWS Glue ETL job, and an AWS Glue Data catalog to search and discover metadata.', isCorrect: true },
+      { id: '52b', text: 'Use an AWS Glue crawler to crawl S3 data, an AWS Lambda function to trigger an AWS Batch job, and an external Apache Hive metastore to search and discover metadata.', isCorrect: false },
+      { id: '52c', text: 'Use an AWS Glue crawler to crawl S3 data, an Amazon CloudWatch alarm to trigger an AWS Batch job, and an AWS Glue Data Catalog to search and discover metadata.', isCorrect: false },
+      { id: '52d', text: 'Use an AWS Glue crawler to crawl S3 data, an Amazon CloudWatch alarm to trigger an AWS Glue ETL job, and an external Apache Hive metastore to search and discover metadata.', isCorrect: false },
+    ],
+    explanation: 'AWS Glue crawlers automatically discover metadata, the Glue Data Catalog provides centralized metadata management accessible by Athena and Redshift Spectrum, and Lambda functions can trigger event-driven ETL jobs. This combination meets all requirements.',
+  },
+  {
+    id: '53',
+    type: QuestionType.MCQ,
+    question: "A company's Machine Learning Specialist needs to improve the training speed of a time-series forecasting model using TensorFlow. The training is currently implemented on a single-GPU machine and takes approximately 23 hours to complete. The training needs to be run daily. The model accuracy is acceptable, but the company anticipates a continuous increase in the size of the training data and a need to update the model on an hourly, rather than a daily, basis. The company also wants to minimize coding effort and infrastructure changes. What should the Machine Learning Specialist do to the training solution to allow it to scale for future demand?",
+    options: [
+      { id: '53a', text: 'Do not change the TensorFlow code. Change the machine to one with a more powerful GPU to speed up the training.', isCorrect: false },
+      { id: '53b', text: 'Change the TensorFlow code to implement a Horovod distributed framework supported by Amazon SageMaker. Parallelize the training to as many machines as needed to achieve the business goals.', isCorrect: true },
+      { id: '53c', text: 'Switch to using a built-in AWS SageMaker DeepAR model. Parallelize the training to as many machines as needed to achieve the business goals.', isCorrect: false },
+      { id: '53d', text: 'Move the training to Amazon EMR and distribute the workload to as many machines as needed to achieve the business goals.', isCorrect: false },
+    ],
+    explanation: 'Horovod is a distributed training framework that integrates with TensorFlow and is supported by SageMaker. It enables data-parallel training across multiple machines with minimal code changes, allowing horizontal scaling to meet hourly training requirements.',
+  },
+  {
+    id: '54',
+    type: QuestionType.MCQ,
+    question: 'Which of the following metrics should a Machine Learning Specialist generally use to compare/evaluate machine learning classification models against each other?',
+    options: [
+      { id: '54a', text: 'Recall', isCorrect: false },
+      { id: '54b', text: 'Misclassification rate', isCorrect: false },
+      { id: '54c', text: 'Mean absolute percentage error (MAPE)', isCorrect: false },
+      { id: '54d', text: 'Area Under the ROC Curve (AUC)', isCorrect: true },
+    ],
+    explanation: 'AUC (Area Under the ROC Curve) provides a comprehensive measure of model performance across all classification thresholds. It is threshold-independent and works well for comparing different classification models, unlike recall or misclassification rate which are threshold-dependent.',
+  },
+  {
+    id: '55',
+    type: QuestionType.MCQ,
+    question: 'A company is running a machine learning prediction service that generates 100 TB of predictions every day. A Machine Learning Specialist must generate a visualization of the daily precision-recall curve from the predictions, and forward a read-only version to the Business team. Which solution requires the LEAST coding effort?',
+    options: [
+      { id: '55a', text: 'Run a daily Amazon EMR workflow to generate precision-recall data, and save the results in Amazon S3. Give the Business team read-only access to S3.', isCorrect: false },
+      { id: '55b', text: 'Generate daily precision-recall data in Amazon QuickSight, and publish the results in a dashboard shared with the Business team.', isCorrect: false },
+      { id: '55c', text: 'Run a daily Amazon EMR workflow to generate precision-recall data, and save the results in Amazon S3. Visualize the arrays in Amazon QuickSight, and publish them in a dashboard shared with the Business team.', isCorrect: true },
+      { id: '55d', text: 'Generate daily precision-recall data in Amazon ES, and publish the results in a dashboard shared with the Business team.', isCorrect: false },
+    ],
+    explanation: 'EMR provides scalable data processing for generating precision-recall data from 100 TB of predictions. QuickSight can then visualize this data without requiring custom visualization code. This combination minimizes coding effort while providing a shared, read-only dashboard for the Business team.',
+  },
 ];
 
 function App() {
