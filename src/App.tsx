@@ -859,6 +859,68 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'The SageMaker notebook needs an IAM role with S3 read permissions to access the data. Additionally, the KMS key policy must grant the notebook role permission to decrypt the data. This combination enables secure access to KMS-encrypted S3 data from SageMaker.',
   },
+  {
+    id: '71',
+    type: QuestionType.MCQ,
+    question: 'A Data Scientist needs to migrate an existing on-premises ETL process to the cloud. The current process runs at regular time intervals and uses PySpark to combine and format multiple large data sources into a single consolidated output for downstream processing. The Data Scientist has been given the following requirements to the cloud solution: Combine multiple data sources. Reuse existing PySpark logic. Run the solution on the existing schedule. Minimize the number of servers that will need to be managed. Which architecture should the Data Scientist use to build this solution?',
+    options: [
+      { id: '71a', text: 'Write the raw data to Amazon S3. Schedule an AWS Lambda function to submit a Spark step to a persistent Amazon EMR cluster based on the existing schedule. Use the existing PySpark logic to run the ETL job on the EMR cluster. Output the results to a "processed" location in Amazon S3 that is accessible for downstream use.', isCorrect: false },
+      { id: '71b', text: 'Write the raw data to Amazon S3. Create an AWS Glue ETL job to perform the ETL processing against the input data. Write the ETL job in PySpark to leverage the existing logic. Create a new AWS Glue trigger to trigger the ETL job based on the existing schedule. Configure the output target of the ETL job to write to a "processed" location in Amazon S3 that is accessible for downstream use.', isCorrect: true },
+      { id: '71c', text: 'Write the raw data to Amazon S3. Schedule an AWS Lambda function to run on the existing schedule and process the input data from Amazon S3. Write the Lambda logic in Python and implement the existing PySpark logic to perform the ETL process. Have the Lambda function output the results to a "processed" location in Amazon S3 that is accessible for downstream use.', isCorrect: false },
+      { id: '71d', text: 'Use Amazon Kinesis Data Analytics to stream the input data and perform real-time SQL queries against the stream to carry out the required transformations within the stream. Deliver the output results to a "processed" location in Amazon S3 that is accessible for downstream use.', isCorrect: false },
+    ],
+    explanation: 'AWS Glue provides serverless PySpark execution with managed infrastructure, Glue triggers for scheduling, and direct integration with S3 for both input and output. This minimizes server management while reusing existing PySpark logic.',
+  },
+  {
+    id: '72',
+    type: QuestionType.MSQ,
+    question: 'A Data Scientist is building a model to predict customer churn using a dataset of 100 continuous numerical features. The Marketing team has not provided any insight about which features are relevant for churn prediction. The Marketing team wants to interpret the model and see the direct impact of relevant features on the model outcome. While training a logistic regression model, the Data Scientist observes that there is a wide gap between the training and validation set accuracy. Which methods can the Data Scientist use to improve the model performance and satisfy the Marketing team\'s needs? (Choose two.)',
+    options: [
+      { id: '72a', text: 'Add L1 regularization to the classifier', isCorrect: true },
+      { id: '72b', text: 'Add features to the dataset', isCorrect: false },
+      { id: '72c', text: 'Perform recursive feature elimination', isCorrect: true },
+      { id: '72d', text: 'Perform t-distributed stochastic neighbor embedding (t-SNE)', isCorrect: false },
+      { id: '72e', text: 'Perform linear discriminant analysis', isCorrect: false },
+    ],
+    explanation: 'L1 regularization performs feature selection by driving irrelevant feature coefficients to zero, improving model generalization. Recursive feature elimination (RFE) systematically removes least important features, addressing the gap between training and validation accuracy while identifying relevant features for interpretability.',
+  },
+  {
+    id: '73',
+    type: QuestionType.MCQ,
+    question: 'An aircraft engine manufacturing company is measuring 200 performance metrics in a time-series. Engineers want to detect critical manufacturing defects in near-real time during testing. All of the data needs to be stored for offline analysis. What approach would be the MOST effective to perform near-real time defect detection?',
+    options: [
+      { id: '73a', text: 'Use AWS IoT Analytics for ingestion, storage, and further analysis. Use Jupyter notebooks from within AWS IoT Analytics to carry out analysis for anomalies.', isCorrect: false },
+      { id: '73b', text: 'Use Amazon S3 for ingestion, storage, and further analysis. Use an Amazon EMR cluster to carry out Apache Spark ML k-means clustering to determine anomalies.', isCorrect: false },
+      { id: '73c', text: 'Use Amazon S3 for ingestion, storage, and further analysis. Use the Amazon SageMaker Random Cut Forest (RCF) algorithm to determine anomalies.', isCorrect: false },
+      { id: '73d', text: 'Use Amazon Kinesis Data Firehose for ingestion and Amazon Kinesis Data Analytics Random Cut Forest (RCF) to perform anomaly detection. Use Kinesis Data Firehose to store data in Amazon S3 for further analysis.', isCorrect: true },
+    ],
+    explanation: 'Kinesis Data Firehose provides real-time ingestion with automatic Parquet conversion, Kinesis Data Analytics RCF performs streaming anomaly detection, and Firehose delivers results to S3 for offline analysis. This combination enables near-real-time defect detection with persistent storage.',
+  },
+  {
+    id: '74',
+    type: QuestionType.MSQ,
+    question: 'A Machine Learning team runs its own training algorithm on Amazon SageMaker. The training algorithm requires external assets. The team needs to submit both its own algorithm code and algorithm-specific parameters to Amazon SageMaker. What combination of services should the team use to build a custom algorithm in Amazon SageMaker? (Choose two.)',
+    options: [
+      { id: '74a', text: 'AWS Secrets Manager', isCorrect: false },
+      { id: '74b', text: 'AWS CodeStar', isCorrect: false },
+      { id: '74c', text: 'Amazon ECR', isCorrect: true },
+      { id: '74d', text: 'Amazon ECS', isCorrect: false },
+      { id: '74e', text: 'Amazon S3', isCorrect: true },
+    ],
+    explanation: 'Amazon ECR hosts the custom algorithm Docker container, while Amazon S3 stores algorithm-specific parameters and external assets. SageMaker pulls the container from ECR and fetches parameters from S3 during training.',
+  },
+  {
+    id: '75',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist wants to determine the appropriate SageMakerVariantInvocationsPerInstance setting for an endpoint automatic scaling configuration. The Specialist has performed a load test on a single instance and determined that peak requests per second (RPS) without service degradation is about 20 RPS. As this is the first deployment, the Specialist intends to set the invocation safety factor to 0.5. Based on the stated parameters and given that the invocations per instance setting is measured on a per-minute basis, what should the Specialist set as the SageMakerVariantInvocationsPerInstance setting?',
+    options: [
+      { id: '75a', text: '10', isCorrect: false },
+      { id: '75b', text: '30', isCorrect: false },
+      { id: '75c', text: '600', isCorrect: true },
+      { id: '75d', text: '2,400', isCorrect: false },
+    ],
+    explanation: '20 RPS × 60 seconds = 1,200 requests per minute capacity. With 0.5 safety factor: 1,200 × 0.5 = 600 invocations per instance. This provides a buffer to maintain performance under peak load while preventing over-provisioning.',
+  },
 ];
 
 function App() {
