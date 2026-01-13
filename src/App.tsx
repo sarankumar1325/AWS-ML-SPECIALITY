@@ -2083,6 +2083,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Customer service emails, social media posts about the company/products, and public customer review datasets all contain customer feedback and sentiment data that directly augment the review dataset. News articles, sales figures, and manuals are not customer feedback.',
   },
+  {
+    id: '171',
+    type: QuestionType.MSQ,
+    question: 'A machine learning (ML) specialist wants to create a data preparation job that uses a PySpark script with complex window aggregation operations to create data for training and testing. The ML specialist needs to evaluate the impact of the number of features and the sample count on model performance. Which approach should the ML specialist use to determine the ideal data transformations for the model?',
+    options: [
+      { id: '171a', text: 'Add an Amazon SageMaker Debugger hook to the script to capture key metrics. Run the script as an AWS Glue job.', isCorrect: false },
+      { id: '171b', text: 'Add an Amazon SageMaker Experiments tracker to the script to capture key metrics. Run the script as an AWS Glue job.', isCorrect: false },
+      { id: '171c', text: 'Add an Amazon SageMaker Debugger hook to the script to capture key parameters. Run the script as a SageMaker processing job.', isCorrect: false },
+      { id: '171d', text: 'Add an Amazon SageMaker Experiments tracker to the script to capture key parameters. Run the script as a SageMaker processing job.', isCorrect: true },
+    ],
+    explanation: 'SageMaker Experiments tracks parameter variations and metrics for experiment comparison. SageMaker Processing jobs provide managed Spark execution. Together they enable systematic evaluation of feature count and sample size impacts on model performance.',
+  },
+  {
+    id: '172',
+    type: QuestionType.MCQ,
+    question: 'A data scientist has a dataset of machine part images stored in Amazon Elastic File System (Amazon EFS). The data scientist needs to use Amazon SageMaker to create and train an image classification machine learning model based on this dataset. Because of budget and time constraints, management wants the data scientist to create and train a model with the least number of steps and integration work required. How should the data scientist meet these requirements?',
+    options: [
+      { id: '172a', text: 'Mount the EFS file system to a SageMaker notebook and run a script that copies the data to an Amazon FSx for Lustre file system. Run the SageMaker training job with the FSx for Lustre file system as the data source.', isCorrect: false },
+      { id: '172b', text: 'Launch a transient Amazon EMR cluster. Configure steps to mount the EFS file system and copy the data to an Amazon S3 bucket by using S3DistCp. Run the SageMaker training job with Amazon S3 as the data source.', isCorrect: false },
+      { id: '172c', text: 'Mount the EFS file system to an Amazon EC2 instance and use the AWS CLI to copy the data to an Amazon S3 bucket. Run the SageMaker training job with Amazon S3 as the data source.', isCorrect: false },
+      { id: '172d', text: 'Run a SageMaker training job with an EFS file system as the data source.', isCorrect: true },
+    ],
+    explanation: 'SageMaker training jobs natively support EFS as a data source, eliminating data copying steps. This provides the fastest path with minimal integration work while avoiding additional infrastructure costs.',
+  },
+  {
+    id: '173',
+    type: QuestionType.MCQ,
+    question: 'A retail company uses a machine learning (ML) model for daily sales forecasting. The company\'s brand manager reports that the model has provided inaccurate results for the past 3 weeks. At the end of each day, an AWS Glue job consolidates the input data that is used for the forecasting with the actual daily sales data and the predictions of the model. The AWS Glue job stores the data in Amazon S3. The company\'s ML team is using an Amazon SageMaker Studio notebook to gain an understanding about the source of the model\'s inaccuracies. What should the ML team do on the SageMaker Studio notebook to visualize the model\'s degradation MOST accurately?',
+    options: [
+      { id: '173a', text: 'Create a histogram of the daily sales over the last 3 weeks. In addition, create a histogram of the daily sales from before that period.', isCorrect: false },
+      { id: '173b', text: 'Create a histogram of the model errors over the last 3 weeks. In addition, create a histogram of the model errors from before that period.', isCorrect: false },
+      { id: '173c', text: 'Create a line chart with the weekly mean absolute error (MAE) of the model.', isCorrect: true },
+      { id: '173d', text: 'Create a scatter plot of daily sales versus model error for the last 3 weeks. In addition, create a scatter plot of daily sales versus model error from before that period.', isCorrect: false },
+    ],
+    explanation: 'A line chart showing weekly MAE over time clearly visualizes model degradation trends. Comparing recent weeks to historical performance pinpoints when accuracy dropped, helping identify the root cause of forecasting failures.',
+  },
+  {
+    id: '174',
+    type: QuestionType.MCQ,
+    question: 'An ecommerce company sends a weekly email newsletter to all of its customers. Management has hired a team of writers to create additional targeted content. A data scientist needs to identify five customer segments based on age, income, and location. The customers\' current segmentation is unknown. The data scientist previously built an XGBoost model to predict the likelihood of a customer responding to an email based on age, income, and location. Why does the XGBoost model NOT meet the current requirements, and how can this be fixed?',
+    options: [
+      { id: '174a', text: 'The XGBoost model provides a true/false binary output. Apply principal component analysis (PCA) with five feature dimensions to predict a segment.', isCorrect: false },
+      { id: '174b', text: 'The XGBoost model provides a true/false binary output. Increase the number of classes the XGBoost model predicts to five classes to predict a segment.', isCorrect: false },
+      { id: '174c', text: 'The XGBoost model is a supervised machine learning algorithm. Train a k-Nearest-Neighbors (kNN) model with K = 5 on the same dataset to predict a segment.', isCorrect: false },
+      { id: '174d', text: 'The XGBoost model is a supervised machine learning algorithm. Train a k-means model with K = 5 on the same dataset to predict a segment.', isCorrect: true },
+    ],
+    explanation: 'Customer segmentation is an unsupervised clustering problem, not supervised classification. XGBoost requires labeled data and produces binary predictions. K-means with K=5 clusters the data based on age, income, and location without requiring predefined labels.',
+  },
+  {
+    id: '175',
+    type: QuestionType.MSQ,
+    question: 'A global financial company is using machine learning to automate its loan approval process. The company has a dataset of customer information. The dataset contains some categorical fields, such as customer location by city and housing status. The dataset also includes financial fields in different units, such as account balances in US dollars and monthly interest in US cents. The company\'s data scientists are using a gradient boosting regression model to infer the credit score for each customer. The model has a training accuracy of 99% and a testing accuracy of 75%. The data scientists want to improve the model\'s testing accuracy. Which process will improve the testing accuracy the MOST?',
+    options: [
+      { id: '175a', text: 'Use a one-hot encoder for the categorical fields in the dataset. Perform standardization on the financial fields in the dataset. Apply L1 regularization to the data.', isCorrect: true },
+      { id: '175b', text: 'Use tokenization of the categorical fields in the dataset. Perform binning on the financial fields in the dataset. Remove the outliers in the data by using the z-score.', isCorrect: false },
+      { id: '175c', text: 'Use a label encoder for the categorical fields in the dataset. Perform L1 regularization on the financial fields in the dataset. Apply L2 regularization to the data.', isCorrect: false },
+      { id: '175d', text: 'Use a logarithm transformation on the categorical fields in the dataset. Perform binning on the financial fields in the dataset. Use imputation to populate missing values in the dataset.', isCorrect: false },
+    ],
+    explanation: 'One-hot encoding properly handles categorical variables for tree-based models. Standardization normalizes different unit financial fields. L1 regularization reduces overfitting (training 99% vs test 75% indicates severe overfitting).',
+  },
 ];
 
 function App() {
