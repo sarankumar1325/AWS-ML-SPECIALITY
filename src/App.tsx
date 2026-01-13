@@ -2266,6 +2266,70 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Multi-label classification allows a single document to belong to multiple categories simultaneously. This matches the requirement where products can be classified as "yogurt," "snack," and "dairy product" at the same time.',
   },
+  {
+    id: '186',
+    type: QuestionType.MSQ,
+    question: 'A data engineer is using AWS Glue to create optimized, secure datasets in Amazon S3. The data science team wants the ability to access the ETL scripts directly from Amazon SageMaker notebooks within a VPC. After this setup is complete, the data science team wants the ability to run the AWS Glue job and invoke the SageMaker training job. Which combination of steps should the data engineer take to meet these requirements? (Choose three.)',
+    options: [
+      { id: '186a', text: 'Create a SageMaker development endpoint in the data science team\'s VPC.', isCorrect: false },
+      { id: '186b', text: 'Create an AWS Glue development endpoint in the data science team\'s VPC.', isCorrect: true },
+      { id: '186c', text: 'Create SageMaker notebooks by using the AWS Glue development endpoint.', isCorrect: true },
+      { id: '186d', text: 'Create SageMaker notebooks by using the SageMaker console.', isCorrect: false },
+      { id: '186e', text: 'Attach a decryption policy to the SageMaker notebooks.', isCorrect: false },
+      { id: '186f', text: 'Create an IAM policy and an IAM role for the SageMaker notebooks.', isCorrect: true },
+    ],
+    explanation: 'AWS Glue development endpoint provides the ETL script access. SageMaker notebooks can attach to this endpoint for script access and job execution. IAM policies and roles provide the necessary permissions for VPC access and AWS service interactions.',
+  },
+  {
+    id: '187',
+    type: QuestionType.MCQ,
+    question: 'A data engineer needs to provide a team of data scientists with the appropriate dataset to run machine learning training jobs. The data will be stored in Amazon S3. The data engineer is obtaining the data from an Amazon Redshift database and is using join queries to extract a single tabular dataset. The data engineer must provide the data so that any row with a CardNo value of NULL is removed. Also, the TransactionTimestamp column must be separated into a TransactionDate column and a TransactionTime column. Finally, the CardName column must be renamed to NameOnCard. The data will be extracted on a monthly basis and will be loaded into an S3 bucket. The solution must minimize the effort that is needed to set up infrastructure for the ingestion and transformation. The solution also must be automated and must minimize the load on the Amazon Redshift cluster. Which solution meets these requirements?',
+    options: [
+      { id: '187a', text: 'Set up an Amazon EMR cluster. Create an Apache Spark job to read the data from the Amazon Redshift cluster and transform the data. Load the data into the S3 bucket. Schedule the job to run monthly.', isCorrect: false },
+      { id: '187b', text: 'Set up an Amazon EC2 instance with a SQL client tool, such as SQL Workbench/J, to query the data from the Amazon Redshift cluster directly Export the resulting dataset into a file. Upload the file into the S3 bucket. Perform these tasks monthly.', isCorrect: false },
+      { id: '187c', text: 'Set up an AWS Glue job that has the Amazon Redshift cluster as the source and the S3 bucket as the destination. Use the built-in transforms Filter, Map, and RenameField to perform the required transformations. Schedule the job to run monthly.', isCorrect: true },
+      { id: '187d', text: 'Use Amazon Redshift Spectrum to run a query that writes the data directly to the S3 bucket. Create an AWS Lambda function to run the query monthly.', isCorrect: false },
+    ],
+    explanation: 'AWS Glue provides serverless ETL with built-in transforms for filtering nulls, mapping timestamps, and renaming columns. Scheduling monthly runs automates the pipeline while minimizing infrastructure setup and Redshift cluster load.',
+  },
+  {
+    id: '188',
+    type: QuestionType.MCQ,
+    question: 'A machine learning (ML) specialist wants to bring a custom training algorithm to Amazon SageMaker. The ML specialist implements the algorithm in a Docker container that is supported by SageMaker. How should the ML specialist package the Docker container so that SageMaker can launch the training correctly?',
+    options: [
+      { id: '188a', text: 'Specify the server argument in the ENTRYPOINT instruction in the Dockerfile.', isCorrect: false },
+      { id: '188b', text: 'Specify the training program in the ENTRYPOINT instruction in the Dockerfile.', isCorrect: true },
+      { id: '188c', text: 'Include the path to the training data in the docker build command when packaging the container.', isCorrect: false },
+      { id: '188d', text: 'Use a COPY instruction in the Dockerfile to copy the training program to the /opt/ml/train directory.', isCorrect: false },
+    ],
+    explanation: 'SageMaker expects the training program to be specified as the ENTRYPOINT in the Dockerfile. This allows SageMaker to invoke the training when the container starts, following the SageMaker container contract.',
+  },
+  {
+    id: '189',
+    type: QuestionType.MSQ,
+    question: 'An ecommerce company wants to use machine learning (ML) to monitor fraudulent transactions on its website. The company is using Amazon SageMaker to research, train, deploy, and monitor the ML models. The historical transactions data is in a .csv file that is stored in Amazon S3. The data contains features such as the user\'s IP address, navigation time, average time on each page, and the number of clicks for each session. There is no label in the data to indicate if a transaction is anomalous. Which models should the company use in combination to detect anomalous transactions? (Choose two.)',
+    options: [
+      { id: '189a', text: 'IP Insights', isCorrect: true },
+      { id: '189b', text: 'K-nearest neighbors (k-NN)', isCorrect: false },
+      { id: '189c', text: 'Linear learner with a logistic function', isCorrect: false },
+      { id: '189d', text: 'Random Cut Forest (RCF)', isCorrect: true },
+      { id: '189e', text: 'XGBoost', isCorrect: false },
+    ],
+    explanation: 'IP Insights learns patterns of normal IP address behavior to detect suspicious IP usage. Random Cut Forest is an unsupervised algorithm specifically designed for anomaly detection. Together they provide comprehensive fraud detection without requiring labeled data.',
+  },
+  {
+    id: '190',
+    type: QuestionType.MSQ,
+    question: 'A healthcare company is using an Amazon SageMaker notebook instance to develop machine learning (ML) models. The company\'s data scientists will need to be able to access datasets stored in Amazon S3 to train the models. Due to regulatory requirements, access to the data from instances and services used for training must not be transmitted over the internet. Which combination of steps should an ML specialist take to provide this access? (Choose two.)',
+    options: [
+      { id: '190a', text: 'Configure the SageMaker notebook instance to be launched with a VPC attached and internet access disabled.', isCorrect: true },
+      { id: '190b', text: 'Create and configure a VPN tunnel between SageMaker and Amazon S3.', isCorrect: false },
+      { id: '190c', text: 'Create and configure an S3 VPC endpoint Attach it to the VPC.', isCorrect: true },
+      { id: '190d', text: 'Create an S3 bucket policy that allows traffic from the VPC and denies traffic from the internet.', isCorrect: false },
+      { id: '190e', text: 'Deploy AWS Transit Gateway Attach the S3 bucket and the SageMaker instance to the gateway.', isCorrect: false },
+    ],
+    explanation: 'Disabling internet access and using a VPC ensures traffic stays within AWS network. An S3 VPC endpoint provides private connectivity to S3 without internet traversal, meeting regulatory requirements for data access.',
+  },
 ];
 
 function App() {
