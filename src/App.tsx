@@ -1833,6 +1833,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'SageMaker Debugger can calculate and collect SHAP values during training without retraining. This provides operationally efficient model explainability. The SHAP values show how each feature contributes to predictions, helping the credit team understand why customers are denied.',
   },
+  {
+    id: '151',
+    type: QuestionType.MCQ,
+    question: 'A data science team is planning to build a natural language processing (NLP) application. The application\'s text preprocessing stage will include part-of-speech tagging and key phrase extraction. The preprocessed text will be input to a custom classification algorithm that the data science team has already written and trained using Apache MXNet. Which solution can the team build MOST quickly to meet these requirements?',
+    options: [
+      { id: '151a', text: 'Use Amazon Comprehend for the part-of-speech tagging, key phrase extraction, and classification tasks.', isCorrect: false },
+      { id: '151b', text: 'Use an NLP library in Amazon SageMaker for the part-of-speech tagging. Use Amazon Comprehend for the key phrase extraction. Use AWS Deep Learning Containers with Amazon SageMaker to build the custom classifier.', isCorrect: false },
+      { id: '151c', text: 'Use Amazon Comprehend for the part-of-speech tagging and key phrase extraction tasks. Use Amazon SageMaker built-in Latent Dirichlet Allocation (LDA) algorithm to build the custom classifier.', isCorrect: false },
+      { id: '151d', text: 'Use Amazon Comprehend for the part-of-speech tagging and key phrase extraction tasks. Use AWS Deep Learning Containers with Amazon SageMaker to build the custom classifier.', isCorrect: true },
+    ],
+    explanation: 'Amazon Comprehend provides managed NLP for part-of-speech tagging and key phrase extraction. AWS Deep Learning Containers with SageMaker allow running the existing MXNet custom classifier without modification. This combination provides the fastest path to production.',
+  },
+  {
+    id: '152',
+    type: QuestionType.MCQ,
+    question: 'A machine learning (ML) specialist must develop a classification model for a financial services company. A domain expert provides the dataset, which is tabular with 10,000 rows and 1,020 features. During exploratory data analysis, the specialist finds no missing values and a small percentage of duplicate rows. There are correlation scores of > 0.9 for 200 feature pairs. The mean value of each feature is similar to its 50th percentile. Which feature engineering strategy should the ML specialist use with Amazon SageMaker?',
+    options: [
+      { id: '152a', text: 'Apply dimensionality reduction by using the principal component analysis (PCA) algorithm.', isCorrect: true },
+      { id: '152b', text: 'Drop the features with low correlation scores by using a Jupyter notebook.', isCorrect: false },
+      { id: '152c', text: 'Apply anomaly detection by using the Random Cut Forest (RCF) algorithm.', isCorrect: false },
+      { id: '152d', text: 'Concatenate the features with high correlation scores by using a Jupyter notebook.', isCorrect: false },
+    ],
+    explanation: 'With 1,020 features and 200 highly correlated feature pairs (>0.9), PCA dimensionality reduction is ideal. It reduces feature count while preserving variance, handles multicollinearity automatically, and SageMaker provides built-in PCA for efficient implementation.',
+  },
+  {
+    id: '153',
+    type: QuestionType.MCQ,
+    question: 'A manufacturing company asks its machine learning specialist to develop a model that classifies defective parts into one of eight defect types. The company has provided roughly 100,000 images per defect type for training. During the initial training of the image classification model, the specialist notices that the validation accuracy is 80%, while the training accuracy is 90%. It is known that human-level performance for this type of image classification is around 90%. What should the specialist consider to fix this issue?',
+    options: [
+      { id: '153a', text: 'A longer training time', isCorrect: false },
+      { id: '153b', text: 'Making the network larger', isCorrect: false },
+      { id: '153c', text: 'Using a different optimizer', isCorrect: false },
+      { id: '153d', text: 'Using some form of regularization', isCorrect: true },
+    ],
+    explanation: 'The gap between training (90%) and validation (80%) accuracy indicates overfitting. Regularization techniques like dropout, weight decay, or data augmentation help reduce overfitting and improve generalization to unseen data.',
+  },
+  {
+    id: '154',
+    type: QuestionType.MSQ,
+    question: 'A machine learning specialist needs to analyze comments on a news website with users across the globe. The specialist must find the most discussed topics in the comments that are in either English or Spanish. What steps could be used to accomplish this task? (Choose two.)',
+    options: [
+      { id: '154a', text: 'Use an Amazon SageMaker BlazingText algorithm to find the topics independently from language. Proceed with the analysis.', isCorrect: false },
+      { id: '154b', text: 'Use an Amazon SageMaker seq2seq algorithm to translate from Spanish to English, if necessary. Use a SageMaker Latent Dirichlet Allocation (LDA) algorithm to find the topics.', isCorrect: false },
+      { id: '154c', text: 'Use Amazon Translate to translate from Spanish to English, if necessary. Use Amazon Comprehend topic modeling to find the topics.', isCorrect: true },
+      { id: '154d', text: 'Use Amazon Translate to translate from Spanish to English, if necessary. Use Amazon Lex to extract topics from the content.', isCorrect: false },
+      { id: '154e', text: 'Use Amazon Translate to translate from Spanish to English, if necessary. Use Amazon SageMaker Neural Topic Model (NTM) to find the topics.', isCorrect: true },
+    ],
+    explanation: 'Amazon Translate standardizes language for topic modeling. Amazon Comprehend topic modeling (or SageMaker NTM) then identifies themes across the unified dataset. This combination handles multilingual content efficiently.',
+  },
+  {
+    id: '155',
+    type: QuestionType.MCQ,
+    question: 'A machine learning (ML) specialist is administering a production Amazon SageMaker endpoint with model monitoring configured. Amazon SageMaker Model Monitor detects violations on the SageMaker endpoint, so the ML specialist retrains the model with the latest dataset. This dataset is statistically representative of the current production traffic. The ML specialist notices that even after deploying the new SageMaker model and running the first monitoring job, the SageMaker endpoint still has violations. What should the ML specialist do to resolve the violations?',
+    options: [
+      { id: '155a', text: 'Manually trigger the monitoring job to re-evaluate the SageMaker endpoint traffic sample.', isCorrect: false },
+      { id: '155b', text: 'Run the Model Monitor baseline job again on the new training set. Configure Model Monitor to use the new baseline.', isCorrect: true },
+      { id: '155c', text: 'Delete the endpoint and recreate it with the original configuration.', isCorrect: false },
+      { id: '155d', text: 'Retrain the model again by using a combination of the original training set and the new training set.', isCorrect: false },
+    ],
+    explanation: 'Model Monitor uses a baseline to compare against production traffic. After retraining with new data, the baseline must be regenerated to reflect the new data distribution. Without updating the baseline, violations will continue because the monitoring job compares against outdated expectations.',
+  },
 ];
 
 function App() {
