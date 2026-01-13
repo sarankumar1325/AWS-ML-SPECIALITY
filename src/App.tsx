@@ -2205,6 +2205,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Elastic Inference accelerators provide GPU-powered inference at lower cost than full GPU instances. Auto-scaling with InvocationsPerInstance adds capacity during peak hours (beginning of month, business hours) and reduces during off-hours, optimizing costs while handling traffic spikes.',
   },
+  {
+    id: '181',
+    type: QuestionType.MCQ,
+    question: 'A real-estate company is launching a new product that predicts the prices of new houses. The historical data for the properties and prices is stored in .csv format in an Amazon S3 bucket. The data has a header, some categorical fields, and some missing values. The company\'s data scientists have used Python with a common open-source library to fill the missing values with zeros. The data scientists have dropped all of the categorical fields and have trained a model by using the open-source linear regression algorithm with the default parameters. The accuracy of the predictions with the current model is below 50%. The company wants to improve the model performance and launch the new product as soon as possible. Which solution will meet these requirements with the LEAST operational overhead?',
+    options: [
+      { id: '181a', text: 'Create a service-linked role for Amazon Elastic Container Service (Amazon ECS) with access to the S3 bucket. Create an ECS cluster that is based on an AWS Deep Learning Containers image. Write the code to perform the feature engineering. Train a logistic regression model for predicting the price, pointing to the bucket with the dataset. Wait for the training job to complete. Perform the inferences.', isCorrect: false },
+      { id: '181b', text: 'Create an Amazon SageMaker notebook with a new IAM role that is associated with the notebook. Pull the dataset from the S3 bucket. Explore different combinations of feature engineering transformations, regression algorithms, and hyperparameters. Compare all the results in the notebook, and deploy the most accurate configuration in an endpoint for predictions.', isCorrect: false },
+      { id: '181c', text: 'Create an IAM role with access to Amazon S3, Amazon SageMaker, and AWS Lambda. Create a training job with the SageMaker built-in XGBoost model pointing to the bucket with the dataset. Specify the price as the target feature. Wait for the job to complete. Load the model artifact to a Lambda function for inference on prices of new houses.', isCorrect: false },
+      { id: '181d', text: 'Create an IAM role for Amazon SageMaker with access to the S3 bucket. Create a SageMaker AutoML job with SageMaker Autopilot pointing to the bucket with the dataset. Specify the price as the target attribute. Wait for the job to complete. Deploy the best model for predictions.', isCorrect: true },
+    ],
+    explanation: 'SageMaker Autopilot automatically handles feature engineering, algorithm selection, and hyperparameter tuning. This requires minimal operational overhead compared to manual exploration. Autopilot is ideal for time-sensitive projects with complex preprocessing needs.',
+  },
+  {
+    id: '182',
+    type: QuestionType.MSQ,
+    question: 'A data scientist is reviewing customer comments about a company\'s products. The data scientist needs to present an initial exploratory analysis by using charts and a word cloud. The data scientist must use feature engineering techniques to prepare this analysis before starting a natural language processing (NLP) model. Which combination of feature engineering techniques should the data scientist use to meet these requirements? (Choose two.)',
+    options: [
+      { id: '182a', text: 'Named entity recognition', isCorrect: false },
+      { id: '182b', text: 'Coreference', isCorrect: false },
+      { id: '182c', text: 'Stemming', isCorrect: true },
+      { id: '182d', text: 'Term frequency-inverse document frequency (TF-IDF)', isCorrect: true },
+      { id: '182e', text: 'Sentiment analysis', isCorrect: false },
+    ],
+    explanation: 'Stemming reduces words to root forms for consistent word cloud analysis. TF-IDF weights words by importance across documents. Both are essential for exploratory NLP analysis and visualization before model training.',
+  },
+  {
+    id: '183',
+    type: QuestionType.MCQ,
+    question: 'A data scientist is evaluating a GluonTS on Amazon SageMaker DeepAR model. The evaluation metrics on the test set indicate that the coverage score is 0.489 and 0.889 at the 0.5 and 0.9 quantiles, respectively. What can the data scientist reasonably conclude about the distributional forecast related to the test set?',
+    options: [
+      { id: '183a', text: 'The coverage scores indicate that the distributional forecast is poorly calibrated. These scores should be approximately equal to each other at all quantiles.', isCorrect: false },
+      { id: '183b', text: 'The coverage scores indicate that the distributional forecast is poorly calibrated. These scores should peak at the median and be lower at the tails.', isCorrect: false },
+      { id: '183c', text: 'The coverage scores indicate that the distributional forecast is correctly calibrated. These scores should always fall below the quantile itself.', isCorrect: false },
+      { id: '183d', text: 'The coverage scores indicate that the distributional forecast is correctly calibrated. These scores should be approximately equal to the quantile itself.', isCorrect: true },
+    ],
+    explanation: 'Coverage score measures what fraction of actual values fall within the predicted quantile interval. A well-calibrated model should have coverage approximately equal to the quantile level (0.5 coverage at 0.5 quantile, 0.9 coverage at 0.9 quantile).',
+  },
+  {
+    id: '184',
+    type: QuestionType.MCQ,
+    question: 'An energy company has wind turbines, weather stations, and solar panels that generate telemetry data. The company wants to perform predictive maintenance on these devices. The devices are in various locations and have unstable internet connectivity. A team of data scientists is using the telemetry data to perform machine learning (ML) to conduct anomaly detection and predict maintenance before the devices start to deteriorate. The team needs a scalable, secure, high-velocity data ingestion mechanism. The team has decided to use Amazon S3 as the data storage location. Which approach meets these requirements?',
+    options: [
+      { id: '184a', text: 'Ingest the data by using an HTTP API call to a web server that is hosted on Amazon EC2. Set up EC2 instances in an Auto Scaling configuration behind an Elastic Load Balancer to load the data into Amazon S3.', isCorrect: false },
+      { id: '184b', text: 'Ingest the data over Message Queuing Telemetry Transport (MQTT) to AWS IoT Core. Set up a rule in AWS IoT Core to use Amazon Kinesis Data Firehose to send data to an Amazon Kinesis data stream that is configured to write to an S3 bucket.', isCorrect: false },
+      { id: '184c', text: 'Ingest the data over Message Queuing Telemetry Transport (MQTT) to AWS IoT Core. Set up a rule in AWS IoT Core to direct all MQTT data to an Amazon Kinesis Data Firehose delivery stream that is configured to write to an S3 bucket.', isCorrect: true },
+      { id: '184d', text: 'Ingest the data over Message Queuing Telemetry Transport (MQTT) to Amazon Kinesis data stream that is configured to write to an S3 bucket.', isCorrect: false },
+    ],
+    explanation: 'AWS IoT Core ingests MQTT telemetry from devices. Kinesis Data Firehose delivers data to S3 with minimal latency. This combination provides scalable, secure ingestion for unstable connectivity environments.',
+  },
+  {
+    id: '185',
+    type: QuestionType.MCQ,
+    question: 'A retail company collects customer comments about its products from social media, the company website, and customer call logs. A team of data scientists and engineers wants to find common topics and determine which products the customers are referring to in their comments. The team is using natural language processing (NLP) to build a model to help with this classification. Each product can be classified into multiple categories that the company defines. These categories are related but are not mutually exclusive. For example, if there is mention of "Sample Yogurt" in the document of customer comments, then "Sample Yogurt" should be classified as "yogurt," "snack," and "dairy product." The team is using Amazon Comprehend to train the model and must complete the project as soon as possible. Which functionality of Amazon Comprehend should the team use to meet these requirements?',
+    options: [
+      { id: '185a', text: 'Custom classification with multi-class mode', isCorrect: false },
+      { id: '185b', text: 'Custom classification with multi-label mode', isCorrect: true },
+      { id: '185c', text: 'Custom entity recognition', isCorrect: false },
+      { id: '185d', text: 'Built-in models', isCorrect: false },
+    ],
+    explanation: 'Multi-label classification allows a single document to belong to multiple categories simultaneously. This matches the requirement where products can be classified as "yogurt," "snack," and "dairy product" at the same time.',
+  },
 ];
 
 function App() {
