@@ -1773,6 +1773,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Amazon Comprehend custom classifier is a fully managed NLP service that can train a text classification model with minimal effort. Given the 2-day deadline and labeled dataset, this is the most direct approach - no model architecture design, training infrastructure, or ML expertise required.',
   },
+  {
+    id: '146',
+    type: QuestionType.MCQ,
+    question: 'A company that runs an online library is implementing a chatbot using Amazon Lex to provide book recommendations based on category. This intent is fulfilled by an AWS Lambda function that queries an Amazon DynamoDB table for a list of book titles, given a particular category. For testing, there are only three categories implemented as the custom slot types: "comedy," "adventure," and "documentary." A machine learning (ML) specialist notices that sometimes the request cannot be fulfilled because Amazon Lex cannot understand the category spoken by users with utterances such as "funny," "fun," and "humor." The ML specialist needs to fix the problem without changing the Lambda code or data in DynamoDB. How should the ML specialist fix the problem?',
+    options: [
+      { id: '146a', text: 'Add the unrecognized words in the enumeration values list as new values in the slot type.', isCorrect: false },
+      { id: '146b', text: 'Create a new custom slot type, add the unrecognized words to this slot type as enumeration values, and use this slot type for the slot.', isCorrect: false },
+      { id: '146c', text: 'Use the AMAZON.SearchQuery built-in slot types for custom searches in the database.', isCorrect: false },
+      { id: '146d', text: 'Add the unrecognized words as synonyms in the custom slot type.', isCorrect: true },
+    ],
+    explanation: 'Synonyms in Amazon Lex slot types allow the bot to recognize alternative words that map to the same slot value. Adding "funny," "fun," and "humor" as synonyms for "comedy" allows Lex to understand users using casual language while keeping the backend Lambda code unchanged.',
+  },
+  {
+    id: '147',
+    type: QuestionType.MCQ,
+    question: 'A manufacturing company uses machine learning (ML) models to detect quality issues. The models use images that are taken of the company\'s product at the end of each production step. The company has thousands of machines at the production site that generate one image per second on average. The company ran a successful pilot with a single manufacturing machine. For the pilot, ML specialists used an industrial PC that ran AWS IoT Greengrass with a long-running AWS Lambda function that uploaded the images to Amazon S3. The uploaded images invoked a Lambda function that was written in Python to perform inference by using an Amazon SageMaker endpoint that ran a custom model. The inference results were forwarded back to a web service that was hosted at the production site to prevent faulty products from being shipped. The company scaled the solution out to all manufacturing machines by installing similarly configured industrial PCs on each production machine. However, latency for predictions increased beyond acceptable limits. Analysis shows that the internet connection is at its capacity limit. How can the company resolve this issue MOST cost-effectively?',
+    options: [
+      { id: '147a', text: 'Set up a 10 Gbps AWS Direct Connect connection between the production site and the nearest AWS Region. Use the Direct Connect connection to upload the images. Increase the size of the instances and the number of instances that are used by the SageMaker endpoint.', isCorrect: false },
+      { id: '147b', text: 'Extend the long-running Lambda function that runs on AWS IoT Greengrass to compress the images and upload the compressed files to Amazon S3. Decompress the files by using a separate Lambda function that invokes the existing Lambda function to run the inference pipeline.', isCorrect: false },
+      { id: '147c', text: 'Use auto scaling for SageMaker. Set up an AWS Direct Connect connection between the production site and the nearest AWS Region. Use the Direct Connect connection to upload the images.', isCorrect: false },
+      { id: '147d', text: 'Deploy the Lambda function and the ML models onto the AWS IoT Greengrass core that is running on the industrial PCs that are installed on each machine. Extend the long-running Lambda function that runs on AWS IoT Greengrass to invoke the Lambda function with the captured images and run the inference on the edge component that forwards the results directly to the web service.', isCorrect: true },
+    ],
+    explanation: 'Edge inference with AWS IoT Greengrass eliminates the need to upload images to the cloud. By running the model locally on each industrial PC, the solution avoids internet bandwidth limitations entirely while maintaining low latency for real-time quality detection.',
+  },
+  {
+    id: '148',
+    type: QuestionType.MCQ,
+    question: 'A data scientist is using an Amazon SageMaker notebook instance and needs to securely access data stored in a specific Amazon S3 bucket. How should the data scientist accomplish this?',
+    options: [
+      { id: '148a', text: 'Add an S3 bucket policy allowing GetObject, PutObject, and ListBucket permissions to the Amazon SageMaker notebook ARN as principal.', isCorrect: false },
+      { id: '148b', text: 'Encrypt the objects in the S3 bucket with a custom AWS Key Management Service (AWS KMS) key that only the notebook owner has access to.', isCorrect: false },
+      { id: '148c', text: 'Attach the policy to the IAM role associated with the notebook that allows GetObject, PutObject, and ListBucket operations to the specific S3 bucket.', isCorrect: true },
+      { id: '148d', text: 'Use a script in a lifecycle configuration to configure the AWS CLI on the instance with an access key ID and secret.', isCorrect: false },
+    ],
+    explanation: 'SageMaker notebook instances assume an IAM role for AWS API calls. Attaching a policy to this role that grants S3 permissions is the secure, standard approach. It avoids hardcoded credentials and leverages AWS IAM for access control.',
+  },
+  {
+    id: '149',
+    type: QuestionType.MCQ,
+    question: 'A company is launching a new product and needs to build a mechanism to monitor comments about the company and its new product on social media. The company needs to be able to evaluate the sentiment expressed in social media posts, and visualize trends and configure alarms based on various thresholds. The company needs to implement this solution quickly, and wants to minimize the infrastructure and data science resources needed to evaluate the messages. The company already has a solution in place to collect posts and store them within an Amazon S3 bucket. What services should the data science team use to deliver this solution?',
+    options: [
+      { id: '149a', text: 'Train a model in Amazon SageMaker by using the BlazingText algorithm to detect sentiment in the corpus of social media posts. Expose an endpoint that can be called by AWS Lambda. Trigger a Lambda function when posts are added to the S3 bucket to invoke the endpoint and record the sentiment in an Amazon DynamoDB table and in a custom Amazon CloudWatch metric. Use CloudWatch alarms to notify analysts of trends.', isCorrect: false },
+      { id: '149b', text: 'Train a model in Amazon SageMaker by using the semantic segmentation algorithm to model the semantic content in the corpus of social media posts. Expose an endpoint that can be called by AWS Lambda. Trigger a Lambda function when objects are added to the S3 bucket to invoke the endpoint and record the sentiment in an Amazon DynamoDB table. Schedule a second Lambda function to query recently added records and send an Amazon Simple Notification Service (Amazon SNS) notification to notify analysts of trends.', isCorrect: false },
+      { id: '149c', text: 'Trigger an AWS Lambda function when social media posts are added to the S3 bucket. Call Amazon Comprehend for each post to capture the sentiment in the message and record the sentiment in an Amazon DynamoDB table. Schedule a second Lambda function to query recently added records and send an Amazon Simple Notification Service (Amazon SNS) notification to notify analysts of trends.', isCorrect: false },
+      { id: '149d', text: 'Trigger an AWS Lambda function when social media posts are added to the S3 bucket. Call Amazon Comprehend for each post to capture the sentiment in the message and record the sentiment in a custom Amazon CloudWatch metric and in S3. Use CloudWatch alarms to notify analysts of trends.', isCorrect: true },
+    ],
+    explanation: 'Amazon Comprehend provides built-in sentiment analysis without requiring model training. Lambda triggered by S3 events processes posts, records sentiment to CloudWatch metrics for visualization and alarms. This serverless approach minimizes infrastructure and ML resources while enabling quick implementation.',
+  },
+  {
+    id: '150',
+    type: QuestionType.MCQ,
+    question: 'A bank wants to launch a low-rate credit promotion. The bank is located in a town that recently experienced economic hardship. Only some of the bank\'s customers were affected by the crisis, so the bank\'s credit team must identify which customers to target with the promotion. However, the credit team wants to make sure that loyal customers\' full credit history is considered when the decision is made. The bank\'s data science team developed a model that classifies account transactions and understands credit eligibility. The data science team used the XGBoost algorithm to train the model. The team used 7 years of bank transaction historical data for training and hyperparameter tuning over the course of several days. The accuracy of the model is sufficient, but the credit team is struggling to explain accurately why the model denies credit to some customers. The credit team has almost no skill in data science. What should the data science team do to address this issue in the MOST operationally efficient manner?',
+    options: [
+      { id: '150a', text: 'Use Amazon SageMaker Studio to rebuild the model. Create a notebook that uses the XGBoost training container to perform model training. Deploy the model at an endpoint. Enable Amazon SageMaker Model Monitor to store inferences. Use the inferences to create Shapley values that help explain model behavior. Create a chart that shows features and SHapley Additive exPlanations (SHAP) values to explain to the credit team how the features affect the model outcomes.', isCorrect: false },
+      { id: '150b', text: 'Use Amazon SageMaker Studio to rebuild the model. Create a notebook that uses the XGBoost training container to perform model training. Activate Amazon SageMaker Debugger, and configure it to calculate and collect Shapley values. Create a chart that shows features and SHapley Additive exPlanations (SHAP) values to explain to the credit team how the features affect the model outcomes.', isCorrect: true },
+      { id: '150c', text: 'Create an Amazon SageMaker notebook instance. Use the notebook instance and the XGBoost library to locally retrain the model. Use the plot_importance() method in the Python XGBoost interface to create a feature importance chart. Use that chart to explain to the credit team how the features affect the model outcomes.', isCorrect: false },
+      { id: '150d', text: 'Use Amazon SageMaker Studio to rebuild the model. Create a notebook that uses the XGBoost training container to perform model training. Deploy the model at an endpoint. Use Amazon SageMaker Processing to post-analyze the model and create a feature importance explainability chart automatically for the credit team.', isCorrect: false },
+    ],
+    explanation: 'SageMaker Debugger can calculate and collect SHAP values during training without retraining. This provides operationally efficient model explainability. The SHAP values show how each feature contributes to predictions, helping the credit team understand why customers are denied.',
+  },
 ];
 
 function App() {
