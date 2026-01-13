@@ -1894,6 +1894,71 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Model Monitor uses a baseline to compare against production traffic. After retraining with new data, the baseline must be regenerated to reflect the new data distribution. Without updating the baseline, violations will continue because the monitoring job compares against outdated expectations.',
   },
+  {
+    id: '156',
+    type: QuestionType.MSQ,
+    question: 'A company supplies wholesale clothing to thousands of retail stores. A data scientist must create a model that predicts the daily sales volume for each item for each store. The data scientist discovers that more than half of the stores have been in business for less than 6 months. Sales data is highly consistent from week to week. Daily data from the database has been aggregated weekly, and weeks with no sales are omitted from the current dataset. Five years (100 MB) of sales data is available in Amazon S3. Which factors will adversely impact the performance of the forecast model to be developed, and which actions should the data scientist take to mitigate them? (Choose two.)',
+    options: [
+      { id: '156a', text: 'Detecting seasonality for the majority of stores will be an issue. Request categorical data to relate new stores with similar stores that have more historical data.', isCorrect: true },
+      { id: '156b', text: 'The sales data does not have enough variance. Request external sales data from other industries to improve the model\'s ability to generalize.', isCorrect: false },
+      { id: '156c', text: 'Sales data is aggregated by week. Request daily sales data from the source database to enable building a daily model.', isCorrect: true },
+      { id: '156d', text: 'The sales data is missing zero entries for item sales. Request that item sales data from the source database include zero entries to enable building the model.', isCorrect: false },
+      { id: '156e', text: 'Only 100 MB of sales data is available in Amazon S3. Request 10 years of sales data, which would provide 200 MB of training data for the model.', isCorrect: false },
+    ],
+    explanation: 'New stores lack historical data for seasonality detection - using categorical data to relate them to similar established stores helps. Weekly aggregation loses daily patterns - daily data is needed for accurate daily forecasts.',
+  },
+  {
+    id: '157',
+    type: QuestionType.MSQ,
+    question: 'An ecommerce company is automating the categorization of its products based on images. A data scientist has trained a computer vision model using the Amazon SageMaker image classification algorithm. The images for each product are classified according to specific product lines. The accuracy of the model is too low when categorizing new products. All of the product images have the same dimensions and are stored within an Amazon S3 bucket. The company wants to improve the model so it can be used for new products as soon as possible. Which steps would improve the accuracy of the solution? (Choose three.)',
+    options: [
+      { id: '157a', text: 'Use the SageMaker semantic segmentation algorithm to train a new model to achieve improved accuracy.', isCorrect: false },
+      { id: '157b', text: 'Use the Amazon Rekognition DetectLabels API to classify the products in the dataset.', isCorrect: false },
+      { id: '157c', text: 'Augment the images in the dataset. Use open source libraries to crop, resize, flip, rotate, and adjust the brightness and contrast of the images.', isCorrect: true },
+      { id: '157d', text: 'Use a SageMaker notebook to implement the normalization of pixels and scaling of the images. Store the new dataset in Amazon S3.', isCorrect: true },
+      { id: '157e', text: 'Use Amazon Rekognition Custom Labels to train a new model.', isCorrect: false },
+      { id: '157f', text: 'Check whether there are class imbalances in the product categories, and apply oversampling or undersampling as required. Store the new dataset in Amazon S3.', isCorrect: true },
+    ],
+    explanation: 'Image augmentation increases effective training data. Normalization and scaling improve model convergence. Class balancing ensures the model learns all categories equally. These three steps directly address low accuracy without requiring complete retraining.',
+  },
+  {
+    id: '158',
+    type: QuestionType.MCQ,
+    question: 'A data scientist is training a text classification model by using the Amazon SageMaker built-in BlazingText algorithm. There are 5 classes in the dataset, with 300 samples for category A, 292 samples for category B, 240 samples for category C, 258 samples for category D, and 310 samples for category E. The data scientist shuffles the data and splits off 10% for testing. After training the model, the data scientist generates confusion matrices for the training and test sets. What could the data scientist conclude form these results?',
+    options: [
+      { id: '158a', text: 'Classes C and D are too similar.', isCorrect: true },
+      { id: '158b', text: 'The dataset is too small for holdout cross-validation.', isCorrect: false },
+      { id: '158c', text: 'The data distribution is skewed.', isCorrect: false },
+      { id: '158d', text: 'The model is overfitting for classes B and E.', isCorrect: false },
+    ],
+    explanation: 'In confusion matrices, when classes C and D show mutual misclassification (C predicted as D and D predicted as C), it indicates the model cannot distinguish between them due to similar characteristics in the text.',
+  },
+  {
+    id: '159',
+    type: QuestionType.MSQ,
+    question: 'A company that manufactures mobile devices wants to determine and calibrate the appropriate sales price for its devices. The company is collecting the relevant data and is determining data features that it can use to train machine learning (ML) models. There are more than 1,000 features, and the company wants to determine the primary features that contribute to the sales price. Which techniques should the company use for feature selection? (Choose three.)',
+    options: [
+      { id: '159a', text: 'Data scaling with standardization and normalization', isCorrect: false },
+      { id: '159b', text: 'Correlation plot with heat maps', isCorrect: true },
+      { id: '159c', text: 'Data binning', isCorrect: false },
+      { id: '159d', text: 'Univariate selection', isCorrect: true },
+      { id: '159e', text: 'Feature importance with a tree-based classifier', isCorrect: true },
+      { id: '159f', text: 'Data augmentation', isCorrect: false },
+    ],
+    explanation: 'Correlation heatmaps identify features highly correlated with the target. Univariate selection tests each feature\'s predictive power individually. Tree-based feature importance ranks features by their contribution to predictions. These three techniques are most effective for high-dimensional feature selection.',
+  },
+  {
+    id: '160',
+    type: QuestionType.MCQ,
+    question: 'A power company wants to forecast future energy consumption for its customers in residential properties and commercial business properties. Historical power consumption data for the last 10 years is available. A team of data scientists who performed the initial data analysis and feature selection will include the historical power consumption data and data such as weather, number of individuals on the property, and public holidays. The data scientists are using Amazon Forecast to generate the forecasts. Which algorithm in Forecast should the data scientists use to meet these requirements?',
+    options: [
+      { id: '160a', text: 'Autoregressive Integrated Moving Average (ARIMA)', isCorrect: false },
+      { id: '160b', text: 'Exponential Smoothing (ETS)', isCorrect: false },
+      { id: '160c', text: 'Convolutional Neural Network - Quantile Regression (CNN-QR)', isCorrect: true },
+      { id: '160d', text: 'Prophet', isCorrect: false },
+    ],
+    explanation: 'CNN-QR is a deep learning algorithm in Amazon Forecast designed for complex time series with multiple related features (weather, holidays, occupancy). It handles the heterogeneous data sources (10 years of consumption plus external features) most effectively for accurate forecasting.',
+  },
 ];
 
 function App() {
