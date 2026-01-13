@@ -1591,6 +1591,68 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'For recommendation systems with sparse purchases, randomly selecting users for the test set ensures the model is evaluated on unseen users (cold start scenario). This simulates the real-world situation of making recommendations to new customers.',
   },
+  {
+    id: '131',
+    type: QuestionType.MSQ,
+    question: 'A financial services company wants to adopt Amazon SageMaker as its default data science environment. The company\'s data scientists run machine learning (ML) models on confidential financial data. The company is worried about data egress and wants an ML engineer to secure the environment. Which mechanisms can the ML engineer use to control data egress from SageMaker? (Choose three.)',
+    options: [
+      { id: '131a', text: 'Connect to SageMaker by using a VPC interface endpoint powered by AWS PrivateLink.', isCorrect: true },
+      { id: '131b', text: 'Use SCPs to restrict access to SageMaker.', isCorrect: false },
+      { id: '131c', text: 'Disable root access on the SageMaker notebook instances.', isCorrect: false },
+      { id: '131d', text: 'Enable network isolation for training jobs and models.', isCorrect: true },
+      { id: '131e', text: 'Restrict notebook presigned URLs to specific IPs used by the company.', isCorrect: true },
+      { id: '131f', text: 'Protect data with encryption at rest and in transit. Use AWS Key Management Service (AWS KMS) to manage encryption keys.', isCorrect: false },
+    ],
+    explanation: 'VPC interface endpoints with PrivateLink keep traffic within AWS network. Network isolation prevents internet access. Restricting presigned URLs to company IPs limits access. Together these controls prevent data exfiltration while SCPs, root access disabling, and encryption address different security concerns.',
+  },
+  {
+    id: '132',
+    type: QuestionType.MCQ,
+    question: 'A company needs to quickly make sense of a large amount of data and gain insight from it. The data is in different formats, the schemas change frequently, and new data sources are added regularly. The company wants to use AWS services to explore multiple data sources, suggest schemas, and enrich and transform the data. The solution should require the least possible coding effort for the data flows and the least possible infrastructure management. Which combination of AWS services will meet these requirements?',
+    options: [
+      { id: '132a', text: 'Amazon EMR for data discovery, enrichment, and transformation; Amazon Athena for querying and analyzing the results in Amazon S3 using standard SQL; Amazon QuickSight for reporting and getting insights', isCorrect: true },
+      { id: '132b', text: 'Amazon Kinesis Data Analytics for data ingestion; Amazon EMR for data discovery, enrichment, and transformation; Amazon Redshift for querying and analyzing the results in Amazon S3', isCorrect: false },
+      { id: '132c', text: 'AWS Glue for data discovery, enrichment, and transformation; Amazon Athena for querying and analyzing the results in Amazon S3 using standard SQL; Amazon QuickSight for reporting and getting insights', isCorrect: false },
+      { id: '132d', text: 'AWS Data Pipeline for data transfer; AWS Step Functions for orchestrating AWS Lambda jobs for data discovery, enrichment, and transformation; Amazon Athena for querying and analyzing the results in Amazon S3; Amazon QuickSight for reporting and getting insights', isCorrect: false },
+    ],
+    explanation: 'EMR handles large-scale data processing with minimal management. Athena provides serverless SQL querying on S3 data. QuickSight enables visualization and insights. This combination requires the least coding and infrastructure management while scaling to handle diverse data formats and changing schemas.',
+  },
+  {
+    id: '133',
+    type: QuestionType.MCQ,
+    question: 'A company is converting a large number of unstructured paper receipts into images. The company wants to create a model based on natural language processing (NLP) to find relevant entities such as date, location, and notes, as well as some custom entities such as receipt numbers. The company is using optical character recognition (OCR) to extract text for data labeling. However, documents are in different structures and formats, and the company is facing challenges with setting up the manual workflows for each document type. Additionally, the company trained a named entity recognition (NER) model for custom entity detection using a small sample size. This model has a very low confidence score and will require retraining with a large dataset. Which solution for text extraction and entity detection will require the LEAST amount of effort?',
+    options: [
+      { id: '133a', text: 'Extract text from receipt images by using Amazon Textract. Use the Amazon SageMaker BlazingText algorithm to train on the text for entities and custom entities.', isCorrect: false },
+      { id: '133b', text: 'Extract text from receipt images by using a deep learning OCR model from the AWS Marketplace. Use the NER deep learning model to extract entities.', isCorrect: false },
+      { id: '133c', text: 'Extract text from receipt images by using Amazon Textract. Use Amazon Comprehend for entity detection, and use Amazon Comprehend custom entity recognition for custom entity detection.', isCorrect: true },
+      { id: '133d', text: 'Extract text from receipt images by using a deep learning OCR model from the AWS Marketplace. Use Amazon Comprehend for entity detection, and use Amazon Comprehend custom entity recognition for custom entity detection.', isCorrect: false },
+    ],
+    explanation: 'Amazon Textract provides automatic OCR for various document layouts without custom workflows. Amazon Comprehend offers built-in entity detection and custom entity recognition with minimal ML expertise. This managed solution requires less effort than building custom NER models or using marketplace OCR solutions.',
+  },
+  {
+    id: '134',
+    type: QuestionType.MCQ,
+    question: 'A company is building a predictive maintenance model based on machine learning (ML). The data is stored in a fully private Amazon S3 bucket that is encrypted at rest with AWS Key Management Service (AWS KMS) CMKs. An ML specialist must run data preprocessing by using an Amazon SageMaker Processing job that is triggered from code in an Amazon SageMaker notebook. The job should read data from Amazon S3, process it, and upload it back to the same S3 bucket. The preprocessing code is stored in a container image in Amazon Elastic Container Registry (Amazon ECR). The ML specialist needs to grant permissions to ensure a smooth data preprocessing workflow. Which set of actions should the ML specialist take to meet these requirements?',
+    options: [
+      { id: '134a', text: 'Create an IAM role that has permissions to create Amazon SageMaker Processing jobs, S3 read and write access to the relevant S3 bucket, and appropriate KMS and ECR permissions. Attach the role to the SageMaker notebook instance. Create an Amazon SageMaker Processing job from the notebook.', isCorrect: false },
+      { id: '134b', text: 'Create an IAM role that has permissions to create Amazon SageMaker Processing jobs. Attach the role to the SageMaker notebook instance. Create an Amazon SageMaker Processing job with an IAM role that has read and write permissions to the relevant S3 bucket, and appropriate KMS and ECR permissions.', isCorrect: true },
+      { id: '134c', text: 'Create an IAM role that has permissions to create Amazon SageMaker Processing jobs and to access Amazon ECR. Attach the role to the SageMaker notebook instance. Set up both an S3 endpoint and a KMS endpoint in the default VPC. Create Amazon SageMaker Processing jobs from the notebook.', isCorrect: false },
+      { id: '134d', text: 'Create an IAM role that has permissions to create Amazon SageMaker Processing jobs. Attach the role to the SageMaker notebook instance. Set up an S3 endpoint in the default VPC. Create an Amazon SageMaker Processing jobs with the access key and secret key of the IAM user with appropriate KMS and ECR permissions.', isCorrect: false },
+    ],
+    explanation: 'SageMaker Processing jobs require a separate execution role for the job itself (not the notebook). This role needs S3 access, KMS decryption for encrypted data, and ECR pull permissions. The notebook instance role only needs permission to create processing jobs, following the principle of least privilege.',
+  },
+  {
+    id: '135',
+    type: QuestionType.MCQ,
+    question: 'A data scientist has been running an Amazon SageMaker notebook instance for a few weeks. During this time, a new version of Jupyter Notebook was released along with additional software updates. The security team mandates that all running SageMaker notebook instances use the latest security and software updates provided by SageMaker. How can the data scientist meet this requirements?',
+    options: [
+      { id: '135a', text: 'Call the CreateNotebookInstanceLifecycleConfig API operation', isCorrect: false },
+      { id: '135b', text: 'Create a new SageMaker notebook instance and mount the Amazon Elastic Block Store (Amazon EBS) volume from the original instance', isCorrect: false },
+      { id: '135c', text: 'Stop and then restart the SageMaker notebook instance', isCorrect: true },
+      { id: '135d', text: 'Call the UpdateNotebookInstanceLifecycleConfig API operation', isCorrect: false },
+    ],
+    explanation: 'Stopping and restarting a SageMaker notebook instance triggers SageMaker to update the instance to the latest recommended platform version and install security updates. This is the simplest way to ensure the instance has the latest software without data loss or complex configuration.',
+  },
 ];
 
 function App() {
