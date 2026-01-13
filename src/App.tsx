@@ -1959,6 +1959,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'CNN-QR is a deep learning algorithm in Amazon Forecast designed for complex time series with multiple related features (weather, holidays, occupancy). It handles the heterogeneous data sources (10 years of consumption plus external features) most effectively for accurate forecasting.',
   },
+  {
+    id: '161',
+    type: QuestionType.MCQ,
+    question: 'A company wants to use automatic speech recognition (ASR) to transcribe messages that are less than 60 seconds long from a voicemail-style application. The company requires the correct identification of 200 unique product names, some of which have unique spellings or pronunciations. The company has 4,000 words of Amazon SageMaker Ground Truth voicemail transcripts it can use to customize the chosen ASR model. The company needs to ensure that everyone can update their customizations multiple times each hour. Which approach will maximize transcription accuracy during the development phase?',
+    options: [
+      { id: '161a', text: 'Use a voice-driven Amazon Lex bot to perform the ASR customization. Create customer slots within the bot that specifically identify each of the required product names. Use the Amazon Lex synonym mechanism to provide additional variations of each product name as mis-transcriptions are identified in development.', isCorrect: false },
+      { id: '161b', text: 'Use Amazon Transcribe to perform the ASR customization. Analyze the word confidence scores in the transcript, and automatically create or update a custom vocabulary file with any word that has a confidence score below an acceptable threshold value. Use this updated custom vocabulary file in all future transcription tasks.', isCorrect: false },
+      { id: '161c', text: 'Create a custom vocabulary file containing each product name with phonetic pronunciations, and use it with Amazon Transcribe to perform the ASR customization. Analyze the transcripts and manually update the custom vocabulary file to include updated or additional entries for those names that are not being correctly identified.', isCorrect: true },
+      { id: '161d', text: 'Use the audio transcripts to create a training dataset and build an Amazon Transcribe custom language model. Analyze the transcripts and update the training dataset with a manually corrected version of transcripts where product names are not being transcribed correctly. Create an updated custom language model.', isCorrect: false },
+    ],
+    explanation: 'Custom vocabulary files in Amazon Transcribe allow specifying product names with phonetic pronunciations for better recognition. Manual updates ensure accuracy as mis-transcriptions are identified. This approach maximizes accuracy for unique product names without the complexity of custom language models.',
+  },
+  {
+    id: '162',
+    type: QuestionType.MCQ,
+    question: 'A company is building a demand forecasting model based on machine learning (ML). In the development stage, an ML specialist uses an Amazon SageMaker notebook to perform feature engineering during work hours that consumes low amounts of CPU and memory resources. A data engineer uses the same notebook to perform data preprocessing once a day on average that requires very high memory and completes in only 2 hours. The data preprocessing is not configured to use GPU. All the processes are running well on an ml.m5.4xlarge notebook instance. The company receives an AWS Budgets alert that the billing for this month exceeds the allocated budget. Which solution will result in the MOST cost savings?',
+    options: [
+      { id: '162a', text: 'Change the notebook instance type to a memory optimized instance with the same vCPU number as the ml.m5.4xlarge instance has. Stop the notebook when it is not in use. Run both data preprocessing and feature engineering development on that instance.', isCorrect: false },
+      { id: '162b', text: 'Keep the notebook instance type and size the same. Stop the notebook when it is not in use. Run data preprocessing on a P3 instance type with the same memory as the ml.m5.4xlarge instance by using Amazon SageMaker Processing.', isCorrect: false },
+      { id: '162c', text: 'Change the notebook instance type to a smaller general purpose instance. Stop the notebook when it is not in use. Run data preprocessing on an ml.r5 instance with the same memory size as the ml.m5.4xlarge instance by using Amazon SageMaker Processing.', isCorrect: true },
+      { id: '162d', text: 'Change the notebook instance type to a smaller general purpose instance. Stop the notebook when it is not in use. Run data preprocessing on an R5 instance with the same memory size as the ml.m5.4xlarge instance by using the Reserved Instance option.', isCorrect: false },
+    ],
+    explanation: 'Downsizing the notebook for feature engineering (smaller general purpose) + using SageMaker Processing for data preprocessing (ml.r5) provides the most cost savings. SageMaker Processing is cheaper than notebook instances for batch workloads. Stopping unused instances prevents charges.',
+  },
+  {
+    id: '163',
+    type: QuestionType.MSQ,
+    question: 'A machine learning specialist is developing a regression model to predict rental rates from rental listings. A variable named Wall_Color represents the most prominent exterior wall color of the property. The specialist chose a model that needs numerical input data. Which feature engineering approaches should the specialist use to allow the regression model to learn from the Wall_Color data? (Choose two.)',
+    options: [
+      { id: '163a', text: 'Apply integer transformation and set Red = 1, White = 5, and Green = 10.', isCorrect: false },
+      { id: '163b', text: 'Add new columns that store one-hot representation of colors.', isCorrect: true },
+      { id: '163c', text: 'Replace the color name string by its length.', isCorrect: false },
+      { id: '163d', text: 'Create three columns to encode the color in RGB format.', isCorrect: false },
+      { id: '163e', text: 'Replace each color name by its training set frequency.', isCorrect: true },
+    ],
+    explanation: 'One-hot encoding creates binary columns for each color category, allowing the model to learn separate weights. Frequency encoding replaces categorical values with their occurrence count, which can capture popularity patterns. Both convert categorical color data to numerical form for regression.',
+  },
+  {
+    id: '164',
+    type: QuestionType.MCQ,
+    question: 'A data scientist is working on a public sector project for an urban traffic system. While studying the traffic patterns, it is clear to the data scientist that the traffic behavior at each light is correlated, subject to a small stochastic error term. The data scientist must model the traffic behavior to analyze the traffic patterns and reduce congestion. How will the data scientist MOST effectively model the problem?',
+    options: [
+      { id: '164a', text: 'The data scientist should obtain a correlated equilibrium policy by formulating this problem as a multi-agent reinforcement learning problem.', isCorrect: true },
+      { id: '164b', text: 'The data scientist should obtain the optimal equilibrium policy by formulating this problem as a single-agent reinforcement learning problem.', isCorrect: false },
+      { id: '164c', text: 'Rather than finding an equilibrium policy, the data scientist should obtain accurate predictors of traffic flow by using historical data through a supervised learning approach.', isCorrect: false },
+      { id: '164d', text: 'Rather than finding an equilibrium policy, the data scientist should obtain accurate predictors of traffic flow by using unlabeled simulated data representing the new traffic patterns in the city and applying an unsupervised learning approach.', isCorrect: false },
+    ],
+    explanation: 'Traffic lights are multiple independent agents that affect each other (correlated behavior). Multi-agent reinforcement learning finds a correlated equilibrium policy where all agents coordinate to optimize traffic flow, unlike single-agent approaches that cannot capture interdependencies.',
+  },
+  {
+    id: '165',
+    type: QuestionType.MCQ,
+    question: 'A data scientist is using the Amazon SageMaker Neural Topic Model (NTM) algorithm to build a model that recommends tags from blog posts. The raw blog post data is stored in an Amazon S3 bucket in JSON format. During model evaluation, the data scientist discovered that the model recommends certain stopwords such as "a," "an," and "the" as tags to certain blog posts, along with a few rare words that are present only in certain blog entries. After a few iterations of tag review with the content team, the data scientist notices that the rare words are unusual but feasible. The data scientist also must ensure that the tag recommendations of the generated model do not include the stopwords. What should the data scientist do to meet these requirements?',
+    options: [
+      { id: '165a', text: 'Use the Amazon Comprehend entity recognition API operations. Remove the detected words from the blog post data. Replace the blog post data source in the S3 bucket.', isCorrect: false },
+      { id: '165b', text: 'Run the SageMaker built-in principal component analysis (PCA) algorithm with the blog post data from the S3 bucket as the data source. Replace the blog post data in the S3 bucket with the results of the training job.', isCorrect: false },
+      { id: '165c', text: 'Use the SageMaker built-in Object Detection algorithm instead of the NTM algorithm for the training job to process the blog post data.', isCorrect: false },
+      { id: '165d', text: 'Remove the stopwords from the blog post data by using the CountVectorizer function in the scikit-learn library. Replace the blog post data in the S3 bucket with the results of the vectorizer.', isCorrect: true },
+    ],
+    explanation: 'CountVectorizer with stopword removal preprocessing filters out common words before NTM training. This ensures stopwords are not learned as topics while preserving rare but meaningful words. Updating the data source in S3 applies the preprocessing to future training jobs.',
+  },
 ];
 
 function App() {
