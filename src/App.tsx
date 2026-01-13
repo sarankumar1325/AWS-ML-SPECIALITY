@@ -1653,6 +1653,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Stopping and restarting a SageMaker notebook instance triggers SageMaker to update the instance to the latest recommended platform version and install security updates. This is the simplest way to ensure the instance has the latest software without data loss or complex configuration.',
   },
+  {
+    id: '136',
+    type: QuestionType.MCQ,
+    question: 'A library is developing an automatic book-borrowing system that uses Amazon Rekognition. Images of library members\' faces are stored in an Amazon S3 bucket. When members borrow books, the Amazon Rekognition CompareFaces API operation compares real faces against the stored faces in Amazon S3. The library needs to improve security by making sure that images are encrypted at rest. Also, when the images are used with Amazon Rekognition, they need to be encrypted in transit. The library also must ensure that the images are not used to improve Amazon Rekognition as a service. How should a machine learning specialist architect the solution to satisfy these requirements?',
+    options: [
+      { id: '136a', text: 'Enable server-side encryption on the S3 bucket. Submit an AWS Support ticket to opt out of allowing images to be used for improving the service, and follow the process provided by AWS Support.', isCorrect: true },
+      { id: '136b', text: 'Switch to using an Amazon Rekognition collection to store the images. Use the IndexFaces and SearchFacesByImage API operations instead of the CompareFaces API operation.', isCorrect: false },
+      { id: '136c', text: 'Switch to using the AWS GovCloud (US) Region for Amazon S3 to store images and for Amazon Rekognition to compare faces. Set up a VPN connection and only call the Amazon Rekognition API operations through the VPN.', isCorrect: false },
+      { id: '136d', text: 'Enable client-side encryption on the S3 bucket. Set up a VPN connection and only call the Amazon Rekognition API operations through the VPN.', isCorrect: false },
+    ],
+    explanation: 'S3 server-side encryption protects data at rest. HTTPS encrypts data in transit for Rekognition API calls. Opting out via AWS Support prevents images from being used to improve the Rekognition service. This combination satisfies all security requirements.',
+  },
+  {
+    id: '137',
+    type: QuestionType.MCQ,
+    question: 'A company is building a line-counting application for use in a quick-service restaurant. The company wants to use video cameras pointed at the line of customers at a given register to measure how many people are in line and deliver notifications to managers if the line grows too long. The restaurant locations have limited bandwidth for connections to external services and cannot accommodate multiple video streams without impacting other operations. Which solution should a machine learning specialist implement to meet these requirements?',
+    options: [
+      { id: '137a', text: 'Install cameras compatible with Amazon Kinesis Video Streams to stream the data to AWS over the restaurant\'s existing internet connection. Write an AWS Lambda function to take an image and send it to Amazon Rekognition to count the number of faces in the image. Send an Amazon Simple Notification Service (Amazon SNS) notification if the line is too long.', isCorrect: false },
+      { id: '137b', text: 'Deploy AWS DeepLens cameras in the restaurant to enable Amazon Rekognition on the AWS DeepLens device, and use it to trigger a local AWS Lambda function when a person is recognized. Use the Lambda function to send an Amazon Simple Notification Service (Amazon SNS) notification if the line is too long.', isCorrect: false },
+      { id: '137c', text: 'Build a custom model in Amazon SageMaker to recognize the number of people in an image. Install cameras compatible with Amazon Kinesis Video Streams in the restaurant. Write an AWS Lambda function to take an image. Use the SageMaker endpoint to call the model to count people. Send an Amazon Simple Notification Service (Amazon SNS) notification if the line is too long.', isCorrect: false },
+      { id: '137d', text: 'Build a custom model in Amazon SageMaker to recognize the number of people in an image. Deploy AWS DeepLens cameras in the restaurant. Deploy the model to the cameras. Deploy an AWS Lambda function to the cameras to use the model to count people and send an Amazon Simple Notification Service (Amazon SNS) notification if the line is too long.', isCorrect: true },
+    ],
+    explanation: 'AWS DeepLens allows edge inference by running the model locally on the device. This minimizes bandwidth usage since video isn\'t streamed to the cloud. The custom model counts people and triggers SNS notifications locally, addressing the limited bandwidth constraint.',
+  },
+  {
+    id: '138',
+    type: QuestionType.MCQ,
+    question: 'A company has set up and deployed its machine learning (ML) model into production with an endpoint using Amazon SageMaker hosting services. The ML team has configured automatic scaling for its SageMaker instances to support workload changes. During testing, the team notices that additional instances are being launched before the new instances are ready. This behavior needs to change as soon as possible. How can the ML team solve this issue?',
+    options: [
+      { id: '138a', text: 'Decrease the cooldown period for the scale-in activity. Increase the configured maximum capacity of instances.', isCorrect: false },
+      { id: '138b', text: 'Replace the current endpoint with a multi-model endpoint using SageMaker.', isCorrect: false },
+      { id: '138c', text: 'Set up Amazon API Gateway and AWS Lambda to trigger the SageMaker inference endpoint.', isCorrect: false },
+      { id: '138d', text: 'Increase the cooldown period for the scale-out activity.', isCorrect: true },
+    ],
+    explanation: 'The cooldown period controls how long Auto Scaling waits before starting another scaling activity. Increasing the cooldown period for scale-out prevents new instances from being launched before previous ones are ready and healthy, ensuring instances are fully initialized before receiving traffic.',
+  },
+  {
+    id: '139',
+    type: QuestionType.MCQ,
+    question: 'A telecommunications company is developing a mobile app for its customers. The company is using an Amazon SageMaker hosted endpoint for machine learning model inferences. Developers want to introduce a new version of the model for a limited number of users who subscribed to a preview feature of the app. After the new version of the model is tested as a preview, developers will evaluate its accuracy. If a new version of the model has better accuracy, developers need to be able to gradually release the new version for all users over a fixed period of time. How can the company implement the testing model with the LEAST amount of operational overhead?',
+    options: [
+      { id: '139a', text: 'Update the ProductionVariant data type with the new version of the model by using the CreateEndpointConfig operation with the InitialVariantWeight parameter set to 0. Specify the TargetVariant parameter for InvokeEndpoint calls for users who subscribed to the preview feature. When the new version of the model is ready for release, gradually increase InitialVariantWeight until all users have the updated version.', isCorrect: false },
+      { id: '139b', text: 'Configure two SageMaker hosted endpoints that serve the different versions of the model. Create an Application Load Balancer (ALB) to route traffic to both endpoints based on the TargetVariant query string parameter. Reconfigure the app to send the TargetVariant query string parameter for users who subscribed to the preview feature. When the new version of the model is ready for release, change the ALB\'s routing algorithm to weighted until all users have the updated version.', isCorrect: false },
+      { id: '139c', text: 'Update the DesiredWeightsAndCapacity data type with the new version of the model by using the UpdateEndpointWeightsAndCapacities operation with the DesiredWeight parameter set to 0. Specify the TargetVariant parameter for InvokeEndpoint calls for users who subscribed to the preview feature. When the new version of the model is ready for release, gradually increase DesiredWeight until all users have the updated version.', isCorrect: true },
+      { id: '139d', text: 'Configure two SageMaker hosted endpoints that serve the different versions of the model. Create an Amazon Route 53 record that is configured with a simple routing policy and that points to the current version of the model. Configure the mobile app to use the endpoint URL for users who subscribed to the preview feature and to use the Route 53 record for other users. When the new version of the model is ready for release, add a new model version endpoint to Route 53, and switch the policy to weighted until all users have the updated version.', isCorrect: false },
+    ],
+    explanation: 'UpdateEndpointWeightsAndCapacities allows modifying traffic distribution between model variants without recreating the endpoint. Setting DesiredWeight to 0 initially routes preview users via TargetVariant, then gradually increasing weight implements canary deployments with minimal operational overhead.',
+  },
+  {
+    id: '140',
+    type: QuestionType.MCQ,
+    question: 'A company offers an online shopping service to its customers. The company wants to enhance the site\'s security by requesting additional information when customers access the site from locations that are different from their normal location. The company wants to update the process to call a machine learning (ML) model to determine when additional information should be requested. The company has several terabytes of data from its existing ecommerce web servers containing the source IP addresses for each request made to the web server. For authenticated requests, the records also contain the login name of the requesting user. Which approach should an ML specialist take to implement the new security feature in the web application?',
+    options: [
+      { id: '140a', text: 'Use Amazon SageMaker Ground Truth to label each record as either a successful or failed access attempt. Use Amazon SageMaker to train a binary classification model using the factorization machines (FM) algorithm.', isCorrect: false },
+      { id: '140b', text: 'Use Amazon SageMaker to train a model using the IP Insights algorithm. Schedule updates and retraining of the model using new log data nightly.', isCorrect: true },
+      { id: '140c', text: 'Use Amazon SageMaker Ground Truth to label each record as either a successful or failed access attempt. Use Amazon SageMaker to train a binary classification model using the IP Insights algorithm.', isCorrect: false },
+      { id: '140d', text: 'Use Amazon SageMaker to train a model using the Object2Vec algorithm. Schedule updates and retraining of the model using new log data nightly.', isCorrect: false },
+    ],
+    explanation: 'Amazon SageMaker IP Insights is specifically designed to detect anomalous IP address patterns. It learns typical IP behavior for users and can flag access from unusual locations. Nightly retraining with new log data keeps the model current. This is the most appropriate algorithm for this use case.',
+  },
 ];
 
 function App() {
