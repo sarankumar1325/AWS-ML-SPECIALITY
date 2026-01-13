@@ -2020,6 +2020,69 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'CountVectorizer with stopword removal preprocessing filters out common words before NTM training. This ensures stopwords are not learned as topics while preserving rare but meaningful words. Updating the data source in S3 applies the preprocessing to future training jobs.',
   },
+  {
+    id: '166',
+    type: QuestionType.MCQ,
+    question: 'A company wants to create a data repository in the AWS Cloud for machine learning (ML) projects. The company wants to use AWS to perform complete ML lifecycles and wants to use Amazon S3 for the data storage. All of the company\'s data currently resides on premises and is 40 TB in size. The company wants a solution that can transfer and automatically update data between the on-premises object storage and Amazon S3. The solution must support encryption, scheduling, monitoring, and data integrity validation. Which solution meets these requirements?',
+    options: [
+      { id: '166a', text: 'Use the S3 sync command to compare the source S3 bucket and the destination S3 bucket. Determine which source files do not exist in the destination S3 bucket and which source files were modified.', isCorrect: false },
+      { id: '166b', text: 'Use AWS Transfer for FTPS to transfer the files from the on-premises storage to Amazon S3.', isCorrect: false },
+      { id: '166c', text: 'Use AWS DataSync to make an initial copy of the entire dataset. Schedule subsequent incremental transfers of changing data until the final cutover from on premises to AWS.', isCorrect: true },
+      { id: '166d', text: 'Use S3 Batch Operations to pull data periodically from the on-premises storage. Enable S3 Versioning on the S3 bucket to protect against accidental overwrites.', isCorrect: false },
+    ],
+    explanation: 'AWS DataSync handles large-scale data transfers with encryption, scheduling, monitoring, and data integrity validation. It performs initial bulk transfer followed by incremental syncs, meeting all requirements for on-premises to S3 data migration.',
+  },
+  {
+    id: '167',
+    type: QuestionType.MCQ,
+    question: 'A company has video feeds and images of a subway train station. The company wants to create a deep learning model that will alert the station manager if any passenger crosses the yellow safety line when there is no train in the station. The alert will be based on the video feeds. The company wants the model to detect the yellow line, the passengers who cross the yellow line, and the trains in the video feeds. This task requires labeling. The video data must remain confidential. A data scientist creates a bounding box to label the sample data and uses an object detection model. However, the object detection model cannot clearly demarcate the yellow line, the passengers who cross the yellow line, and the trains. Which labeling approach will help the company improve this model?',
+    options: [
+      { id: '167a', text: 'Use Amazon Rekognition Custom Labels to label the dataset and create a custom Amazon Rekognition object detection model. Create a private workforce. Use Amazon Augmented AI (Amazon A2I) to review the low-confidence predictions and retrain the custom Amazon Rekognition model.', isCorrect: false },
+      { id: '167b', text: 'Use an Amazon SageMaker Ground Truth object detection labeling task. Use Amazon Mechanical Turk as the labeling workforce.', isCorrect: false },
+      { id: '167c', text: 'Use Amazon Rekognition Custom Labels to label the dataset and create a custom Amazon Rekognition object detection model. Create a workforce with a third-party AWS Marketplace vendor. Use Amazon Augmented AI (Amazon A2I) to review the low-confidence predictions and retrain the custom Amazon Rekognition model.', isCorrect: false },
+      { id: '167d', text: 'Use an Amazon SageMaker Ground Truth semantic segmentation labeling task. Use a private workforce as the labeling workforce.', isCorrect: true },
+    ],
+    explanation: 'Semantic segmentation provides pixel-level labeling rather than bounding boxes, which is essential for precisely demarcating thin lines like the yellow safety line. Private workforce ensures data confidentiality for sensitive video feeds.',
+  },
+  {
+    id: '168',
+    type: QuestionType.MSQ,
+    question: 'A data engineer at a bank is evaluating a new tabular dataset that includes customer data. The data engineer will use the customer data to create a new model to predict customer behavior. After creating a correlation matrix for the variables, the data engineer notices that many of the 100 features are highly correlated with each other. Which steps should the data engineer take to address this issue? (Choose two.)',
+    options: [
+      { id: '168a', text: 'Use a linear-based algorithm to train the model.', isCorrect: false },
+      { id: '168b', text: 'Apply principal component analysis (PCA).', isCorrect: true },
+      { id: '168c', text: 'Remove a portion of highly correlated features from the dataset.', isCorrect: true },
+      { id: '168d', text: 'Apply min-max feature scaling to the dataset.', isCorrect: false },
+      { id: '168e', text: 'Apply one-hot encoding category-based variables.', isCorrect: false },
+    ],
+    explanation: 'PCA reduces dimensionality while preserving variance and handles multicollinearity automatically. Removing highly correlated features eliminates redundancy and reduces model complexity. Both approaches address the correlation matrix findings effectively.',
+  },
+  {
+    id: '169',
+    type: QuestionType.MCQ,
+    question: 'A company is building a new version of a recommendation engine. Machine learning (ML) specialists need to keep adding new data from users to improve personalized recommendations. The ML specialists gather data from the users\' interactions on the platform and from sources such as external websites and social media. The pipeline cleans, transforms, enriches, and compresses terabytes of data daily, and this data is stored in Amazon S3. A set of Python scripts was coded to do the job and is stored in a large Amazon EC2 instance. The whole process takes more than 20 hours to finish, with each script taking at least an hour. The company wants to move the scripts out of Amazon EC2 into a more managed solution that will eliminate the need to maintain servers. Which approach will address all of these requirements with the LEAST development effort?',
+    options: [
+      { id: '169a', text: 'Load the data into an Amazon Redshift cluster. Execute the pipeline by using SQL. Store the results in Amazon S3.', isCorrect: false },
+      { id: '169b', text: 'Load the data into Amazon DynamoDB. Convert the scripts to an AWS Lambda function. Execute the pipeline by triggering Lambda executions. Store the results in Amazon S3.', isCorrect: false },
+      { id: '169c', text: 'Create an AWS Glue job. Convert the scripts to PySpark. Execute the pipeline. Store the results in Amazon S3.', isCorrect: true },
+      { id: '169d', text: 'Create a set of individual AWS Lambda functions to execute each of the scripts. Build a step function by using the AWS Step Functions Data Science SDK. Store the results in Amazon S3.', isCorrect: false },
+    ],
+    explanation: 'AWS Glue with PySpark is a managed Spark service that eliminates server maintenance. PySpark can execute Python scripts with minimal conversion. This approach handles terabyte-scale data efficiently with the least development effort compared to Lambda or custom solutions.',
+  },
+  {
+    id: '170',
+    type: QuestionType.MSQ,
+    question: 'A retail company is selling products through a global online marketplace. The company wants to use machine learning (ML) to analyze customer feedback and identify specific areas for improvement. A developer has built a tool that collects customer reviews from the online marketplace and stores them in an Amazon S3 bucket. This process yields a dataset of 40 reviews. A data scientist building the ML models must identify additional sources of data to increase the size of the dataset. Which data sources should the data scientist use to augment the dataset of reviews? (Choose three.)',
+    options: [
+      { id: '170a', text: 'Emails exchanged by customers and the company\'s customer service agents', isCorrect: true },
+      { id: '170b', text: 'Social media posts containing the name of the company or its products', isCorrect: true },
+      { id: '170c', text: 'A publicly available collection of news articles', isCorrect: false },
+      { id: '170d', text: 'A publicly available collection of customer reviews', isCorrect: true },
+      { id: '170e', text: 'Product sales revenue figures for the company', isCorrect: false },
+      { id: '170f', text: 'Instruction manuals for the company\'s products', isCorrect: false },
+    ],
+    explanation: 'Customer service emails, social media posts about the company/products, and public customer review datasets all contain customer feedback and sentiment data that directly augment the review dataset. News articles, sales figures, and manuals are not customer feedback.',
+  },
 ];
 
 function App() {
