@@ -3,6 +3,7 @@ import type {
   Question,
   UserAnswer,
   QuizResults,
+  WrongAnswerDetail,
 } from '../types/quiz';
 import {
   QuizState,
@@ -161,15 +162,32 @@ export const useQuiz = ({
         answers: Array.from(currentAnswers.values()),
       };
 
-      results.answers.forEach((answer) => {
+      const wrongAnswerDetails: WrongAnswerDetail[] = [];
+
+      results.answers.forEach((answer, index) => {
         if (answer.selectedOptionIds.length === 0) {
           results.skippedQuestions++;
         } else if (answer.isCorrect) {
           results.correctAnswers++;
         } else {
           results.incorrectAnswers++;
+          const question = questions[index];
+          if (question) {
+            wrongAnswerDetails.push({
+              questionId: question.id,
+              questionNumber: index + 1,
+              question: question.question,
+              type: question.type,
+              selectedOptionIds: answer.selectedOptionIds,
+              correctOptionIds: question.options.filter((o) => o.isCorrect).map((o) => o.id),
+              options: question.options,
+              explanation: question.explanation,
+            });
+          }
         }
       });
+
+      results.wrongAnswers = wrongAnswerDetails;
 
       results.score = Math.round(
         (results.correctAnswers / results.totalQuestions) * 100
@@ -181,7 +199,7 @@ export const useQuiz = ({
 
       return currentAnswers;
     });
-  }, [startTime, totalQuestions, onComplete]);
+  }, [startTime, totalQuestions, onComplete, questions]);
 
   /**
    * Move to the next question after viewing feedback

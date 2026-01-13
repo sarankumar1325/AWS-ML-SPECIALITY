@@ -44,6 +44,20 @@ export interface Option {
 }
 
 /**
+ * Wrong answer detail for review
+ */
+export interface WrongAnswerDetail {
+  questionId: string;
+  questionNumber: number;
+  question: string;
+  type: QuestionType;
+  selectedOptionIds: string[];
+  correctOptionIds: string[];
+  options: Option[];
+  explanation?: string;
+}
+
+/**
  * Question data structure
  */
 export interface Question {
@@ -52,7 +66,7 @@ export interface Question {
   question: string;
   options: Option[];
   explanation?: string;
-  timeLimit?: number; // Optional time limit in seconds
+  timeLimit?: number;
 }
 
 /**
@@ -88,4 +102,5 @@ export interface QuizResults {
   score: number; // Percentage (0-100)
   timeTaken: number; // Total time in seconds
   answers: UserAnswer[];
+  wrongAnswers?: WrongAnswerDetail[];
 }
