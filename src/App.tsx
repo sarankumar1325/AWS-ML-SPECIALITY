@@ -2143,6 +2143,68 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'One-hot encoding properly handles categorical variables for tree-based models. Standardization normalizes different unit financial fields. L1 regularization reduces overfitting (training 99% vs test 75% indicates severe overfitting).',
   },
+  {
+    id: '176',
+    type: QuestionType.MSQ,
+    question: 'A machine learning (ML) specialist needs to extract embedding vectors from a text series. The goal is to provide a ready-to-ingest feature space for a data scientist to develop downstream ML predictive models. The text consists of curated sentences in English. Many sentences use similar words but in different contexts. There are questions and answers among the sentences, and the embedding space must differentiate between them. Which options can produce the required embedding vectors that capture word context and sequential QA information? (Choose two.)',
+    options: [
+      { id: '176a', text: 'Amazon SageMaker seq2seq algorithm', isCorrect: false },
+      { id: '176b', text: 'Amazon SageMaker BlazingText algorithm in Skip-gram mode', isCorrect: true },
+      { id: '176c', text: 'Amazon SageMaker Object2Vec algorithm', isCorrect: true },
+      { id: '176d', text: 'Amazon SageMaker BlazingText algorithm in continuous bag-of-words (CBOW) mode', isCorrect: false },
+      { id: '176e', text: 'Combination of the Amazon SageMaker BlazingText algorithm in Batch Skip-gram mode with a custom recurrent neural network (RNN)', isCorrect: false },
+    ],
+    explanation: 'BlazingText Skip-gram mode captures contextual relationships between words in different sentences. Object2Vec creates embeddings that preserve semantic relationships, including QA pairs. Both produce vectors that distinguish word context and sequential information.',
+  },
+  {
+    id: '177',
+    type: QuestionType.MCQ,
+    question: 'A retail company wants to update its customer support system. The company wants to implement automatic routing of customer claims to different queues to prioritize the claims by category. Currently, an operator manually performs the category assignment and routing. After the operator classifies and routes the claim, the company stores the claim\'s record in a central database. The claim\'s record includes the claim\'s category. The company has no data science team or experience in the field of machine learning (ML). The company\'s small development team needs a solution that requires no ML expertise. Which solution meets these requirements?',
+    options: [
+      { id: '177a', text: 'Export the database to a .csv file with two columns: claim_label and claim_text. Use the Amazon SageMaker Object2Vec algorithm and the .csv file to train a model. Use SageMaker to deploy the model to an inference endpoint. Develop a service in the application to use the inference endpoint to process incoming claims, predict the labels, and route the claims to the appropriate queue.', isCorrect: false },
+      { id: '177b', text: 'Export the database to a .csv file with one column: claim_text. Use the Amazon SageMaker Latent Dirichlet Allocation (LDA) algorithm and the .csv file to train a model. Use the LDA algorithm to detect labels automatically. Use SageMaker to deploy the model to an inference endpoint. Develop a service in the application to use the inference endpoint to process incoming claims, predict the labels, and route the claims to the appropriate queue.', isCorrect: false },
+      { id: '177c', text: 'Use Amazon Textract to process the database and automatically detect two columns: claim_label and claim_text. Use Amazon Comprehend custom classification and the extracted information to train the custom classifier. Develop a service in the application to use the Amazon Comprehend API to process incoming claims, predict the labels, and route the claims to the appropriate queue.', isCorrect: false },
+      { id: '177d', text: 'Export the database to a .csv file with two columns: claim_label and claim_text. Use Amazon Comprehend custom classification and the .csv file to train the custom classifier. Develop a service in the application to use the Amazon Comprehend API to process incoming claims, predict the labels, and route the claims to the appropriate queue.', isCorrect: true },
+    ],
+    explanation: 'Amazon Comprehend custom classification requires no ML expertise and trains on labeled CSV data. The managed service handles model training and hosting. The application uses the Comprehend API for inference, providing automatic claim categorization with minimal development effort.',
+  },
+  {
+    id: '178',
+    type: QuestionType.MCQ,
+    question: 'A machine learning (ML) specialist is using Amazon SageMaker hyperparameter optimization (HPO) to improve a model\'s accuracy. The learning rate parameter is specified in the following HPO configuration: During the results analysis, the ML specialist determines that most of the training jobs had a learning rate between 0.01 and 0.1. The best result had a learning rate of less than 0.01. Training jobs need to run regularly over a changing dataset. The ML specialist needs to find a tuning mechanism that uses different learning rates more evenly from the provided range between MinValue and MaxValue. Which solution provides the MOST accurate result?',
+    options: [
+      { id: '178a', text: 'Modify the HPO configuration as follows: Select the most accurate hyperparameter configuration form this HPO job.', isCorrect: false },
+      { id: '178b', text: 'Run three different HPO jobs that use different learning rates form the following intervals for MinValue and MaxValue while using the same number of training jobs for each HPO job: [0.01, 0.1], [0.001, 0.01], [0.0001, 0.001]. Select the most accurate hyperparameter configuration form these three HPO jobs.', isCorrect: false },
+      { id: '178c', text: 'Modify the HPO configuration as follows: Select the most accurate hyperparameter configuration form this training job.', isCorrect: true },
+      { id: '178d', text: 'Run three different HPO jobs that use different learning rates form the following intervals for MinValue and MaxValue. Divide the number of training jobs for each HPO job by three: [0.01, 0.1], [0.001, 0.01], [0.0001, 0.001]. Select the most accurate hyperparameter configuration form these three HPO jobs.', isCorrect: false },
+    ],
+    explanation: 'Bayesian optimization in SageMaker HPO concentrates on promising regions. The best result was below 0.01, so the optimal learning rate is in a region HPO didn\'t fully explore. Manually selecting the best configuration from this run ensures the optimal rate is used for future training.',
+  },
+  {
+    id: '179',
+    type: QuestionType.MCQ,
+    question: 'A manufacturing company wants to use machine learning (ML) to automate quality control in its facilities. The facilities are in remote locations and have limited internet connectivity. The company has 20 TB of training data that consists of labeled images of defective product parts. The training data is in the corporate on-premises data center. The company will use this data to train a model for real-time defect detection in new parts as the parts move on a conveyor belt in the facilities. The company needs a solution that minimizes costs for compute infrastructure and that maximizes the scalability of resources for training. The solution also must facilitate the company\'s use of an ML model in the low-connectivity environments. Which solution will meet these requirements?',
+    options: [
+      { id: '179a', text: 'Move the training data to an Amazon S3 bucket. Train and evaluate the model by using Amazon SageMaker. Optimize the model by using SageMaker Neo. Deploy the model on a SageMaker hosting services endpoint.', isCorrect: false },
+      { id: '179b', text: 'Train and evaluate the model on premises. Upload the model to an Amazon S3 bucket. Deploy the model on an Amazon SageMaker hosting services endpoint.', isCorrect: false },
+      { id: '179c', text: 'Move the training data to an Amazon S3 bucket. Train and evaluate the model by using Amazon SageMaker. Optimize the model by using SageMaker Neo. Set up an edge device in the manufacturing facilities with AWS IoT Greengrass. Deploy the model on the edge device.', isCorrect: true },
+      { id: '179d', text: 'Train the model on premises. Upload the model to an Amazon S3 bucket. Set up an edge device in the manufacturing facilities with AWS IoT Greengrass. Deploy the model on the edge device.', isCorrect: false },
+    ],
+    explanation: 'SageMaker provides scalable cloud training. SageMaker Neo optimizes the model for edge deployment. AWS IoT Greengrass enables local inference in low-connectivity environments. This combination minimizes costs while enabling real-time defect detection on-premises.',
+  },
+  {
+    id: '180',
+    type: QuestionType.MSQ,
+    question: 'A company has an ecommerce website with a product recommendation engine built in TensorFlow. The recommendation engine endpoint is hosted by Amazon SageMaker. Three compute-optimized instances support the expected peak load of the website. Response times on the product recommendation page are increasing at the beginning of each month. Some users are encountering errors. The website receives the majority of its traffic between 8 AM and 6 PM on weekdays in a single time zone. Which of the following options are the MOST effective in solving the issue while keeping costs to a minimum? (Choose two.)',
+    options: [
+      { id: '180a', text: 'Configure the endpoint to use Amazon Elastic Inference (EI) accelerators.', isCorrect: true },
+      { id: '180b', text: 'Create a new endpoint configuration with two production variants.', isCorrect: false },
+      { id: '180c', text: 'Configure the endpoint to automatically scale with the InvocationsPerInstance metric.', isCorrect: true },
+      { id: '180d', text: 'Deploy a second instance pool to support a blue/green deployment of models.', isCorrect: false },
+      { id: '180e', text: 'Reconfigure the endpoint to use burstable instances.', isCorrect: false },
+    ],
+    explanation: 'Elastic Inference accelerators provide GPU-powered inference at lower cost than full GPU instances. Auto-scaling with InvocationsPerInstance adds capacity during peak hours (beginning of month, business hours) and reduces during off-hours, optimizing costs while handling traffic spikes.',
+  },
 ];
 
 function App() {
