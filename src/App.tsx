@@ -1713,6 +1713,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Amazon SageMaker IP Insights is specifically designed to detect anomalous IP address patterns. It learns typical IP behavior for users and can flag access from unusual locations. Nightly retraining with new log data keeps the model current. This is the most appropriate algorithm for this use case.',
   },
+  {
+    id: '141',
+    type: QuestionType.MCQ,
+    question: 'A retail company wants to combine its customer orders with the product description data from its product catalog. The structure and format of the records in each dataset is different. A data analyst tried to use a spreadsheet to combine the datasets, but the effort resulted in duplicate records and records that were not properly combined. The company needs a solution that it can use to combine similar records from the two datasets and remove any duplicates. Which solution will meet these requirements?',
+    options: [
+      { id: '141a', text: 'Use an AWS Lambda function to process the data. Use two arrays to compare equal strings in the fields from the two datasets and remove any duplicates.', isCorrect: false },
+      { id: '141b', text: 'Create AWS Glue crawlers for reading and populating the AWS Glue Data Catalog. Call the AWS Glue SearchTables API operation to perform a fuzzy-matching search on the two datasets, and cleanse the data accordingly.', isCorrect: false },
+      { id: '141c', text: 'Create AWS Glue crawlers for reading and populating the AWS Glue Data Catalog. Use the FindMatches transform to cleanse the data.', isCorrect: true },
+      { id: '141d', text: 'Create an AWS Lake Formation custom transform. Run a transformation for matching products from the Lake Formation console to cleanse the data automatically.', isCorrect: false },
+    ],
+    explanation: 'AWS Glue FindMatches ML transform is designed specifically for entity resolution - finding duplicate or matching records across datasets with different formats. It uses machine learning to identify records that should be matched, making it ideal for combining customer orders with product catalog data.',
+  },
+  {
+    id: '142',
+    type: QuestionType.MCQ,
+    question: 'A company provisions Amazon SageMaker notebook instances for its data science team and creates Amazon VPC interface endpoints to ensure communication between the VPC and the notebook instances. All connections to the Amazon SageMaker API are contained entirely and securely using the AWS network. However, the data science team realizes that individuals outside the VPC can still connect to the notebook instances across the internet. Which set of actions should the data science team take to fix the issue?',
+    options: [
+      { id: '142a', text: 'Modify the notebook instances\' security group to allow traffic only from the CIDR ranges of the VPC. Apply this security group to all of the notebook instances\' VPC interfaces.', isCorrect: false },
+      { id: '142b', text: 'Create an IAM policy that allows the sagemaker:CreatePresignedNotebookInstanceUrl and sagemaker:DescribeNotebookInstance actions from only the VPC endpoints. Apply this policy to all IAM users, groups, and roles used to access the notebook instances.', isCorrect: true },
+      { id: '142c', text: 'Add a NAT gateway to the VPC. Convert all of the subnets where the Amazon SageMaker notebook instances are hosted to private subnets. Stop and start all of the notebook instances to reassign only private IP addresses.', isCorrect: false },
+      { id: '142d', text: 'Change the network ACL of the subnet the notebook is hosted in to restrict access to anyone outside the VPC.', isCorrect: false },
+    ],
+    explanation: 'IAM policies can restrict which VPC endpoints can invoke SageMaker API actions. By requiring sagemaker:CreatePresignedNotebookInstanceUrl and sagemaker:DescribeNotebookInstance to come only from VPC endpoints, you prevent presigned URL generation from outside the VPC, effectively blocking external access.',
+  },
+  {
+    id: '143',
+    type: QuestionType.MCQ,
+    question: 'A company will use Amazon SageMaker to train and host a machine learning (ML) model for a marketing campaign. The majority of data is sensitive customer data. The data must be encrypted at rest. The company wants AWS to maintain the root of trust for the master keys and wants encryption key usage to be logged. Which implementation will meet these requirements?',
+    options: [
+      { id: '143a', text: 'Use encryption keys that are stored in AWS Cloud HSM to encrypt the ML data volumes, and to encrypt the model artifacts and data in Amazon S3.', isCorrect: false },
+      { id: '143b', text: 'Use SageMaker built-in transient keys to encrypt the ML data volumes. Enable default encryption for new Amazon Elastic Block Store (Amazon EBS) volumes.', isCorrect: false },
+      { id: '143c', text: 'Use customer managed keys in AWS Key Management Service (AWS KMS) to encrypt the ML data volumes, and to encrypt the model artifacts and data in Amazon S3.', isCorrect: true },
+      { id: '143d', text: 'Use AWS Security Token Service (AWS STS) to create temporary tokens to encrypt the ML storage volumes, and to encrypt the model artifacts and data in Amazon S3.', isCorrect: false },
+    ],
+    explanation: 'Customer managed keys in AWS KMS provide: AWS-managed root of trust for master keys, full control over key policies, detailed logging of key usage via CloudTrail, and compliance with encryption requirements for both EBS volumes and S3 data.',
+  },
+  {
+    id: '144',
+    type: QuestionType.MCQ,
+    question: 'A machine learning specialist stores IoT soil sensor data in Amazon DynamoDB table and stores weather event data as JSON files in Amazon S3. The dataset in DynamoDB is 10 GB in size and the dataset in Amazon S3 is 5 GB in size. The specialist wants to train a model on this data to help predict soil moisture levels as a function of weather events using Amazon SageMaker. Which solution will accomplish the necessary transformation to train the Amazon SageMaker model with the LEAST amount of administrative overhead?',
+    options: [
+      { id: '144a', text: 'Launch an Amazon EMR cluster. Create an Apache Hive external table for the DynamoDB table and S3 data. Join the Hive tables and write the results out to Amazon S3.', isCorrect: false },
+      { id: '144b', text: 'Crawl the data using AWS Glue crawlers. Write an AWS Glue ETL job that merges the two tables and writes the output to an Amazon Redshift cluster.', isCorrect: false },
+      { id: '144c', text: 'Enable Amazon DynamoDB Streams on the sensor table. Write an AWS Lambda function that consumes the stream and appends the results to the existing weather files in Amazon S3.', isCorrect: false },
+      { id: '144d', text: 'Crawl the data using AWS Glue crawlers. Write an AWS Glue ETL job that merges the two tables and writes the output in CSV format to Amazon S3.', isCorrect: true },
+    ],
+    explanation: 'AWS Glue crawlers automatically discover data schemas. AWS Glue ETL jobs can read from both DynamoDB and S3, join the datasets, and write to S3 in CSV format for SageMaker training. This serverless approach requires minimal infrastructure management and administrative overhead.',
+  },
+  {
+    id: '145',
+    type: QuestionType.MCQ,
+    question: 'A company sells thousands of products on a public website and wants to automatically identify products with potential durability problems. The company has 1,000 reviews with date, star rating, review text, review summary, and customer email fields, but many reviews are incomplete and have empty fields. Each review has already been labeled with the correct durability result. A machine learning specialist must train a model to identify reviews expressing concerns over product durability. The first model needs to be trained and ready to review in 2 days. What is the MOST direct approach to solve this problem within 2 days?',
+    options: [
+      { id: '145a', text: 'Train a custom classifier by using Amazon Comprehend.', isCorrect: true },
+      { id: '145b', text: 'Build a recurrent neural network (RNN) in Amazon SageMaker by using Gluon and Apache MXNet.', isCorrect: false },
+      { id: '145c', text: 'Train a built-in BlazingText model using Word2Vec mode in Amazon SageMaker.', isCorrect: false },
+      { id: '145d', text: 'Use a built-in seq2seq model in Amazon SageMaker.', isCorrect: false },
+    ],
+    explanation: 'Amazon Comprehend custom classifier is a fully managed NLP service that can train a text classification model with minimal effort. Given the 2-day deadline and labeled dataset, this is the most direct approach - no model architecture design, training infrastructure, or ML expertise required.',
+  },
 ];
 
 function App() {
