@@ -2330,6 +2330,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Disabling internet access and using a VPC ensures traffic stays within AWS network. An S3 VPC endpoint provides private connectivity to S3 without internet traversal, meeting regulatory requirements for data access.',
   },
+  {
+    id: '191',
+    type: QuestionType.MSQ,
+    question: 'A machine learning (ML) specialist at a retail company is forecasting sales for one of the company\'s stores. The ML specialist is using data from the past 10 years. The company has provided a dataset that includes the total amount of money in sales each day for the store. Approximately 5% of the days are missing sales data.\n\nThe ML specialist builds a simple forecasting model with the dataset and discovers that the model performs poorly. The performance is poor around the time of seasonal events, when the model consistently predicts sales figures that are too low or too high.\n\nWhich actions should the ML specialist take to try to improve the model\'s performance? (Choose two.)',
+    options: [
+      { id: '191a', text: 'Add information about the store\'s sales periods to the dataset.', isCorrect: true },
+      { id: '191b', text: 'Aggregate sales figures from stores in the same proximity.', isCorrect: false },
+      { id: '191c', text: 'Apply smoothing to correct for seasonal variation.', isCorrect: true },
+      { id: '191d', text: 'Change the forecast frequency from daily to weekly.', isCorrect: false },
+      { id: '191e', text: 'Replace missing values in the dataset by using linear interpolation.', isCorrect: false },
+    ],
+    explanation: 'Adding sales period information (like holiday periods, promotional events) helps the model understand seasonal patterns. Applying smoothing techniques (e.g., moving averages) can reduce noise and help the model better capture underlying trends while minimizing the impact of seasonal variations.',
+  },
+  {
+    id: '192',
+    type: QuestionType.MCQ,
+    question: 'A newspaper publisher has a table of customer data that consists of several numerical and categorical features, such as age and education history, as well as subscription status. The company wants to build a targeted marketing model for predicting the subscription status based on the table data.\n\nWhich Amazon SageMaker built-in algorithm should be used to model the targeted marketing?',
+    options: [
+      { id: '192a', text: 'Random Cut Forest (RCF)', isCorrect: false },
+      { id: '192b', text: 'XGBoost', isCorrect: true },
+      { id: '192c', text: 'Neural Topic Model (NTM)', isCorrect: false },
+      { id: '192d', text: 'DeepAR forecasting', isCorrect: false },
+    ],
+    explanation: 'XGBoost is a gradient boosting algorithm that excels at tabular data classification and regression tasks. It handles both numerical and categorical features well, making it ideal for predicting subscription status (a classification problem) from customer data.',
+  },
+  {
+    id: '193',
+    type: QuestionType.MCQ,
+    question: 'A company will use Amazon SageMaker to train and host a machine learning model for a marketing campaign. The data must be encrypted at rest. Most of the data is sensitive customer data. The company wants AWS to maintain the root of trust for the encryption keys and wants key usage to be logged.\n\nWhich solution will meet these requirements with the LEAST operational overhead?',
+    options: [
+      { id: '193a', text: 'Use AWS Security Token Service (AWS STS) to create temporary tokens to encrypt the storage volumes for all SageMaker instances and to encrypt the model artifacts and data in Amazon S3.', isCorrect: false },
+      { id: '193b', text: 'Use customer managed keys in AWS Key Management Service (AWS KMS) to encrypt the storage volumes for all SageMaker instances and to encrypt the model artifacts and data in Amazon S3.', isCorrect: true },
+      { id: '193c', text: 'Use encryption keys stored in AWS CloudHSM to encrypt the storage volumes for all SageMaker instances and to encrypt the model artifacts and data in Amazon S3.', isCorrect: false },
+      { id: '193d', text: 'Use SageMaker built-in transient keys to encrypt the storage volumes for all SageMaker instances. Enable default encryption on new Amazon Elastic Block Store (Amazon EBS) volumes.', isCorrect: false },
+    ],
+    explanation: 'Customer managed keys in AWS KMS provide the root of trust with AWS, enable key usage logging via CloudTrail, and integrate seamlessly with SageMaker for encryption at rest. This requires less operational overhead than managing CloudHSM or custom encryption solutions while meeting all security requirements.',
+  },
+  {
+    id: '194',
+    type: QuestionType.MCQ,
+    question: 'A data scientist is working on a model to predict a company\'s required inventory stock levels. All historical data is stored in .csv files in the company\'s data lake on Amazon S3. The dataset consists of approximately 500 GB of data The data scientist wants to use SQL to explore the data before training the model. The company wants to minimize costs.\n\nWhich option meets these requirements with the LEAST operational overhead?',
+    options: [
+      { id: '194a', text: 'Create an Amazon EMR cluster. Create external tables in the Apache Hive metastore, referencing the data that is stored in the S3 bucket. Explore the data from the Hive console.', isCorrect: false },
+      { id: '194b', text: 'Use AWS Glue to crawl the S3 bucket and create tables in the AWS Glue Data Catalog. Use Amazon Athena to explore the data.', isCorrect: true },
+      { id: '194c', text: 'Create an Amazon Redshift cluster. Use the COPY command to ingest the data from Amazon S3. Explore the data from the Amazon Redshift query editor GUI.', isCorrect: false },
+      { id: '194d', text: 'Create an Amazon Redshift cluster. Create external tables in an external schema, referencing the S3 bucket that contains the data. Explore the data from the Amazon Redshift query editor GUI.', isCorrect: false },
+    ],
+    explanation: 'AWS Glue crawlers automatically discover schema and create Data Catalog tables from S3 data. Amazon Athena then allows SQL queries directly on the data without loading it, providing serverless exploration with minimal setup and cost. This is much simpler than managing EMR or Redshift clusters.',
+  },
+  {
+    id: '195',
+    type: QuestionType.MCQ,
+    question: 'A geospatial analysis company processes thousands of new satellite images each day to produce vessel detection data for commercial shipping. The company stores the training data in Amazon S3. The training data incrementally increases in size with new images each day.\n\nThe company has configured an Amazon SageMaker training job to use a single ml.p2.xlarge instance with File input mode to train the built-in Object Detection algorithm. The training process was successful last month but is now failing because of a lack of storage. Aside from the addition of training data, nothing has changed in the model training process.\n\nA machine learning (ML) specialist needs to change the training configuration to fix the problem. The solution must optimize performance and must minimize the cost of training.\n\nWhich solution will meet these requirements?',
+    options: [
+      { id: '195a', text: 'Modify the training configuration to use two ml.p2.xlarge instances.', isCorrect: false },
+      { id: '195b', text: 'Modify the training configuration to use Pipe input mode.', isCorrect: true },
+      { id: '195c', text: 'Modify the training configuration to use a single ml.p3.2xlarge instance.', isCorrect: false },
+      { id: '195d', text: 'Modify the training configuration to use Amazon Elastic File System (Amazon EFS) instead of Amazon S3 to store the input training data.', isCorrect: false },
+    ],
+    explanation: 'Pipe input mode streams data directly from S3 during training instead of downloading all data to local storage first. This eliminates the EBS volume storage limitation that causes the failure when training data grows. Pipe mode also improves performance by enabling parallel data streaming and reduces cost by eliminating the need for larger storage volumes.',
+  },
 ];
 
 function App() {
