@@ -2391,6 +2391,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Pipe input mode streams data directly from S3 during training instead of downloading all data to local storage first. This eliminates the EBS volume storage limitation that causes the failure when training data grows. Pipe mode also improves performance by enabling parallel data streaming and reduces cost by eliminating the need for larger storage volumes.',
   },
+  {
+    id: '196',
+    type: QuestionType.MCQ,
+    question: 'A company is using Amazon SageMaker to build a machine learning (ML) model to predict customer churn based on customer call transcripts. Audio files from customer calls are located in an on-premises VoIP system that has petabytes of recorded calls. The on-premises infrastructure has high-velocity networking and connects to the company\'s AWS infrastructure through a VPN connection over a 100 Mbps connection.\n\nThe company has an algorithm for transcribing customer calls that requires GPUs for inference. The company wants to store these transcriptions in an Amazon S3 bucket in the AWS Cloud for model development.\n\nWhich solution should an ML specialist use to deliver the transcriptions to the S3 bucket as quickly as possible?',
+    options: [
+      { id: '196a', text: 'Order and use an AWS Snowball Edge Compute Optimized device with an NVIDIA Tesla module to run the transcription algorithm. Use AWS DataSync to send the resulting transcriptions to the transcription S3 bucket.', isCorrect: true },
+      { id: '196b', text: 'Order and use an AWS Snowcone device with Amazon EC2 Inf1 instances to run the transcription algorithm. Use AWS DataSync to send the resulting transcriptions to the transcription S3 bucket.', isCorrect: false },
+      { id: '196c', text: 'Order and use AWS Outposts to run the transcription algorithm on GPU-based Amazon EC2 instances. Store the resulting transcriptions in the transcription S3 bucket.', isCorrect: false },
+      { id: '196d', text: 'Use AWS DataSync to ingest the audio files to Amazon S3. Create an AWS Lambda function to run the transcription algorithm on the audio files when they are uploaded to Amazon S3. Configure the function to write the resulting transcriptions to the transcription S3 bucket.', isCorrect: false },
+    ],
+    explanation: 'AWS Snowball Edge Compute Optimized with NVIDIA Tesla provides GPU compute on-premises to run the transcription algorithm without being limited by the 100 Mbps VPN bandwidth. DataSync then efficiently transfers the resulting transcriptions to S3. This approach avoids transferring petabytes of audio over the slow VPN connection.',
+  },
+  {
+    id: '197',
+    type: QuestionType.MCQ,
+    question: 'A company has a podcast platform that has thousands of users. The company has implemented an anomaly detection algorithm to detect low podcast engagement based on a 10-minute running window of user events such as listening, pausing, and exiting the podcast. A machine learning (ML) specialist is designing the data ingestion of these events with the knowledge that the event payload needs some small transformations before inference.\n\nHow should the ML specialist design the data ingestion to meet these requirements with the LEAST operational overhead?',
+    options: [
+      { id: '197a', text: 'Ingest event data by using a GraphQL API in AWS AppSync. Store the data in an Amazon DynamoDB table. Use DynamoDB Streams to call an AWS Lambda function to transform the most recent 10 minutes of data before inference.', isCorrect: false },
+      { id: '197b', text: 'Ingest event data by using Amazon Kinesis Data Streams. Store the data in Amazon S3 by using Amazon Kinesis Data Firehose. Use AWS Glue to transform the most recent 10 minutes of data before inference.', isCorrect: true },
+      { id: '197c', text: 'Ingest event data by using Amazon Kinesis Data Streams. Use an Amazon Kinesis Data Analytics for Apache Flink application to transform the most recent 10 minutes of data before inference.', isCorrect: false },
+      { id: '197d', text: 'Ingest event data by using Amazon Managed Streaming for Apache Kafka (Amazon MSK). Use an AWS Lambda function to transform the most recent 10 minutes of data before inference.', isCorrect: false },
+    ],
+    explanation: 'Kinesis Data Streams handles high-velocity event ingestion, Kinesis Data Firehose provides serverless delivery to S3 with automatic data transformation, and AWS Glue can perform the required transformations with minimal operational overhead. This managed services approach requires less maintenance than building custom Flink applications or managing DynamoDB infrastructure.',
+  },
+  {
+    id: '198',
+    type: QuestionType.MCQ,
+    question: 'A company wants to predict the classification of documents that are created from an application. New documents are saved to an Amazon S3 bucket every 3 seconds. The company has developed three versions of a machine learning (ML) model within Amazon SageMaker to classify document text. The company wants to deploy these three versions to predict the classification of each document.\n\nWhich approach will meet these requirements with the LEAST operational overhead?',
+    options: [
+      { id: '198a', text: 'Configure an S3 event notification that invokes an AWS Lambda function when new documents are created. Configure the Lambda function to create three SageMaker batch transform jobs, one batch transform job for each model for each document.', isCorrect: false },
+      { id: '198b', text: 'Deploy all the models to a single SageMaker endpoint. Treat each model as a production variant. Configure an S3 event notification that invokes an AWS Lambda function when new documents are created. Configure the Lambda function to call each production variant and return the results of each model.', isCorrect: true },
+      { id: '198c', text: 'Deploy each model to its own SageMaker endpoint. Configure an S3 event notification that invokes an AWS Lambda function when new documents are created. Configure the Lambda function to call each endpoint and return the results of each model.', isCorrect: false },
+      { id: '198d', text: 'Deploy each model to its own SageMaker endpoint. Create three AWS Lambda functions. Configure each Lambda function to call a different endpoint and return the results. Configure three S3 event notifications to invoke the Lambda functions when new documents are created.', isCorrect: false },
+    ],
+    explanation: 'Deploying all three models as production variants on a single endpoint minimizes operational overhead by using one endpoint instead of three. S3 event notifications trigger a single Lambda function that can invoke all variants. This approach reduces costs, simplifies management, and provides lower latency compared to managing multiple endpoints.',
+  },
+  {
+    id: '199',
+    type: QuestionType.MSQ,
+    question: 'A manufacturing company needs to identify returned smartphones that have been damaged by moisture. The company has an automated process that produces 2,000 diagnostic values for each phone. The database contains more than five million phone evaluations. The evaluation process is consistent, and there are no missing values in the data. A machine learning (ML) specialist has trained an Amazon SageMaker linear learner ML model to classify phones as moisture damaged or not moisture damaged by using all available features. The model\'s F1 score is 0.6.\n\nWhich changes in model training would MOST likely improve the model\'s F1 score? (Choose two.)',
+    options: [
+      { id: '199a', text: 'Continue to use the SageMaker linear learner algorithm. Reduce the number of features with the SageMaker principal component analysis (PCA) algorithm.', isCorrect: true },
+      { id: '199b', text: 'Continue to use the SageMaker linear learner algorithm. Reduce the number of features with the scikit-learn multi-dimensional scaling (MDS) algorithm.', isCorrect: false },
+      { id: '199c', text: 'Continue to use the SageMaker linear learner algorithm. Set the predictor type to regressor.', isCorrect: false },
+      { id: '199d', text: 'Use the SageMaker k-means algorithm with k of less than 1,000 to train the model.', isCorrect: false },
+      { id: '199e', text: 'Use the SageMaker k-nearest neighbors (k-NN) algorithm. Set a dimension reduction target of less than 1,000 to train the model.', isCorrect: true },
+    ],
+    explanation: 'PCA reduces dimensionality while preserving variance, helping the linear learner focus on the most important features. k-NN with dimension reduction provides better classification for high-dimensional data with complex decision boundaries. Both approaches address the limitation of using all 2,000 features directly with linear learner.',
+  },
+  {
+    id: '200',
+    type: QuestionType.MCQ,
+    question: 'A company is building a machine learning (ML) model to classify images of plants. An ML specialist has trained the model using the Amazon SageMaker built-in Image Classification algorithm. The model is hosted using a SageMaker endpoint on an ml.m5.xlarge instance for real-time inference. When used by researchers in the field, the inference has greater latency than is acceptable. The latency gets worse when multiple researchers perform inference at the same time on their devices. Using Amazon CloudWatch metrics, the ML specialist notices that the ModelLatency metric shows a high value and is responsible for most of the response latency.\n\nThe ML specialist needs to fix the performance issue so that researchers can experience less latency when performing inference from their devices.\n\nWhich action should the ML specialist take to meet this requirement?',
+    options: [
+      { id: '200a', text: 'Change the endpoint instance to an ml.t3 burstable instance with the same vCPU number as the ml.m5.xlarge instance has.', isCorrect: false },
+      { id: '200b', text: 'Attach an Amazon Elastic Inference ml.eia2.medium accelerator to the endpoint instance.', isCorrect: true },
+      { id: '200c', text: 'Enable Amazon SageMaker Autopilot to automatically tune performance of the model.', isCorrect: false },
+      { id: '200d', text: 'Change the endpoint instance to use a memory optimized ML instance.', isCorrect: false },
+    ],
+    explanation: 'Amazon Elastic Inference provides GPU acceleration for inference at a lower cost than full GPU instances. Attaching an Elastic Inference accelerator to the ml.m5.xlarge endpoint significantly reduces ModelLatency for image classification workloads without requiring a larger or more expensive instance type.',
+  },
 ];
 
 function App() {
