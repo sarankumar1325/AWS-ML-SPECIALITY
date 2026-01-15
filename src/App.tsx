@@ -2452,6 +2452,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Amazon Elastic Inference provides GPU acceleration for inference at a lower cost than full GPU instances. Attaching an Elastic Inference accelerator to the ml.m5.xlarge endpoint significantly reduces ModelLatency for image classification workloads without requiring a larger or more expensive instance type.',
   },
+  {
+    id: '201',
+    type: QuestionType.MCQ,
+    question: 'An automotive company is using computer vision in its autonomous cars. The company has trained its models successfully by using transfer learning from a convolutional neural network (CNN). The models are trained with PyTorch through the use of the Amazon SageMaker SDK. The company wants to reduce the time that is required for performing inferences, given the low latency that is required for self-driving.\n\nWhich solution should the company use to evaluate and improve the performance of the models?',
+    options: [
+      { id: '201a', text: 'Use Amazon CloudWatch algorithm metrics for visibility into the SageMaker training weights, gradients, biases, and activation outputs. Compute the filter ranks based on this information. Apply pruning to remove the low-ranking filters. Set the new weights. Run a new training job with the pruned model.', isCorrect: false },
+      { id: '201b', text: 'Use SageMaker Debugger for visibility into the training weights, gradients, biases, and activation outputs. Adjust the model hyperparameters, and look for lower inference times. Run a new training job.', isCorrect: false },
+      { id: '201c', text: 'Use SageMaker Debugger for visibility into the training weights, gradients, biases, and activation outputs. Compute the filter ranks based on this information. Apply pruning to remove the low-ranking filters. Set the new weights. Run a new training job with the pruned model.', isCorrect: true },
+      { id: '201d', text: 'Use SageMaker Model Monitor for visibility into the ModelLatency metric and OverheadLatency metric of the model after the model is deployed. Adjust the model hyperparameters, and look for lower inference times. Run a new training job.', isCorrect: false },
+    ],
+    explanation: 'SageMaker Debugger provides visibility into training metrics including weights, gradients, biases, and activation outputs. By computing filter ranks and applying pruning to remove low-ranking filters, the model size can be reduced while maintaining accuracy, which directly improves inference latency for autonomous driving applications.',
+  },
+  {
+    id: '202',
+    type: QuestionType.MCQ,
+    question: "A company's machine learning (ML) specialist is designing a scalable data storage solution for Amazon SageMaker. The company has an existing TensorFlow-based model that uses a train.py script. The model relies on static training data that is currently stored in TFRecord format.\n\nWhat should the ML specialist do to provide the training data to SageMaker with the LEAST development overhead?",
+    options: [
+      { id: '202a', text: 'Put the TFRecord data into an Amazon S3 bucket. Use AWS Glue or AWS Lambda to reformat the data to protobuf format and store the data in a second S3 bucket. Point the SageMaker training invocation to the second S3 bucket.', isCorrect: false },
+      { id: '202b', text: 'Rewrite the train.py script to add a section that converts TFRecord data to protobuf format. Point the SageMaker training invocation to the local path of the data. Ingest the protobuf data instead of the TFRecord data.', isCorrect: false },
+      { id: '202c', text: 'Use SageMaker script mode, and use train.py unchanged. Point the SageMaker training invocation to the local path of the data without reformatting the training data.', isCorrect: false },
+      { id: '202d', text: 'Use SageMaker script mode, and use train.py unchanged. Put the TFRecord data into an Amazon S3 bucket. Point the SageMaker training invocation to the S3 bucket without reformatting the training data.', isCorrect: true },
+    ],
+    explanation: 'SageMaker script mode supports TensorFlow scripts that work directly with TFRecord format. By using script mode and keeping the train.py unchanged, the ML specialist can simply point to the TFRecord data in S3 without any data transformation or script modifications, minimizing development overhead.',
+  },
+  {
+    id: '203',
+    type: QuestionType.MCQ,
+    question: 'An ecommerce company wants to train a large image classification model with 10,000 classes. The company runs multiple model training iterations and needs to minimize operational overhead and cost. The company also needs to avoid loss of work and model retraining.\n\nWhich solution will meet these requirements?',
+    options: [
+      { id: '203a', text: 'Create the training jobs as AWS Batch jobs that use Amazon EC2 Spot Instances in a managed compute environment.', isCorrect: false },
+      { id: '203b', text: 'Use Amazon EC2 Spot Instances to run the training jobs. Use a Spot Instance interruption notice to save a snapshot of the model to Amazon S3 before an instance is terminated.', isCorrect: false },
+      { id: '203c', text: 'Use AWS Lambda to run the training jobs. Save model weights to Amazon S3.', isCorrect: false },
+      { id: '203d', text: 'Use managed spot training in Amazon SageMaker. Launch the training jobs with checkpointing enabled.', isCorrect: true },
+    ],
+    explanation: 'SageMaker managed spot training automatically handles Spot Instance interruptions and uses checkpointing to save model progress to S3. If an instance is interrupted, training resumes from the last checkpoint, avoiding work loss while significantly reducing costs (up to 70% savings) compared to on-demand instances.',
+  },
+  {
+    id: '204',
+    type: QuestionType.MCQ,
+    question: 'A retail company uses a machine learning (ML) model for daily sales forecasting. The model has provided inaccurate results for the past 3 weeks. At the end of each day, an AWS Glue job consolidates the input data that is used for the forecasting with the actual daily sales data and the predictions of the model. The AWS Glue job stores the data in Amazon S3.\n\nThe company\'s ML team determines that the inaccuracies are occurring because of a change in the value distributions of the model features. The ML team must implement a solution that will detect when this type of change occurs in the future.\n\nWhich solution will meet these requirements with the LEAST amount of operational overhead?',
+    options: [
+      { id: '204a', text: 'Use Amazon SageMaker Model Monitor to create a data quality baseline. Confirm that the emit_metrics option is set to Enabled in the baseline constraints file. Set up an Amazon CloudWatch alarm for the metric.', isCorrect: true },
+      { id: '204b', text: 'Use Amazon SageMaker Model Monitor to create a model quality baseline. Confirm that the emit_metrics option is set to Enabled in the baseline constraints file. Set up an Amazon CloudWatch alarm for the metric.', isCorrect: false },
+      { id: '204c', text: 'Use Amazon SageMaker Debugger to create rules to capture feature values Set up an Amazon CloudWatch alarm for the rules.', isCorrect: false },
+      { id: '204d', text: 'Use Amazon CloudWatch to monitor Amazon SageMaker endpoints. Analyze logs in Amazon CloudWatch Logs to check for data drift.', isCorrect: false },
+    ],
+    explanation: 'SageMaker Model Monitor continuously monitors deployed models for data quality drift. By creating a data quality baseline and setting up CloudWatch alarms, the team can automatically detect changes in feature value distributions (data drift) with minimal operational overhead compared to building custom monitoring solutions.',
+  },
+  {
+    id: '205',
+    type: QuestionType.MCQ,
+    question: 'A machine learning (ML) specialist has prepared and used a custom container image with Amazon SageMaker to train an image classification model. The ML specialist is performing hyperparameter optimization (HPO) with this custom container image to produce a higher quality image classifier.\n\nThe ML specialist needs to determine whether HPO with the SageMaker built-in image classification algorithm will produce a better model than the model produced by HPO with the custom container image. All ML experiments and HPO jobs must be invoked from scripts inside SageMaker Studio notebooks.\n\nHow can the ML specialist meet these requirements in the LEAST amount of time?',
+    options: [
+      { id: '205a', text: 'Prepare a custom HPO script that runs multiple training jobs in SageMaker Studio in local mode to tune the model of the custom container image. Use the automatic model tuning capability of SageMaker with early stopping enabled to tune the model of the built-in image classification algorithm. Select the model with the best objective metric value.', isCorrect: false },
+      { id: '205b', text: 'Use SageMaker Autopilot to tune the model of the custom container image. Use the automatic model tuning capability of SageMaker with early stopping enabled to tune the model of the built-in image classification algorithm. Compare the objective metric values of the resulting models of the SageMaker AutopilotAutoML job and the automatic model tuning job. Select the model with the best objective metric value.', isCorrect: false },
+      { id: '205c', text: 'Use SageMaker Experiments to run and manage multiple training jobs and tune the model of the custom container image. Use the automatic model tuning capability of SageMaker to tune the model of the built-in image classification algorithm. Select the model with the best objective metric value.', isCorrect: true },
+      { id: '205d', text: 'Use the automatic model tuning capability of SageMaker to tune the models of the custom container image and the built-in image classification algorithm at the same time. Select the model with the best objective metric value.', isCorrect: false },
+    ],
+    explanation: 'SageMaker Experiments provides a organized way to run, track, and compare multiple training experiments. The ML specialist can use Experiments to manage HPO jobs for the custom container image while simultaneously running automatic model tuning for the built-in algorithm, then easily compare objective metrics to select the best model. This approach minimizes time while maintaining proper experiment tracking.',
+  },
 ];
 
 function App() {
