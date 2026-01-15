@@ -2755,6 +2755,70 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Oscillating training loss that fails to converge typically indicates a learning rate that is too high. Decreasing the learning rate allows the optimizer to make smaller, more precise updates. Adding learning rate scheduling (like step decay or polynomial decay) further helps convergence by reducing the rate over time.',
   },
+  {
+    id: '226',
+    type: QuestionType.MCQ,
+    question: 'A bank wants to launch a low-rate credit promotion campaign. The bank must identify which customers to target with the promotion and wants to make sure that each customer\'s full credit history is considered when an approval or denial decision is made. The bank\'s data science team used the XGBoost algorithm to train a classification model based on account transaction features. The data science team deployed the model by using Amazon SageMaker model hosting. The accuracy of the model is sufficient, but the data science team wants to be able to explain why the model denies the promotion to some customers. What should the data science team do to meet this requirement in the MOST operationally efficient manner?',
+    options: [
+      { id: '226a', text: 'Create a SageMaker notebook instance. Upload the model artifact to the notebook. Use the plot_importance() method in the Python XGBoost interface to create a feature importance chart for the individual predictions.', isCorrect: false },
+      { id: '226b', text: 'Retrain the model by using SageMaker Debugger. Configure Debugger to calculate and collect Shapley values. Create a chart that shows features and SHapley Additive explanations (SHAP) values to explain how the features affect the model outcomes.', isCorrect: false },
+      { id: '226c', text: 'Set up and run an explainability job powered by SageMaker Clarify to analyze the individual customer data, using the training data as a baseline. Create a chart that shows features and SHAP values to explain how the features affect the model outcomes.', isCorrect: true },
+      { id: '226d', text: 'Use SageMaker Model Monitor to create Shapley values that help explain model behavior. Store the Shapley values in Amazon S3. Create a chart that shows features and SHAP values to explain how the features affect the model outcomes.', isCorrect: false },
+    ],
+    explanation: 'SageMaker Clarify is specifically designed for model explainability and bias detection. It provides SHAP-based feature importance attributions at the individual prediction level, making it the most operationally efficient choice for explaining why specific customers are denied credit promotions.',
+  },
+  {
+    id: '227',
+    type: QuestionType.MSQ,
+    question: 'A company has hired a data scientist to create a loan risk model. The dataset contains loan amounts and variables such as loan type, region, and other demographic variables. The data scientist wants to use Amazon SageMaker to test bias regarding the loan amount distribution with respect to some of these categorical variables. Which pretraining bias metrics should the data scientist use to check the bias distribution? (Choose three.)',
+    options: [
+      { id: '227a', text: 'Class imbalance', isCorrect: false },
+      { id: '227b', text: 'Conditional demographic disparity', isCorrect: false },
+      { id: '227c', text: 'Difference in proportions of labels', isCorrect: false },
+      { id: '227d', text: 'Jensen-Shannon divergence', isCorrect: true },
+      { id: '227e', text: 'Kullback-Leibler divergence', isCorrect: true },
+      { id: '227f', text: 'Total variation distance', isCorrect: true },
+    ],
+    explanation: 'Jensen-Shannon divergence, Kullback-Leibler divergence, and Total variation distance are statistical measures used by SageMaker Clarify to quantify bias in the pretraining phase. They measure the distribution differences between protected and unprotected groups for categorical variables like loan type and region.',
+  },
+  {
+    id: '228',
+    type: QuestionType.MCQ,
+    question: 'A retail company wants to use Amazon Forecast to predict daily stock levels of inventory. The cost of running out of items in stock is much higher than having excess inventory. The company has millions of data samples for multiple years for thousands of items. The company needs to predict demand for 30-day cycles for each item. A machine learning specialist wants to use item-related features such as "category," "brand," and "safety stock count," and a binary time series feature "promotion applied?" (future promotion info available for next 5 days only). Which solution will produce predictions that maximize company profit?',
+    options: [
+      { id: '228a', text: 'Train a model using ARIMA algorithm. Evaluate using Weighted Quantile Loss (wQL) at 0.75 (P75).', isCorrect: false },
+      { id: '228b', text: 'Train a model using ARIMA algorithm. Evaluate using WAPE metric.', isCorrect: false },
+      { id: '228c', text: 'Train a model using CNN-QR algorithm. Evaluate using Weighted Quantile Loss (wQL) at 0.75 (P75).', isCorrect: true },
+      { id: '228d', text: 'Train a model using CNN-QR algorithm. Evaluate using WAPE metric.', isCorrect: false },
+    ],
+    explanation: 'CNN-QR handles related time series with covariates like promotions and item features better than ARIMA. The 0.75 quantile (P75) focuses on higher demand predictions, reducing stockout risk since running out of stock is more costly than excess inventory.',
+  },
+  {
+    id: '229',
+    type: QuestionType.MSQ,
+    question: 'An online retail company wants to develop an NLP model to improve customer service. A machine learning specialist is setting up distributed training of a BERT model on Amazon SageMaker using eight compute instances. The specialist wants to ensure security of data during distributed training. The data is stored in Amazon S3. Which combination of steps should the specialist take to protect the data during distributed training? (Choose three.)',
+    options: [
+      { id: '229a', text: 'Run distributed training jobs in a private VPC. Enable inter-container traffic encryption.', isCorrect: true },
+      { id: '229b', text: 'Run distributed training jobs across multiple VPCs. Enable VPC peering.', isCorrect: false },
+      { id: '229c', text: 'Create an S3 VPC endpoint. Then configure network routes, endpoint policies, and S3 bucket policies.', isCorrect: true },
+      { id: '229d', text: 'Grant read-only access to SageMaker resources by using an IAM role.', isCorrect: true },
+      { id: '229e', text: 'Create a NAT gateway. Assign an Elastic IP address for the NAT gateway.', isCorrect: false },
+      { id: '229f', text: 'Configure an inbound rule to allow traffic from a security group associated with training instances.', isCorrect: false },
+    ],
+    explanation: 'Running in a private VPC with inter-container encryption protects data in transit. S3 VPC endpoints enable private connectivity without internet. IAM roles with least privilege (read-only) ensure proper access control for SageMaker resources.',
+  },
+  {
+    id: '230',
+    type: QuestionType.MCQ,
+    question: 'An analytics company has an Amazon SageMaker hosted endpoint for an image classification model. The model is a custom-built convolutional neural network using PyTorch. The company wants to increase throughput and decrease latency for customers. Which solution will meet these requirements MOST cost-effectively?',
+    options: [
+      { id: '230a', text: 'Use Amazon Elastic Inference on the SageMaker hosted endpoint.', isCorrect: true },
+      { id: '230b', text: 'Retrain the CNN with more layers and a larger dataset.', isCorrect: false },
+      { id: '230c', text: 'Retrain the CNN with more layers and a smaller dataset.', isCorrect: false },
+      { id: '230d', text: 'Choose a SageMaker instance type that has multiple GPUs.', isCorrect: false },
+    ],
+    explanation: 'Amazon Elastic Inference allows attaching GPU acceleration to any SageMaker instance at a fraction of the cost of full GPU instances. This cost-effectively improves throughput and latency for PyTorch CNN inference without retraining the model.',
+  },
 ];
 
 function App() {
