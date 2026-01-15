@@ -2694,6 +2694,67 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'SageMaker Batch Transform is the most cost-effective solution for batch inference scenarios where you need to process data stored in S3 and write results back to S3. It provisions compute resources only for the duration of the job, making it more cost-effective than maintaining endpoints for asynchronous or real-time inference.',
   },
+  {
+    id: '221',
+    type: QuestionType.MCQ,
+    question: 'A data science team is building a machine learning pipeline that processes customer transactions in real time. The pipeline needs to detect potentially fraudulent transactions as they occur. The team wants to use Amazon SageMaker for model training and deployment. Which approach will allow the team to perform real-time inference with the lowest latency?',
+    options: [
+      { id: '221a', text: 'Deploy the model to a SageMaker real-time endpoint with auto-scaling configured.', isCorrect: true },
+      { id: '221b', text: 'Use SageMaker batch transform to process transactions in batches every hour.', isCorrect: false },
+      { id: '221c', text: 'Deploy the model to SageMaker serverless endpoints.', isCorrect: false },
+      { id: '221d', text: 'Use SageMaker asynchronous inference with a waiting queue.', isCorrect: false },
+    ],
+    explanation: 'SageMaker real-time endpoints provide the lowest latency for inference by maintaining always-on compute instances. Auto-scaling ensures the endpoint can handle varying loads while optimizing costs. This is the best choice for real-time fraud detection.',
+  },
+  {
+    id: '222',
+    type: QuestionType.MSQ,
+    question: 'A Machine Learning Specialist is designing a machine learning workflow that processes data from Amazon S3, trains a model using Amazon SageMaker, and deploys the model for inference. The Specialist needs to ensure that all data is encrypted at rest and in transit. Which of the following configurations satisfy these requirements? (Choose three.)',
+    options: [
+      { id: '222a', text: 'Enable default encryption on the S3 bucket using AWS KMS.', isCorrect: true },
+      { id: '222b', text: 'Use SSL/TLS for all data transfers between SageMaker and S3.', isCorrect: true },
+      { id: '222c', text: 'Configure SageMaker training jobs to use encrypted EBS volumes.', isCorrect: true },
+      { id: '222d', text: 'Use VPC endpoints for SageMaker to route traffic through the AWS backbone.', isCorrect: false },
+      { id: '222e', text: 'Enable Amazon SageMaker network isolation mode.', isCorrect: false },
+    ],
+    explanation: 'S3 bucket encryption with KMS encrypts data at rest, SSL/TLS encrypts data in transit between SageMaker and S3, and encrypted EBS volumes protect training data at rest. Together these provide comprehensive encryption coverage for the ML workflow.',
+  },
+  {
+    id: '223',
+    type: QuestionType.MCQ,
+    question: 'A company is building an image classification model using Amazon SageMaker. The training dataset consists of 100,000 images stored in an S3 bucket. The data science team wants to use data augmentation to improve model generalization. Which approach should the team use to implement data augmentation with the least operational overhead?',
+    options: [
+      { id: '223a', text: 'Download all images to the SageMaker training instance and apply augmentation using a Python script during training.', isCorrect: false },
+      { id: '223b', text: 'Use the built-in image classification algorithm with its built-in data augmentation options.', isCorrect: true },
+      { id: '223c', text: 'Create an AWS Lambda function to preprocess and augment all images before training.', isCorrect: false },
+      { id: '223d', text: 'Use AWS Glue to transform all images and store augmented versions in a separate S3 bucket.', isCorrect: false },
+    ],
+    explanation: 'The built-in image classification algorithm in SageMaker includes native support for common data augmentation techniques like random cropping, flipping, and color jitter. This requires no additional code or infrastructure, minimizing operational overhead while improving model generalization.',
+  },
+  {
+    id: '224',
+    type: QuestionType.MCQ,
+    question: 'A financial services company wants to build a model that predicts stock price movements. The data science team has collected 10 years of historical stock data with 50 features per day. The team wants to train a deep learning model that can capture long-term temporal dependencies. Which Amazon SageMaker algorithm should the team use?',
+    options: [
+      { id: '224a', text: 'Amazon SageMaker Linear Learner', isCorrect: false },
+      { id: '224b', text: 'Amazon SageMaker DeepAR', isCorrect: true },
+      { id: '224c', text: 'Amazon SageMaker XGBoost', isCorrect: false },
+      { id: '224d', text: 'Amazon SageMaker Random Cut Forest', isCorrect: false },
+    ],
+    explanation: 'DeepAR is a recurrent neural network-based algorithm specifically designed for time series forecasting with long-term dependencies. It can capture complex temporal patterns across multiple related time series and is ideal for stock price prediction with historical data.',
+  },
+  {
+    id: '225',
+    type: QuestionType.MCQ,
+    question: 'A Machine Learning Specialist is debugging a training job that is not converging. The training loss decreases initially but then oscillates and does not improve further. The Specialist suspects the issue is related to the learning rate. Which SageMaker hyperparameter should be adjusted to address this issue?',
+    options: [
+      { id: '225a', text: 'Decrease the learning rate and enable learning rate scheduling.', isCorrect: true },
+      { id: '225b', text: 'Increase the batch size without changing the learning rate.', isCorrect: false },
+      { id: '225c', text: 'Decrease the number of epochs.', isCorrect: false },
+      { id: '225d', text: 'Increase the learning rate to converge faster.', isCorrect: false },
+    ],
+    explanation: 'Oscillating training loss that fails to converge typically indicates a learning rate that is too high. Decreasing the learning rate allows the optimizer to make smaller, more precise updates. Adding learning rate scheduling (like step decay or polynomial decay) further helps convergence by reducing the rate over time.',
+  },
 ];
 
 function App() {
