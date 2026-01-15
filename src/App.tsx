@@ -2634,6 +2634,66 @@ const sampleQuestions: Question[] = [
     ],
     explanation: 'Amazon Transcribe with custom vocabularies allows the model to recognize domain-specific terminology, names, and locations accurately. Amazon Translate provides machine translation from English to French/Spanish. Together, they provide a fully managed solution with minimal operational overhead compared to building custom speech-to-speech or machine translation models.',
   },
+  {
+    id: '216',
+    type: QuestionType.MCQ,
+    question: 'A data scientist at a retail company is forecasting sales for a product over the next 3 months. After preliminary analysis, the data scientist identifies that sales are seasonal and that holidays affect sales. The data scientist also determines that sales of the product are correlated with sales of other products in the same category.\n\nThe data scientist needs to train a sales forecasting model that incorporates this information.\n\nWhich solution will meet this requirement with the LEAST development effort?',
+    options: [
+      { id: '216a', text: 'Use Amazon Forecast with Holidays featurization and the built-in autoregressive integrated moving average (ARIMA) algorithm to train the model.', isCorrect: false },
+      { id: '216b', text: 'Use Amazon Forecast with Holidays featurization and the built-in DeepAR+ algorithm to train the model.', isCorrect: true },
+      { id: '216c', text: 'Use Amazon SageMaker Processing to enrich the data with holiday information. Train the model by using the SageMaker DeepAR built-in algorithm.', isCorrect: false },
+      { id: '216d', text: 'Use Amazon SageMaker Processing to enrich the data with holiday information. Train the model by using the Gluon Time Series (GluonTS) toolkit.', isCorrect: false },
+    ],
+    explanation: 'Amazon Forecast with DeepAR+ algorithm natively supports holiday featurization and can handle related time series (correlated products) without custom data preprocessing. This is the least effort solution as it provides all required capabilities out-of-the-box compared to building custom models with SageMaker.',
+  },
+  {
+    id: '217',
+    type: QuestionType.MCQ,
+    question: 'A company is building a predictive maintenance model for its warehouse equipment. The model must predict the probability of failure of all machines in the warehouse. The company has collected 10,000 event samples within 3 months. The event samples include 100 failure cases that are evenly distributed across 50 different machine types.\n\nHow should the company prepare the data for the model to improve the model\'s accuracy?',
+    options: [
+      { id: '217a', text: 'Adjust the class weight to account for each machine type.', isCorrect: false },
+      { id: '217b', text: 'Oversample the failure cases by using the Synthetic Minority Oversampling Technique (SMOTE).', isCorrect: true },
+      { id: '217c', text: 'Undersample the non-failure events. Stratify the non-failure events by machine type.', isCorrect: false },
+      { id: '217d', text: 'Undersample the non-failure events by using the Synthetic Minority Oversampling Technique (SMOTE).', isCorrect: false },
+    ],
+    explanation: 'SMOTE (Synthetic Minority Oversampling Technique) creates synthetic samples of the minority class (failure cases) by interpolating between existing samples. This balances the dataset while providing more training examples than simple random oversampling, improving model accuracy for rare event prediction.',
+  },
+  {
+    id: '218',
+    type: QuestionType.MCQ,
+    question: 'A company stores its documents in Amazon S3 with no predefined product categories. A data scientist needs to build a machine learning model to categorize the documents for all the company\'s products.\n\nWhich solution will meet these requirements with the MOST operational efficiency?',
+    options: [
+      { id: '218a', text: 'Build a custom clustering model. Create a Dockerfile and build a Docker image. Register the Docker image in Amazon Elastic Container Registry (Amazon ECR). Use the custom image in Amazon SageMaker to generate a trained model.', isCorrect: false },
+      { id: '218b', text: 'Tokenize the data and transform the data into tabular data. Train an Amazon SageMaker k-means model to generate the product categories.', isCorrect: false },
+      { id: '218c', text: 'Train an Amazon SageMaker Neural Topic Model (NTM) model to generate the product categories.', isCorrect: true },
+      { id: '218d', text: 'Train an Amazon SageMaker Blazing Text model to generate the product categories.', isCorrect: false },
+    ],
+    explanation: 'Amazon SageMaker NTM is specifically designed for topic modeling and document categorization using neural networks. It requires minimal setup compared to building custom Docker containers and provides better semantic understanding than k-means clustering on tokenized data.',
+  },
+  {
+    id: '219',
+    type: QuestionType.MCQ,
+    question: 'A sports analytics company is providing services at a marathon. Each runner in the marathon will have their race ID printed as text on the front of their shirt. The company needs to extract race IDs from images of the runners.\n\nWhich solution will meet these requirements with the LEAST operational overhead?',
+    options: [
+      { id: '219a', text: 'Use Amazon Rekognition.', isCorrect: true },
+      { id: '219b', text: 'Use a custom convolutional neural network (CNN).', isCorrect: false },
+      { id: '219c', text: 'Use the Amazon SageMaker Object Detection algorithm.', isCorrect: false },
+      { id: '219d', text: 'Use Amazon Lookout for Vision.', isCorrect: false },
+    ],
+    explanation: 'Amazon Rekognition provides built-in text detection (DetectText API) that can extract text from images without any model training or custom code. This is the least operational overhead solution compared to building custom CNN models or using other services that require more setup and maintenance.',
+  },
+  {
+    id: '220',
+    type: QuestionType.MCQ,
+    question: 'A manufacturing company wants to monitor its devices for anomalous behavior. A data scientist has trained an Amazon SageMaker scikit-learn model that classifies a device as normal or anomalous based on its 4-day telemetry. The 4-day telemetry of each device is collected in a separate file and is placed in an Amazon S3 bucket once every hour. The total time to run the model across the telemetry for all devices is 5 minutes.\n\nWhat is the MOST cost-effective solution for the company to use to run the model across the telemetry for all the devices?',
+    options: [
+      { id: '220a', text: 'SageMaker Batch Transform', isCorrect: true },
+      { id: '220b', text: 'SageMaker Asynchronous Inference', isCorrect: false },
+      { id: '220c', text: 'SageMaker Processing', isCorrect: false },
+      { id: '220d', text: 'A SageMaker multi-container endpoint', isCorrect: false },
+    ],
+    explanation: 'SageMaker Batch Transform is the most cost-effective solution for batch inference scenarios where you need to process data stored in S3 and write results back to S3. It provisions compute resources only for the duration of the job, making it more cost-effective than maintaining endpoints for asynchronous or real-time inference.',
+  },
 ];
 
 function App() {
